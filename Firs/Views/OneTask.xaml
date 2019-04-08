@@ -7,7 +7,9 @@
        xmlns:local="clr-namespace:First.ViewModel;assembly=First.ViewModel"
           xmlns:local2="clr-namespace:First.Controllers"
         Title="MainWindow" Height="500" Width="800">
-
+    <Window.DataContext>
+        <local:OneTaskViewModel/>
+    </Window.DataContext>
 
     <Grid>
 
@@ -20,8 +22,10 @@
             <TextBox x:Name="textBox" HorizontalAlignment="Left" Height="23" Margin="13,44,0,0" TextWrapping="Wrap" Text="{Binding Path=Name, Mode=TwoWay}" VerticalAlignment="Top" Width="317"/>
             <TextBlock x:Name="textBlock" HorizontalAlignment="Left" Margin="27,103,0,0" TextWrapping="Wrap" Text="{Binding Path=Name, Mode=TwoWay}" VerticalAlignment="Top" Width="131" Height="16"/>
             <TextBox x:Name="textBox1" HorizontalAlignment="Left" Height="114" Margin="13,87,0,0" TextWrapping="Wrap" Text="{Binding Path=Description, Mode=TwoWay}" VerticalAlignment="Top" Width="317" />
-            <Button x:Name="button" Content="Button" HorizontalAlignment="Left" Margin="99,345,0,14"  Width="75" Command="{Binding AddCommand}" />
-            <local2:GradientPicker Grid.Column="1"></local2:GradientPicker>
+            <Button x:Name="button" Content="Добавить в список задач" HorizontalAlignment="Left" Margin="74,338,0,21"  Width="169" Command="{Binding AddCommand}" />
+            <local2:GradientPicker x:Name="GradietPicker"  Grid.Column="1"  Urgency="{Binding Path=UrgencyVM, Mode=Default,UpdateSourceTrigger=LostFocus}"  Importance="{Binding Path=UrgencyVM, Mode=OneWay}"></local2:GradientPicker>
+            <RadioButton x:Name="radioButton" Content="RadioButton" HorizontalAlignment="Left" Margin="25,250,0,0" VerticalAlignment="Top" IsChecked="{Binding ElementName=GradietPicker, Path=Urgency}"/>
+
         </Grid>
 
     </Grid>

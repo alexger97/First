@@ -9,6 +9,6 @@
         Title="MainWindow2" Height="450" Width="800">
     
     <Grid>
-        <local2:GradientPicker Margin="1,0,-1,0"></local2:GradientPicker>
+        <local2:GradientPicker Margin="1,0,-1,0" X_Title="Вера" Y_Title="Надежда"  RenderTransformOrigin="0.498,0.494" ></local2:GradientPicker>
     </Grid>
 </Window>

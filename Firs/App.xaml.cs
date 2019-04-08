@@ -32,7 +32,7 @@ namespace First
             builder.RegisterType<MainWindowViewModel>().AsSelf();
             var container = builder.Build();
             var model = container.Resolve<MainWindowViewModel>();
-            var view = new MainWindow2() ;
+            var view = new MainWindow() { DataContext = new MainWindowViewModel()}  ;
             view.Show();
         }
     }

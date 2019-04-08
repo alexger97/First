@@ -22,8 +22,8 @@ namespace First.ViewModel
         // TaskService taskService = new TaskService();
       private string _name;
         private string _description;
-      //  private bool _importance;
-        //private bool _urgency;
+       private bool _importance;
+        private bool _urgency;
 
         public string Name
         {
@@ -41,34 +41,37 @@ namespace First.ViewModel
 
             set { _description = value;
                 OnPropertyChanged("Description");
+                
             }
         }
 
-        bool isactive1 = false;
-        bool isactive2 = false;
-        /*public bool Importance
+       // bool isactive1 = false;
+        //bool isactive2 = false;
+        public bool ImportanceVM
         {
             get { return _importance; }
 
             set
             {
-                isactive1 = true;
+               // isactive1 = true;
                _importance = value;
-                OnPropertyChanged("Importance");
+                OnPropertyChanged("ImportanceVM");
+                MessageBox.Show(ImportanceVM.ToString());
             }
-        }*/
+        }
 
-      /*  public bool Urgency
+        public bool UrgencyVM
         {
             get { return _urgency; }
 
             set
             {
-                isactive2= true;
+              //  isactive2= true;
                 _urgency = value;
-                OnPropertyChanged("Urgency");
+                OnPropertyChanged("UrgencyVM");
+                MessageBox.Show(UrgencyVM.ToString());
             }
-        }*/
+        }
 
     
         private RelayCommand _addCommand;
@@ -95,7 +98,7 @@ namespace First.ViewModel
         public bool CanExecuteAddClientCommand(object parameter)
         {
 
-            if ((!String.IsNullOrWhiteSpace(Name)) && (!string.IsNullOrWhiteSpace(_description))&&isactive1&&isactive2 ){  return true; }
+            if ((!String.IsNullOrWhiteSpace(Name)) && (!string.IsNullOrWhiteSpace(Description))){  return true; }
 
             //  MessageBox.Show("Условия не норм"); 
             return false; return true;
