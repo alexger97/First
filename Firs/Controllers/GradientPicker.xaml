@@ -5,7 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:First.Controllers"
              mc:Ignorable="d" 
-              xmlns:local2="clr-namespace:First.ViewModel;assembly=First.ViewModel"
+              
              d:DesignHeight="400" d:DesignWidth="400">
     <UserControl.Resources>
         <local:ConverterValue  x:Key="ConvertValue"></local:ConverterValue>
@@ -52,15 +52,9 @@
 
 
         <TextBox x:Name="Text_Importance" Height="23" Canvas.Left="255" TextWrapping="Wrap"   Canvas.Top="355" Width="114" Text="{Binding Path=Importance, Mode=OneWay , UpdateSourceTrigger=PropertyChanged, Converter={StaticResource ConvertValue},ConverterParameter=1}" IsReadOnly="True" />
-       
-        <TextBox x:Name="Text_Urgency" Height="23" Canvas.Left="38" TextWrapping="Wrap" Text="{Binding Path=Urgency, Mode=TwoWay,Converter={StaticResource ConvertValue},ConverterParameter=0}"  Canvas.Top="356" Width="120" IsReadOnly="True" />
 
-        <Grid>
-            <Grid.DataContext>
-                <local2:OneTaskViewModel></local2:OneTaskViewModel>
-            </Grid.DataContext>
+        <TextBox x:Name="Text_Urgency" Height="23" Canvas.Left="38" TextWrapping="Wrap" Text="{Binding Path=Urgency,UpdateSourceTrigger=PropertyChanged, Mode=OneWay,Converter={StaticResource ConvertValue},ConverterParameter=0}"  Canvas.Top="356" Width="120" IsReadOnly="True" />
 
-        </Grid>
     </Canvas>
 
     

@@ -19,7 +19,7 @@ namespace First.Controllers
     /// <summary>
     /// Логика взаимодействия для GradientPicker.xaml
     /// </summary>
-    public partial class GradientPicker :UserControl // INotifyPropertyChanged
+    public partial class GradientPicker :UserControl// ,INotifyPropertyChanged
     {
         public GradientPicker()
         {
@@ -44,27 +44,37 @@ namespace First.Controllers
        public static  DependencyProperty UrgencyProperty;
        public static  DependencyProperty ImportanceProperty;
 
-      //  public event PropertyChangedEventHandler PropertyChanged;
-      //  public virtual void OnPropertyChanged(string propertyName)
-       /// {
-        //    PropertyChangedEventHandler handler = this.PropertyChanged;
-         //   if (handler != null)
-          //  {
-          //      handler.Invoke(this, new PropertyChangedEventArgs(propertyName));
-          //  }
+     
+        //public event PropertyChangedEventHandler PropertyChanged;
+
+        //public virtual void OnPropertyChanged(string propertyName)
+        //{
+         //   PropertyChangedEventHandler handler = this.PropertyChanged;
+          //  if (handler != null)
+         //   {
+           //     handler.Invoke(this, new PropertyChangedEventArgs(propertyName));
+           // }
        // }
 
-
-            static GradientPicker()
+        static GradientPicker()
         {
             XProperty = DependencyProperty.Register("X", typeof(double), typeof(GradientPicker), new PropertyMetadata(null));
            YProperty = DependencyProperty.Register("Y", typeof(double), typeof(GradientPicker), new PropertyMetadata(null));
            Y_TitleProperty = DependencyProperty.Register("Y_Title", typeof(string), typeof(GradientPicker), new PropertyMetadata(null));
             X_TitleProperty = DependencyProperty.Register("X_Title", typeof(string), typeof(GradientPicker), new PropertyMetadata(null));
+            var tt=new FrameworkPropertyMetadata()
+            { 
+                BindsTwoWayByDefault = true,
+            
+                   
+              
+            };
 
-
-           UrgencyProperty = DependencyProperty.Register("Urgency", typeof(bool), typeof(GradientPicker), new PropertyMetadata(null));
-            ImportanceProperty = DependencyProperty.Register("Importance", typeof(bool), typeof(GradientPicker), new PropertyMetadata(null));
+        //  var metadata1=  new FrameworkPropertyMetadata(false, FrameworkPropertyMetadataOptions.BindsTwoWayByDefault);
+            UrgencyProperty = DependencyProperty.Register("Urgency", typeof(bool), typeof(GradientPicker), new FrameworkPropertyMetadata(true,
+            FrameworkPropertyMetadataOptions.BindsTwoWayByDefault));
+            ImportanceProperty = DependencyProperty.Register("Importance", typeof(bool), typeof(GradientPicker), new FrameworkPropertyMetadata(true,
+            FrameworkPropertyMetadataOptions.BindsTwoWayByDefault));
         }
 
       // private double _x;
@@ -138,7 +148,7 @@ namespace First.Controllers
             get => (bool)GetValue(UrgencyProperty);
 
             set
-            {//OnPropertyChanged("Urgency2");
+            {//OnPropertyChanged("Urgency");
                 //_urgency = value;
                SetValue(UrgencyProperty, value);
                 //OnPropertyChanged("UrgencyPropery");
@@ -156,7 +166,7 @@ namespace First.Controllers
             {
                // _importance = value;
                 SetValue(ImportanceProperty, value);
-               // OnPropertyChanged("Importance2");
+              //  OnPropertyChanged("Importance");
             }
 
         }
@@ -164,12 +174,7 @@ namespace First.Controllers
 
         private static void ImportanceChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
-          //  TextBox control = d as TextControl;
-          //  if (e.Property == TextProperty)
-          //  {
-           //     control.Text = e.NewValue.ToString();
-           //     return;
-           // }
+       
 
         }
 
@@ -203,28 +208,18 @@ namespace First.Controllers
                 }
 
                 if (X >= 150)
-                { Urgency = true; //Text_Urgency.Text = "Cрочно";
+                { Urgency = true; 
                 }
-                else { Urgency = false; //Text_Urgency.Text = "Не срочно";
+                else { Urgency = false; 
                 }
 
-              //  MessageBox.Show(Urgency2.ToString() + "   " + Importance2.ToString());
+             
 
                 check = !check; //}
             //  Ellipse.Colo
 
         }
-       /* private static void PropertyChanged(DependencyObject depObj, DependencyPropertyChangedEventArgs e)
-        {
-            TextBox control = depObj as TextControl;
-            if (e.Property == TextProperty)
-            {
-                control.Text = e.NewValue.ToString();
-                return;
-            }
-        }*/
-
-
+   
         private Point GetCoordinates(object sender, MouseEventArgs e)
         {
 

@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Data;
 
-namespace First.ViewModel
+namespace First.ViewModel.Converter
 {
     public class Converter1 : IValueConverter
     {

@@ -78,20 +78,27 @@
     <Compile Include="Controllers\GradientPicker.xaml.cs">
       <DependentUpon>GradientPicker.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\MainWindow2.xaml.cs">
-      <DependentUpon>MainWindow2.xaml</DependentUpon>
+    <Compile Include="ViewModels\Converter\Converter1.cs" />
+    <Compile Include="ViewModels\Converter\Converter2.cs" />
+    <Compile Include="ViewModels\Converter\RelayCommand.cs" />
+    <Compile Include="ViewModels\MainWindowViewModel.cs" />
+    <Compile Include="ViewModels\OneTaskViewModel.cs" />
+    <Compile Include="ViewModels\SeeListViewModel.cs" />
+    <Compile Include="ViewModels\ViewModelBase.cs" />
+    <Compile Include="Views\MainWindowS.xaml.cs">
+      <DependentUpon>MainWindowS.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\SeeListTask.xaml.cs">
       <DependentUpon>SeeListTask.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\MainWindow.xaml.cs">
+    <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
     </Compile>
     <Page Include="Controllers\GradientPicker.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\MainWindow2.xaml">
+    <Page Include="Views\MainWindowS.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -111,7 +118,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\MainWindow.xaml">
+    <Page Include="MainWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -159,10 +166,6 @@
     <ProjectReference Include="..\First.Service\First.Service.csproj">
       <Project>{443b5485-db8d-45c3-bd6f-2727886e7692}</Project>
       <Name>First.Service</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\First.ViewModel\First.ViewModel.csproj">
-      <Project>{b4bb0f29-8d25-4d05-a556-79a74529deb8}</Project>
-      <Name>First.ViewModel</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

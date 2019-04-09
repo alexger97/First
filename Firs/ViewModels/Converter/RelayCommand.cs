@@ -15,6 +15,8 @@ namespace First.ViewModel
 
         public RelayCommand(Action<object> execute) : this(execute, null)
         { }
+        public RelayCommand()
+        { }
 
         public RelayCommand (Action<object> execute,Predicate<object> canExecute = null)
         {

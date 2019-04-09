@@ -1,58 +1,92 @@
-﻿<Window x:Class="First.SeeListTask"
+﻿<Page x:Class="First.SeeListTask"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:First.ViewModel;assembly=First.ViewModel"
+       xmlns:local2="clr-namespace:First.ViewModel.Converter"
+      xmlns:local="clr-namespace:First.ViewModel"
         
         mc:Ignorable="d"
-        Title="SeeOneTask" Height="450" Width="800" >
-
-    <Window.DataContext>
+        Title="SeeOneTask" 
+      Width="1000"
+      >
+    <Page.DataContext>
         <local:SeeListViewModel></local:SeeListViewModel>
-    </Window.DataContext>
+    </Page.DataContext>
 
-
-    <Window.Resources>
-        <local:Converter1 x:Key="Converter1"/>
-        <local:Converter2 x:Key="Converter2"/>
-    </Window.Resources>
-
-
-    <Grid  Margin="0,5,0,0">
-            <Button x:Name="button" Content="Button" HorizontalAlignment="Left" Margin="136,277,0,0" VerticalAlignment="Top" Width="75" />
-
-
-        <ListBox Name="TaskList" Margin="3,52,125,166"  Visibility="{Binding ElementName=radioButton, Path=IsChecked, Converter={StaticResource Converter1}}">
-            <ListBox.ItemTemplate>
-                <DataTemplate>
-                    <Border Margin="5" BorderThickness="1" BorderBrush="SteelBlue" CornerRadius="4" Width="500">
-                        <Grid Margin="3">
-                            <Grid.RowDefinitions>
-                                <RowDefinition/>
-                                <RowDefinition/>
-                                <RowDefinition/>
-                                <RowDefinition/>
-                            </Grid.RowDefinitions>
-                            <TextBlock FontWeight="Bold"
-                               Text="{Binding Path=Name}"  FontSize="16"/>
-                            <TextBlock Grid.Row="1" Text="{Binding Path=Description }"  FontSize="14" />
-                            <TextBlock Grid.Row="2" Text="{Binding Path=Importance, Converter={StaticResource Converter2},ConverterParameter=1 }"  FontSize="12"/>
-                            <TextBlock Grid.Row="3" Text="{Binding Path=Urgency , Converter={StaticResource Converter2},ConverterParameter=2 }" FontSize="12" />
-                        </Grid>
-                    </Border>
-                </DataTemplate>
-            </ListBox.ItemTemplate>
-        </ListBox>
-        <RadioButton x:Name="radioButton" Content="RadioButton" HorizontalAlignment="Left" Margin="685,106,0,0" VerticalAlignment="Top" GroupName="1" />
-        <RadioButton x:Name="radioButton1" Content="RadioButton" HorizontalAlignment="Left" Margin="684,69,0,0" VerticalAlignment="Top"  GroupName="1"/>
-        <Slider x:Name="slider" HorizontalAlignment="Left" Margin="190,23,0,0" VerticalAlignment="Top" Width="59"/>
-
-
-
-
-
-    </Grid>
+    <Page.Resources>
+        <local2:Converter1 x:Key="Converter1"> </local2:Converter1>
+        <local2:Converter2 x:Key="Converter2" ></local2:Converter2>
+    </Page.Resources>
 
    
-</Window>
+
+    <DockPanel LastChildFill="False" >
+       
+        <Grid Width="800"  >
+            <ListBox Name="TaskList"    Visibility="{Binding ElementName=radioButton, Path=IsChecked, Converter={StaticResource Converter1}}" Width="800" ItemsSource="{Binding  Path=Tasks, Mode=OneWay,UpdateSourceTrigger=PropertyChanged}" >
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <Border Margin="5" BorderThickness="1" BorderBrush="SteelBlue" CornerRadius="4" Width="750">
+                            <Grid Margin="3">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition  TextElement.FontFamily="17" />
+                                    <RowDefinition TextElement.FontFamily="15" />
+                                    <RowDefinition TextElement.FontFamily="13" />
+                                    <RowDefinition TextElement.FontFamily="13" />
+                                </Grid.RowDefinitions>
+
+                                <TextBlock FontWeight="Bold"
+                               Text="{Binding Path=Name}" />
+                                <TextBlock Grid.Row="1" Text="{Binding Path=Description }" />
+                                <TextBlock Grid.Row="2" Text="{Binding Path=Importance, Converter={StaticResource Converter2},ConverterParameter=1 }" />
+                                <TextBlock Grid.Row="3" Text="{Binding Path=Urgency , Converter={StaticResource Converter2},ConverterParameter=2 }" />
+                            </Grid>
+                        </Border>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
+
+            <ListBox Name="TaskList2" Width="800" Visibility="{Binding ElementName=radioButton1, Path=IsChecked, Converter={StaticResource Converter1}}" ItemsSource="{Binding  Path=Tasks, Mode=OneWay,UpdateSourceTrigger=PropertyChanged}">
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <Border Margin="5" BorderThickness="1" BorderBrush="SteelBlue" CornerRadius="4" Width="750">
+                            <Grid Margin="3">
+                              
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition TextElement.FontFamily="17"></ColumnDefinition>
+                                    <ColumnDefinition TextElement.FontFamily="15"></ColumnDefinition>
+                                    <ColumnDefinition TextElement.FontFamily="13"></ColumnDefinition>
+                                    <ColumnDefinition TextElement.FontFamily="13"></ColumnDefinition>
+                                </Grid.ColumnDefinitions>
+                                <TextBlock FontWeight="Bold"
+                               Text="{Binding Path=Name}" />
+                                <TextBlock Grid.Column="1" Text="{Binding Path=Description }" />
+                                <TextBlock Grid.Column="2" Text="{Binding Path=Importance, Converter={StaticResource Converter2 },ConverterParameter=1 }" />
+                                <TextBlock Grid.Column="3" Text="{Binding Path=Urgency , Converter={StaticResource Converter2 },ConverterParameter=2 }" />
+                            </Grid>
+                        </Border>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
+        </Grid>
+        <Grid   DockPanel.Dock="Right" Width="200" >
+            <Button  x:Name="button" Content="Button" HorizontalAlignment="Center" Width="75"  VerticalAlignment="Bottom" />
+            <RadioButton x:Name="radioButton"  Content="Вид таблицы 2"  GroupName="1"  VerticalAlignment="Center" Margin="-3,221,3,173" />
+            <Slider x:Name="slider" Minimum="400" Maximum="800" VerticalAlignment="Center" Margin="8,270,16,121" />
+            <RadioButton x:Name="radioButton1" Content="Вид таблицы 1"   GroupName="1" VerticalAlignment="Center" RenderTransformOrigin="0.437,-0.812" Margin="4,191,-4,203" />
+
+
+
+
+        </Grid>
+
+
+
+    </DockPanel>
+
+
+
+
+
+</Page>

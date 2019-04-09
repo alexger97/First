@@ -15,28 +15,24 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using First;
+using First.ViewModel;
 
 namespace First
 {
     /// <summary>
     /// Логика взаимодействия для SeeOneTask.xaml
     /// </summary>
-    public partial class SeeListTask : Window
+    public partial class SeeListTask : Page
     {
         public SeeListTask()
         {
             InitializeComponent();
-            TaskList.ItemsSource = ObsTask;
+           
         }
 
 
 
-            public ObservableCollection<ITask> ObsTask = new ObservableCollection<ITask>
-                 {
-            new MyTask("One","Ебанько",true, true),
-           new MyTask("Two","Малыш",false, true),
-              new MyTask("Third","Супер",false, true),
-                            new MyTask("Four","Киберпанкс",false, false)  };
+          
     } }
 
 

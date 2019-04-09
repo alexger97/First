@@ -10,16 +10,17 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
 using System.Windows.Shapes;
 
 namespace First.Views
 {
     /// <summary>
-    /// Логика взаимодействия для MainWindow2.xaml
+    /// Логика взаимодействия для MainWindowS.xaml
     /// </summary>
-    public partial class MainWindow2 : Window
+    public partial class MainWindowS : Page
     {
-        public MainWindow2()
+        public MainWindowS()
         {
             InitializeComponent();
         }

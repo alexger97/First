@@ -13,19 +13,33 @@ namespace First.ViewModel
 {
    public class SeeListViewModel:ViewModelBase
     {
-        ObservableCollection<ITask> _tasks = null;
+        ObservableCollection<ITask> _tasks = new ObservableCollection<ITask>
+        {
+            new MyTask("One", "Ебанько", true, true),
+        new MyTask("One", "Ебанько", false, true),
+        new MyTask("One", "Ебанько", true, true),
+        new MyTask("One", "Ебанько", false, true)
+        };
 
-        ObservableCollection<ITask> Tasks
+       public  ObservableCollection<ITask> Tasks
         {
             get
-            {if (_tasks == null)
-                    _tasks.Add(new MyTask("One", "Ебанько", true, true));
-                _tasks.Add(new MyTask("One", "Ебанько", true, true));
-                _tasks.Add(new MyTask("One", "Ебанько", true, true));
+            {
                 return _tasks;
             }
 
+            set
+            {
+                base.OnPropertyChanged("Tasks");
+                _tasks.Add((ITask)value);
+                base.OnPropertyChanged("Tasks");
+            }
+
         }
+
+
+
+
 
         RelayCommand _readCommand;
 
@@ -40,7 +54,6 @@ namespace First.ViewModel
 
         }
 
-        public bool typelist;
 
 
         public void ExecuteAddClientCommand(object parameter)
@@ -58,13 +71,7 @@ namespace First.ViewModel
 
         }
 
-       public ObservableCollection<ITask> ObsTask = new ObservableCollection<ITask>
-        {
-            new MyTask("One","Ебанько",true, true),
-           new MyTask("Two","Малыш",false, true),
-              new MyTask("Third","Супер",false, true),
-                 new MyTask("Four","Киберпанкс",false, false)
-        };
+       
 
 
 

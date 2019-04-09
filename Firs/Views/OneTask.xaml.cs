@@ -1,4 +1,5 @@
-﻿using System;
+﻿using First.Controllers;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -16,16 +17,16 @@ using System.Windows.Shapes;
 namespace First
 {
     /// <summary>
-    /// Логика взаимодействия для MainWindow.xaml
+    
     /// </summary>
-    public partial class OneTask : Window
+    public partial class OneTask :Page
     {
         public OneTask()
         {
             InitializeComponent();
-       
         }
-
-        
     }
 }
+
+
+  

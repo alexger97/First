@@ -1,5 +1,5 @@
 ﻿using First.Interface;
-using First.ViewModel;
+
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -26,24 +26,8 @@ namespace First
             InitializeComponent();
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
-        {
-           //MainWindow2 mainWindow2= new MainWindow2();
-           // mainWindow2.Show();
 
-        }
 
-        private void Button_Click_1(object sender, RoutedEventArgs e)
-        {
-            OneTask oneTask = new OneTask() {DataContext=new OneTaskViewModel() };
-            oneTask.Show();
-        }
-
-        private void Button_Click_2(object sender, RoutedEventArgs e)
-        {
-            SeeListTask seeListTask = new SeeListTask();//{ DataContext = new SeeListViewModel() };
-            seeListTask.Show();
-        }
 
        
     }

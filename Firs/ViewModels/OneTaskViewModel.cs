@@ -16,9 +16,7 @@ namespace First.ViewModel
     public class OneTaskViewModel: ViewModelBase
     {
 
-    
-        
-        
+   
         // TaskService taskService = new TaskService();
       private string _name;
         private string _description;
@@ -53,8 +51,9 @@ namespace First.ViewModel
 
             set
             {
-               // isactive1 = true;
-               _importance = value;
+                OnPropertyChanged("ImportanceVM");
+                // isactive1 = true;
+                _importance = value;
                 OnPropertyChanged("ImportanceVM");
                 MessageBox.Show(ImportanceVM.ToString());
             }
