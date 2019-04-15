@@ -8,22 +8,26 @@
         xmlns:local1="clr-namespace:First.ViewModel"
         mc:Ignorable="d"
         Title="Window1" Height="500" Width="1150">
-    <Window.DataContext>
-        <local1:MainWindowViewModel></local1:MainWindowViewModel>
-    </Window.DataContext>
-    
+
+
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="150"/>
             <ColumnDefinition Width="1000"/>
         </Grid.ColumnDefinitions>
-        <StackPanel Grid.Column="0" Margin="0,0,0,51" >
+        <StackPanel Grid.Column="0">
+            <StackPanel.Background>
+                <LinearGradientBrush EndPoint="0.5,1" MappingMode="RelativeToBoundingBox" StartPoint="0.5,0">
+                    <GradientStop Color="#FFF6E8ED" Offset="0"/>
+                    <GradientStop Color="#FFD79C00" Offset="0.526"/>
+                </LinearGradientBrush>
+            </StackPanel.Background>
 
-            <Button Background="LawnGreen"  Content="Добавить задачу" Command="{Binding CliclOne}" />
-            <Button  Background="GreenYellow" Content="Просмотра списка задач" Command="{Binding CliclTwo}" />
-            <Button Background="LightGreen" Content="Возможнгсть редакции выбранной задачи"/>
-           
-     
+            <Button Background="{Binding Path=ColorButton1}"  Content="Добавить задачу" Command="{Binding CliclOne}" Margin="0,50" FontSize="15" />
+            <Button  Background="{Binding Path=ColorButton2}" Content="Просмотра списка задач" Command="{Binding CliclTwo}" Margin="0,50" FontSize="15" />
+            <Button Background="{Binding Path=ColorButton3}" Content="Редактирование задачи" Margin="0,50" FontSize="15" />
+
+
         </StackPanel>
         <Frame Grid.Column="1" Content="{Binding CurrentPage}"  NavigationUIVisibility="Hidden" Opacity="{Binding FrameOpacity}" />
 

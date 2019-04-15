@@ -44,9 +44,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ITask.cs" />
+    <Compile Include="IMyMainWindows.cs" />
+    <Compile Include="IMyTask.cs" />
+    <Compile Include="IOneTaskViewModel.cs" />
     <Compile Include="ITaskRepository.cs" />
     <Compile Include="ITaskService.cs" />
+    <Compile Include="IViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

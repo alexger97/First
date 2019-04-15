@@ -1,24 +1,80 @@
-﻿using First.Views;
+﻿using First.Model;
+using First.Views;
+using First.Service;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
+using System.Windows.Media;
 
 namespace First.ViewModel
 {
     public class MainWindowViewModel : ViewModelBase
     {
+        public static NavigationService nv = new NavigationService();
+
 
 
         private Page Main;
-        private Page OneTask;
+        private Page OneTask1;
         private Page ListTasks;
 
+        
+    
 
         private Page _currentPage;
     
-        public Page CurrentPage { get => _currentPage; set { _currentPage = value; OnPropertyChanged("CurrentPage"); } }
+        public Page CurrentPage { get => _currentPage; set { _currentPage = value; OnPropertyChanged("CurrentPage");   } }
+
+        private Brush _colorButton1;
+        private Brush _colorButton2;
+        private Brush _colorButton3;
+
+        public Brush ColorButton1
+        {
+            get => _colorButton1;
+            set { _colorButton1 = value;
+                OnPropertyChanged("ColorButton1");
+            }
+
+        }
+        public Brush ColorButton2
+        {
+            get => _colorButton2;
+            set
+            {
+                _colorButton2 = value;
+                OnPropertyChanged("ColorButton2");
+            }
+
+        }
+        public Brush ColorButton3
+        {
+            get => _colorButton3;
+            set
+            {
+                _colorButton3 = value;
+                OnPropertyChanged("ColorButton3");
+
+                
+                
+            }
+           
+        }
+
+        public void ColorSet(short i)
+        {
+            var supcolor = new SolidColorBrush(Color.FromRgb(177, 255, 10));
+            var othercolor= new SolidColorBrush(Color.FromRgb(2, 255, 29));
+            if (i == 1) { ColorButton1 = supcolor; ColorButton2 = othercolor; ColorButton3 = othercolor;  }
+            if (i == 2) { ColorButton2 = supcolor; ColorButton1 = othercolor; ColorButton3 = othercolor; }
+            if (i == 3) { ColorButton3 = supcolor; ColorButton2 = othercolor; ColorButton1 = othercolor; }
+            if (i==0) { ColorButton3 = ColorButton2 = ColorButton1 = othercolor; }
+        }
+
+
+
 
         private double _frameOpacity;
         public double FrameOpacity
@@ -28,10 +84,10 @@ namespace First.ViewModel
 
         public MainWindowViewModel()
         {
-            Main = new MainWindowS();
-            OneTask = new OneTask() { DataContext = new OneTaskViewModel()};
-            ListTasks = new SeeListTask();
+            //Main = new MainWindowS();
+            ///{ DataContext = new OneTaskViewModel()};
 
+            ColorSet(0);
             CurrentPage = Main;
             FrameOpacity = 1;
 
@@ -53,7 +109,12 @@ namespace First.ViewModel
 
             public void ExecuteCliclOne(object parameter)
         {
-            SlowOpacity(OneTask);
+           // Page li = new OneTask();
+          //  nv.Navigate()
+            // OneTask = new OneTask(new MyTask { Name="22",Description="55",Urgency=true,Importance=true}, this); SlowOpacity(OneTask);
+            //ColorSet(1);
+
+
         }
         public bool CanExecuteCliclOne(object parameter)
         {
@@ -77,7 +138,9 @@ namespace First.ViewModel
 
         public void ExecuteCliclTwo(object parameter)
         {
-            SlowOpacity(ListTasks);
+            
+            ListTasks = new SeeListTask((ViewModelBase)this); SlowOpacity(ListTasks);
+            ColorSet(2);
         }
         public bool CanExecuteCliclTwo (object parameter)
         {
@@ -112,32 +175,6 @@ namespace First.ViewModel
 
         }
 
-
-
-
-
-        RelayCommand _openAddCommand;
-    //    RelayCommand OpenAddCommnd
-       // {
-          //  get { if (_openAddCommand== null)
-             //   {
-             //       _openAddCommand = new RelayCommand(ExecuteOpenAddCommnd, CanExecuteOpenAddCommnd);
-             //       return _openAddCommand;
-             //   }
-             //           }
-
-            public void ExecuteOpenAddCommnd(object parameter)
-        {
-            //Frame.
-            //
-
-        }
-        public bool CanExecuteAddClientCommand(object parameter)
-        {
-
-            return true;
-
-        }
 
     }
     }

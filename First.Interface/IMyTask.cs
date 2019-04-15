@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace First.Interface
 {
-   public interface ITask
+   public interface IMyTask
     {
 
         string Name { get; set; }

@@ -24,15 +24,14 @@ namespace First
     /// </summary>
     public partial class SeeListTask : Page
     {
-        public SeeListTask()
+        public SeeListTask(ViewModelBase vm)
         {
             InitializeComponent();
-           
+          //  DataContext= new SeeListViewModel((MainWindowViewModel)vm);
+            radioButton1.IsChecked = true;
         }
 
-
-
-          
+       
     } }
 
 

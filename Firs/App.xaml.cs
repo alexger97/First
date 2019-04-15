@@ -21,18 +21,10 @@ namespace First
     /// </summary>
     public partial class App : Application
     {
-        
+
         protected override void OnStartup(StartupEventArgs e)
         {
-            var builder = new ContainerBuilder();
-            builder.RegisterType<MyTask> ().As<Interface.ITask>();
-            builder.RegisterType<TaskRepository> ().As<ITaskRepository>();
-            builder.RegisterType<TaskService>().As<ITaskService>();
-          //  builder.RegisterType<VisitorRepository>().As<IVisitorRepository>();
-            builder.RegisterType<MainWindowViewModel>().AsSelf();
-            var container = builder.Build();
-            var model = container.Resolve<MainWindowViewModel>();
-            var view = new MainWindow() { DataContext = new MainWindowViewModel()}  ;
+           var view= new MainWindow() { DataContext = Composite.GetMainViewModel() };
             view.Show();
         }
     }

@@ -35,6 +35,7 @@
       <HintPath>..\packages\Autofac.4.9.2\lib\net45\Autofac.dll</HintPath>
     </Reference>
     <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL" />
+    <Reference Include="PresentationFramework" />
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -52,6 +53,10 @@
     <ProjectReference Include="..\First.Interface\First.Interface.csproj">
       <Project>{cad34784-5aac-4ef5-b539-64679f0fef6b}</Project>
       <Name>First.Interface</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\First.Model\First.Model.csproj">
+      <Project>{0BE005C4-1BC2-45EC-B123-70FDFA1C820E}</Project>
+      <Name>First.Model</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

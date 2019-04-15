@@ -5,7 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:First.Controllers"
              mc:Ignorable="d" 
-              
+              x:Name="uk"
              d:DesignHeight="400" d:DesignWidth="400">
     <UserControl.Resources>
         <local:ConverterValue  x:Key="ConvertValue"></local:ConverterValue>
@@ -13,7 +13,7 @@
     </UserControl.Resources>
  
 
-    <Canvas x:Name="canv" Margin="0,0,145,149">
+    <Canvas x:Name="canv" Margin="0,0,98,103">
         <Grid x:Name="grid"  Height="300" Width="300"  MouseMove="grid_PointerMoved" MouseDown="grid_PointerPressed" Canvas.Left="3" >
             <Canvas Background="Transparent">
                 <Rectangle x:Name="rec1" Stroke="Black" StrokeThickness="2"  Height="300" Width="300">
@@ -35,11 +35,11 @@
                 </Rectangle>
                 <Line x:Name="l1" Stroke="White" X1="150" Y1="0" X2="150" Y2="300" StrokeThickness="0.5"/>
                 <Line x:Name="l2" Stroke="White" X1="0" Y1="150" X2="300" Y2="150" StrokeThickness="0.5"/>
-                <Ellipse x:Name="round" Height="20" Width="20" Stroke="LightGray" StrokeThickness="4" Canvas.Left="{Binding Path= X, Mode=OneWay,UpdateSourceTrigger=PropertyChanged}" Canvas.Top="{Binding Path= Y, Mode=OneWay,UpdateSourceTrigger=PropertyChanged}"   />
+                <Ellipse x:Name="round" Height="20" Width="20" Stroke="LightGray" StrokeThickness="4" Canvas.Left="{Binding Path= X, Mode=OneWay,UpdateSourceTrigger=PropertyChanged}" Canvas.Top="{Binding Path= Y, Mode=OneWay,UpdateSourceTrigger=PropertyChanged}" Fill="{Binding BrushMy,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"   />
             </Canvas>
         </Grid>
-        <TextBlock x:Name="tb1" Text="{Binding Path=X_Title, Mode=TwoWay}" FontStyle="Oblique" FontSize="40" Height="56" Width="352" TextAlignment="Center" Canvas.Top="301" Canvas.Left="6" />
-        <TextBlock x:Name="tb2" Text="{Binding Path=Y_Title, Mode=TwoWay}" FontSize="40" TextWrapping="Wrap" TextAlignment="Center" RenderTransformOrigin="0.5,0.5" Height="51" Width="300" Canvas.Left="183" Canvas.Top="124" >
+        <TextBlock x:Name="tb1" Text="{Binding Path=X_Title, Mode=OneWay,UpdateSourceTrigger=PropertyChanged ,ElementName=uk}" FontStyle="Oblique" FontSize="40" Height="56" Width="352" TextAlignment="Center" Canvas.Top="301" Canvas.Left="6" />
+        <TextBlock x:Name="tb2" Text="{Binding Path=Y_Title, Mode=OneWay,UpdateSourceTrigger=PropertyChanged,  ElementName=uk}" FontSize="40" TextWrapping="Wrap" TextAlignment="Center" RenderTransformOrigin="0.5,0.5" Height="51" Width="300" Canvas.Left="183" Canvas.Top="124" >
             <TextBlock.RenderTransform>
                 <TransformGroup>
                     <ScaleTransform/>
@@ -51,9 +51,9 @@
         </TextBlock>
 
 
-        <TextBox x:Name="Text_Importance" Height="23" Canvas.Left="255" TextWrapping="Wrap"   Canvas.Top="355" Width="114" Text="{Binding Path=Importance, Mode=OneWay , UpdateSourceTrigger=PropertyChanged, Converter={StaticResource ConvertValue},ConverterParameter=1}" IsReadOnly="True" />
+        <TextBox x:Name="Text_Importance" Height="23" Canvas.Left="255" TextWrapping="Wrap"   Canvas.Top="355" Width="114" Text="{Binding Path=Importance, Mode=OneWay , UpdateSourceTrigger=PropertyChanged, ElementName=uk,Converter={StaticResource ConvertValue},ConverterParameter=1}" IsReadOnly="True" />
 
-        <TextBox x:Name="Text_Urgency" Height="23" Canvas.Left="38" TextWrapping="Wrap" Text="{Binding Path=Urgency,UpdateSourceTrigger=PropertyChanged, Mode=OneWay,Converter={StaticResource ConvertValue},ConverterParameter=0}"  Canvas.Top="356" Width="120" IsReadOnly="True" />
+        <TextBox x:Name="Text_Urgency" Height="23" Canvas.Left="38" TextWrapping="Wrap" Text="{Binding Path=Urgency,UpdateSourceTrigger=PropertyChanged, ElementName=uk, Mode=OneWay,Converter={StaticResource ConvertValue},ConverterParameter=0}"  Canvas.Top="356" Width="120" IsReadOnly="True" />
 
     </Canvas>
 

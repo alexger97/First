@@ -19,14 +19,14 @@ namespace First.Controllers
     /// <summary>
     /// Логика взаимодействия для GradientPicker.xaml
     /// </summary>
-    public partial class GradientPicker :UserControl// ,INotifyPropertyChanged
+    public partial class GradientPicker :UserControl
     {
         public GradientPicker()
         {
             this.InitializeComponent();
             this.DataContext = this;
-            round.Fill = (Brush)System.ComponentModel.TypeDescriptor
-          .GetConverter(typeof(Brush)).ConvertFromInvariantString("Aqua");
+            BrushMy = (Brush)System.ComponentModel.TypeDescriptor
+         .GetConverter(typeof(Brush)).ConvertFromInvariantString("Aqua");
             Y_Title = "First";
             X_Title = "Second";
         }
@@ -44,47 +44,49 @@ namespace First.Controllers
        public static  DependencyProperty UrgencyProperty;
        public static  DependencyProperty ImportanceProperty;
 
-     
-        //public event PropertyChangedEventHandler PropertyChanged;
+        public static DependencyProperty BrushMyProperty;
 
-        //public virtual void OnPropertyChanged(string propertyName)
-        //{
-         //   PropertyChangedEventHandler handler = this.PropertyChanged;
-          //  if (handler != null)
-         //   {
-           //     handler.Invoke(this, new PropertyChangedEventArgs(propertyName));
-           // }
-       // }
+
+
+   
+
+      
+
+
 
         static GradientPicker()
         {
+            BrushMyProperty = DependencyProperty.Register("BrushMy", typeof(Brush), typeof(GradientPicker), new PropertyMetadata(null));
             XProperty = DependencyProperty.Register("X", typeof(double), typeof(GradientPicker), new PropertyMetadata(null));
            YProperty = DependencyProperty.Register("Y", typeof(double), typeof(GradientPicker), new PropertyMetadata(null));
            Y_TitleProperty = DependencyProperty.Register("Y_Title", typeof(string), typeof(GradientPicker), new PropertyMetadata(null));
             X_TitleProperty = DependencyProperty.Register("X_Title", typeof(string), typeof(GradientPicker), new PropertyMetadata(null));
-            var tt=new FrameworkPropertyMetadata()
-            { 
-                BindsTwoWayByDefault = true,
             
-                   
-              
-            };
 
         //  var metadata1=  new FrameworkPropertyMetadata(false, FrameworkPropertyMetadataOptions.BindsTwoWayByDefault);
-            UrgencyProperty = DependencyProperty.Register("Urgency", typeof(bool), typeof(GradientPicker), new FrameworkPropertyMetadata(true,
-            FrameworkPropertyMetadataOptions.BindsTwoWayByDefault));
-            ImportanceProperty = DependencyProperty.Register("Importance", typeof(bool), typeof(GradientPicker), new FrameworkPropertyMetadata(true,
-            FrameworkPropertyMetadataOptions.BindsTwoWayByDefault));
+            UrgencyProperty = DependencyProperty.Register("Urgency", typeof(bool), typeof(GradientPicker), new PropertyMetadata(null));
+            ImportanceProperty = DependencyProperty.Register("Importance", typeof(bool), typeof(GradientPicker), new PropertyMetadata(null));
         }
 
-      // private double _x;
-      //  private double _y;
-        //private string _x_title;
-       // private string y_title;
-       
-       // private bool _urgency;
 
-      // private bool _importance;
+      
+
+
+
+
+        public Brush BrushMy
+        {
+            get
+            {
+                return (Brush)GetValue(BrushMyProperty);
+            }
+
+            set
+            {
+                SetValue(BrushMyProperty, value);
+
+            }
+    }
 
         public double X
         {
@@ -96,6 +98,7 @@ namespace First.Controllers
             set
             {
                   SetValue(XProperty, value);
+            
                // _x = value;
                 //OnPropertyChanged("X");
             }
@@ -152,7 +155,7 @@ namespace First.Controllers
                 //_urgency = value;
                SetValue(UrgencyProperty, value);
                 //OnPropertyChanged("UrgencyPropery");
-                
+              //  OnPropertyChanged("Urgency");
             }
 
         }
@@ -166,24 +169,19 @@ namespace First.Controllers
             {
                // _importance = value;
                 SetValue(ImportanceProperty, value);
-              //  OnPropertyChanged("Importance");
+              // OnPropertyChanged("Importance");
             }
 
         }
 
 
-        private static void ImportanceChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
-        {
-       
-
-        }
 
         private void grid_PointerMoved(object sender, MouseEventArgs e)
         {
             if (check==false)
             {
-                round.Fill = (Brush)System.ComponentModel.TypeDescriptor
-        .GetConverter(typeof(Brush)).ConvertFromInvariantString("Aqua");
+                BrushMy = (Brush)System.ComponentModel.TypeDescriptor
+          .GetConverter(typeof(Brush)).ConvertFromInvariantString("Aqua");
                 mousePosition = GetCoordinates(sender, e);
                 round.DataContext = mousePosition;
             }
@@ -191,10 +189,10 @@ namespace First.Controllers
 
         private void grid_PointerPressed(object sender, MouseEventArgs e)
         {
-           
-          
 
-                round.Fill = (Brush)System.ComponentModel.TypeDescriptor
+
+
+            BrushMy  = (Brush)System.ComponentModel.TypeDescriptor
             .GetConverter(typeof(Brush)).ConvertFromInvariantString("Red");
 
                 Point point = GetCoordinates(sender, e);
@@ -202,9 +200,9 @@ namespace First.Controllers
                 Y = point.Y;
 
                 if (Y >= 150)
-                { Importance = false; //Text_Importance.Text = " Не важно";
+                { Importance = false; 
                 }
-                else { Importance = true; //Text_Importance.Text = "Важно";
+                else { Importance = true;
                 }
 
                 if (X >= 150)
@@ -216,7 +214,10 @@ namespace First.Controllers
              
 
                 check = !check; //}
-            //  Ellipse.Colo
+                                //  Ellipse.Colo
+
+
+            
 
         }
    

@@ -7,7 +7,7 @@ using First.Interface;
 
 namespace First.Model
 {
-    public class MyTask: ITask
+    public class MyTask: IMyTask
     {
 
         public string Name { get; set; }
@@ -22,5 +22,7 @@ namespace First.Model
             this.Urgency = Urgency;
 
         }
+
+        public MyTask() { }
     }
 }

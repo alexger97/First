@@ -9,14 +9,16 @@ namespace First.Interface
    public interface ITaskRepository
     {
 
-        void AddTask(ITask task);
+        void AddTask(IMyTask task);
 
-        void SaveInJson(ITask task);
+        void SaveInJson(IMyTask task);
 
-         ITask ReadTask(string name);
+         IMyTask ReadTask(string name);
 
          bool SearchTaskOfName(string name);
 
-        ITask DeserializeTask(string path);
+        IMyTask DeserializeTask(string path);
+
+        List<IMyTask> ReadAllTasks();
     }
 }

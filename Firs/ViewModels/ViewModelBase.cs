@@ -4,10 +4,12 @@ using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
+using First.Interface;
 
 namespace First.ViewModel
 {
-   public class ViewModelBase: INotifyPropertyChanged
+   public class ViewModelBase: INotifyPropertyChanged,IViewModel
     {
         public event PropertyChangedEventHandler PropertyChanged;
 

@@ -5,31 +5,37 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
        xmlns:local2="clr-namespace:First.ViewModel.Converter"
       xmlns:local="clr-namespace:First.ViewModel"
-        
-        mc:Ignorable="d"
+     
+     xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
+      xmlns:i1="http://schemas.microsoft.com/xps/2005/06"
+      mc:Ignorable="d"
         Title="SeeOneTask" 
       Width="1000"
       >
-    <Page.DataContext>
-        <local:SeeListViewModel></local:SeeListViewModel>
-    </Page.DataContext>
+
 
     <Page.Resources>
-        <local2:Converter1 x:Key="Converter1"> </local2:Converter1>
+        <local2:Converter1 x:Key="Converter1"></local2:Converter1>
         <local2:Converter2 x:Key="Converter2" ></local2:Converter2>
     </Page.Resources>
 
-   
+
 
     <DockPanel LastChildFill="False" >
-       
-        <Grid Width="800"  >
-            <ListBox Name="TaskList"    Visibility="{Binding ElementName=radioButton, Path=IsChecked, Converter={StaticResource Converter1}}" Width="800" ItemsSource="{Binding  Path=Tasks, Mode=OneWay,UpdateSourceTrigger=PropertyChanged}" >
-                <ListBox.ItemTemplate>
-                    <DataTemplate>
+
+        <Grid Width="800" Height="500"  >
+
+            <ListBox Name="TaskList"    Visibility="{Binding ElementName=radioButton, Path=IsChecked, Converter={StaticResource Converter1}}" Width="800" ItemsSource="{Binding  Path=Tasks, Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" SelectedItem="{Binding Path=ActualTask, Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" >
+                <i:Interaction.Triggers>
+                    <i:EventTrigger EventName="MouseDoubleClick" >
+                        <i:InvokeCommandAction Command="{Binding EditTaskCommand}"             />
+                    </i:EventTrigger>
+                </i:Interaction.Triggers>
+                <ListBox.ItemTemplate >
+                    <DataTemplate >
                         <Border Margin="5" BorderThickness="1" BorderBrush="SteelBlue" CornerRadius="4" Width="750">
-                            <Grid Margin="3">
-                                <Grid.RowDefinitions>
+                            <Grid Margin="3" >
+                                <Grid.RowDefinitions >
                                     <RowDefinition  TextElement.FontFamily="17" />
                                     <RowDefinition TextElement.FontFamily="15" />
                                     <RowDefinition TextElement.FontFamily="13" />
@@ -45,14 +51,21 @@
                         </Border>
                     </DataTemplate>
                 </ListBox.ItemTemplate>
+
             </ListBox>
 
-            <ListBox Name="TaskList2" Width="800" Visibility="{Binding ElementName=radioButton1, Path=IsChecked, Converter={StaticResource Converter1}}" ItemsSource="{Binding  Path=Tasks, Mode=OneWay,UpdateSourceTrigger=PropertyChanged}">
+            <ListBox Name="TaskList2" Width="800" Visibility="{Binding ElementName=radioButton1, Path=IsChecked, Converter={StaticResource Converter1}}" ItemsSource="{Binding  Path=Tasks, Mode=OneWay,UpdateSourceTrigger=PropertyChanged}" SelectedItem="{Binding Path=ActualTask, Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}">
+                <i:Interaction.Triggers>
+                    <i:EventTrigger EventName="MouseDoubleClick" >
+                        <i:InvokeCommandAction Command="{Binding EditTaskCommand}"             />
+                    </i:EventTrigger>
+                </i:Interaction.Triggers>
+
                 <ListBox.ItemTemplate>
                     <DataTemplate>
                         <Border Margin="5" BorderThickness="1" BorderBrush="SteelBlue" CornerRadius="4" Width="750">
                             <Grid Margin="3">
-                              
+
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition TextElement.FontFamily="17"></ColumnDefinition>
                                     <ColumnDefinition TextElement.FontFamily="15"></ColumnDefinition>
@@ -71,10 +84,16 @@
             </ListBox>
         </Grid>
         <Grid   DockPanel.Dock="Right" Width="200" >
-            <Button  x:Name="button" Content="Button" HorizontalAlignment="Center" Width="75"  VerticalAlignment="Bottom" />
-            <RadioButton x:Name="radioButton"  Content="Вид таблицы 2"  GroupName="1"  VerticalAlignment="Center" Margin="-3,221,3,173" />
-            <Slider x:Name="slider" Minimum="400" Maximum="800" VerticalAlignment="Center" Margin="8,270,16,121" />
-            <RadioButton x:Name="radioButton1" Content="Вид таблицы 1"   GroupName="1" VerticalAlignment="Center" RenderTransformOrigin="0.437,-0.812" Margin="4,191,-4,203" />
+            <StackPanel VerticalAlignment="Center">
+                <RadioButton x:Name="radioButton"  Content="Вид таблицы 2"  GroupName="1"  VerticalAlignment="Center" BorderBrush="FloralWhite"  BorderThickness="5" Margin="0,30" FontFamily="Comic Sans MS" />
+                <RadioButton x:Name="radioButton1" Content="Вид таблицы 1"   GroupName="1" VerticalAlignment="Center"  BorderBrush="FloralWhite"  BorderThickness="7" Margin="0,30" FontFamily="Comic Sans MS"/>
+                <Button  x:Name="button"  HorizontalAlignment="Center" Width="110"  VerticalAlignment="Bottom" Command="{Binding RefeshCommand}" Content="Обновить базу" FontFamily="Comic Sans MS" Margin="0,25" />
+                <Slider x:Name="slider" Minimum="400" Maximum="800" VerticalAlignment="Center" />
+            </StackPanel>
+
+
+
+
 
 
 

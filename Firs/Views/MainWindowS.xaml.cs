@@ -1,4 +1,5 @@
-﻿using System;
+﻿using First.Interface;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -18,7 +19,7 @@ namespace First.Views
     /// <summary>
     /// Логика взаимодействия для MainWindowS.xaml
     /// </summary>
-    public partial class MainWindowS : Page
+    public partial class MainWindowS : Page,IMyMainWindows
     {
         public MainWindowS()
         {
