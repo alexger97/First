@@ -111,7 +111,7 @@ namespace First.ViewModel
         {
            // Page li = new OneTask();
           //  nv.Navigate()
-            // OneTask = new OneTask(new MyTask { Name="22",Description="55",Urgency=true,Importance=true}, this); SlowOpacity(OneTask);
+            OneTask1 = new OneTask(new MyTask { Name="22",Description="55",Urgency=true,Importance=true}, this); SlowOpacity(OneTask1);
             //ColorSet(1);
 
 

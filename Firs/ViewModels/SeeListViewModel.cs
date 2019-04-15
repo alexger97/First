@@ -19,11 +19,11 @@ namespace First.ViewModel
 
 
         MainWindowViewModel mainWindowViewModel;
-        public SeeListViewModel(ITaskService taskService)
+        public SeeListViewModel( MainWindowViewModel Vm)///ITaskService taskService)
         {
-            _taskService = taskService;
+          //  _taskService = taskService;
 
-         //   this.mainWindowViewModel = Vm;
+           this.mainWindowViewModel = Vm;
         }
 
        

@@ -12,14 +12,14 @@ namespace First.Service
     {
         //  public MyTask newtask = null;
 
-        public TaskService(ITaskRepository repository)
-        {
+       // public TaskService(ITaskRepository repository)
+       // {
 
-            taskRepository = repository;
+            //taskRepository = repository;
 
-        }
+        //}
 
-        static ITaskRepository taskRepository;
+        static ITaskRepository taskRepository= new TaskRepository();
   // public TaskService(ITaskRepository service)
     //       {
         // taskRepository = service;

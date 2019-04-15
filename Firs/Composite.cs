@@ -23,7 +23,7 @@ namespace First
             IContainer container = BuildContainer();
 
             var mainViewModel = container.Resolve <MainWindowViewModel> ();
-            mainViewModel.CurrentPage = container.Resolve<MainWindowS>();
+           // mainViewModel.CurrentPage = container.Resolve<MainWindowS>();
             
             /*mainViewModel.NavigationService = container.
                 Resolve<INavigationService>(
