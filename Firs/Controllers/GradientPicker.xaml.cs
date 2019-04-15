@@ -24,7 +24,6 @@ namespace First.Controllers
         public GradientPicker()
         {
             this.InitializeComponent();
-            this.DataContext = this;
             BrushMy = (Brush)System.ComponentModel.TypeDescriptor
          .GetConverter(typeof(Brush)).ConvertFromInvariantString("Aqua");
             Y_Title = "First";
