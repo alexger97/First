@@ -84,7 +84,7 @@ namespace First.ViewModel
 
         public MainWindowViewModel()
         {
-            //Main = new MainWindowS();
+            Main = new MainWindowS();
             ///{ DataContext = new OneTaskViewModel()};
 
             ColorSet(0);
