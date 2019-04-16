@@ -11,35 +11,36 @@
        Title="MainWindow" Height="500" Width="800">
 
     <!--   DataContext="{Binding Path=DatConst,ElementName=ttt}" -->
-  
 
-   
-   
+
+
+
     <Grid >
 
         <Grid HorizontalAlignment="Left" Height="422" Margin="23,34,0,0" VerticalAlignment="Top" Width="753" RenderTransformOrigin="0.5,0.5">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="350" />
-                <ColumnDefinition/>
+                <ColumnDefinition Width="400" />
             </Grid.ColumnDefinitions>
             <TextBlock Text="Наименование задачи:" Margin="22,10,269,291" ></TextBlock>
             <TextBox x:Name="textBox" HorizontalAlignment="Left" Height="23" Margin="13,44,0,0" TextWrapping="Wrap" Text="{Binding Path=Name, Mode=TwoWay}" VerticalAlignment="Top" Width="317"/>
             <TextBlock x:Name="textBlock" HorizontalAlignment="Left" Margin="27,103,0,0" TextWrapping="Wrap" Text="{Binding Path=Name, Mode=TwoWay}" VerticalAlignment="Top" Width="131" Height="16"/>
             <TextBox x:Name="textBox1" HorizontalAlignment="Left" Height="114" Margin="13,87,0,0" TextWrapping="Wrap" Text="{Binding Path=Description, Mode=TwoWay}" VerticalAlignment="Top" Width="317" />
-           
+
             <Button x:Name="button" Content="Добавить в список задач" HorizontalAlignment="Left" Margin="74,338,0,21"  Width="169" Command="{Binding AddCommand}" />
 
             <local2:GradientPicker  X_Title="Срочность" Y_Title="Важность" Grid.Column="1" x:Name="ct" 
                                     Importance="{Binding Path=ImportanceVM, Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" 
-                                    Urgency="{Binding Path=UrgencyVM,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"> 
-                
+                                    Urgency="{Binding Path=UrgencyVM,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" >
+
             </local2:GradientPicker>
-           
-            
+
+
             <RadioButton x:Name="radioButton" Content="RadioButton" HorizontalAlignment="Left" Margin="25,250,0,0" VerticalAlignment="Top" IsChecked="{Binding ImportanceVM, Mode=TwoWay}"/>
             <TextBox x:Name="textBox2" HorizontalAlignment="Left" Height="23" Margin="191,257,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="120" Text="{Binding Path=Description,Mode=OneWay,UpdateSourceTrigger=PropertyChanged}" IsReadOnly="True"/>
+            <Border BorderBrush="Black" BorderThickness="1" Grid.ColumnSpan="2" />
 
         </Grid>
 
     </Grid>
-    </Page>
+</Page>

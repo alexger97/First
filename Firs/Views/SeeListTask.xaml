@@ -84,13 +84,24 @@
             </ListBox>
         </Grid>
         <Grid   DockPanel.Dock="Right" Width="200" >
-            <StackPanel VerticalAlignment="Center">
+            <StackPanel VerticalAlignment="Center" Height="400">
+                <TextBlock x:Name="textBlock" FontSize="17" FontFamily="Miramonte Bold" Text="Поик по имени задачи" TextAlignment="Left"/>
+                <TextBox x:Name="textBox"  Height="23" TextWrapping="Wrap" Text="{Binding Path=SearchText, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"  Width="180" HorizontalAlignment="Left" >
+                    <i:Interaction.Triggers>
+                        <i:EventTrigger EventName="TextChanged" >
+                            <i:InvokeCommandAction Command="{Binding SearchTaskCommand}"  />
+                        </i:EventTrigger>
+                    </i:Interaction.Triggers>
+                </TextBox>
                 <RadioButton x:Name="radioButton"  Content="Вид таблицы 2"  GroupName="1"  VerticalAlignment="Center" BorderBrush="FloralWhite"  BorderThickness="5" Margin="0,30" FontFamily="Comic Sans MS" />
                 <RadioButton x:Name="radioButton1" Content="Вид таблицы 1"   GroupName="1" VerticalAlignment="Center"  BorderBrush="FloralWhite"  BorderThickness="7" Margin="0,30" FontFamily="Comic Sans MS"/>
                 <Button  x:Name="button"  HorizontalAlignment="Center" Width="110"  VerticalAlignment="Bottom" Command="{Binding RefeshCommand}" Content="Обновить базу" FontFamily="Comic Sans MS" Margin="0,25" />
                 <Slider x:Name="slider" Minimum="400" Maximum="800" VerticalAlignment="Center" />
-            </StackPanel>
+               
 
+
+            </StackPanel>
+           
 
 
 

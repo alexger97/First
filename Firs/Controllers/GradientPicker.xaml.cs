@@ -182,7 +182,10 @@ namespace First.Controllers
                 BrushMy = (Brush)System.ComponentModel.TypeDescriptor
           .GetConverter(typeof(Brush)).ConvertFromInvariantString("Aqua");
                 mousePosition = GetCoordinates(sender, e);
-                round.DataContext = mousePosition;
+                X = mousePosition.X;
+                Y = mousePosition.Y;
+
+                // round. = mousePosition;
             }
         }
 

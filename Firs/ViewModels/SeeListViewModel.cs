@@ -24,6 +24,8 @@ namespace First.ViewModel
           //  _taskService = taskService;
 
            this.mainWindowViewModel = Vm;
+            basetask = Refesh();
+            Tasks = basetask;
         }
 
        
@@ -40,26 +42,13 @@ namespace First.ViewModel
             }
                     }
 
+        private ObservableCollection<IMyTask> basetask;
         public  ObservableCollection<IMyTask> Tasks
         {
             
             get
             {
-                if (_tasks == null)
-                {
-                    _tasks = new ObservableCollection<IMyTask>();
-
-                    List<IMyTask> _list = Refesh();
-                    if (_list != null)
-                    {
-                        foreach(Model.MyTask task in _list )
-                        {
-                            _tasks.Add(task);
-                        }
-                        MessageBox.Show("Актуальное состояние базы");
-                    } else { MessageBox.Show("Нет задач в базе данных"); }
-                    
-                }
+               
                 return _tasks;
             }
 
@@ -75,7 +64,7 @@ namespace First.ViewModel
                 if ((value) is ObservableCollection<IMyTask>)
                 {
 
-
+                    _tasks = value; base.OnPropertyChanged("Tasks");
                 }
             }
 
@@ -91,14 +80,11 @@ namespace First.ViewModel
 
        
 
-        private List<IMyTask> Refesh()
+        private ObservableCollection<IMyTask> Refesh()
         {
            
             var list = TaskService.ReadAllTasks();
-            if (list != null)
-
-                return list;
-            else return null;
+            return new ObservableCollection<IMyTask>(list);
             
            
            
@@ -119,14 +105,15 @@ namespace First.ViewModel
         public void ExecuteRefeshCommand(object parameter)
         {
             // mainWindowViewModel.CurrentPage = new SeeListTask(this);
-
-            this.Tasks = null;
-            MessageBox.Show("@@@@@");
+            basetask = Refesh();
+            Tasks = basetask;
+            
+            MessageBox.Show("Обновление базы произошло");
         }
 
         public bool CanExecuteRefeshCommand(object parameter)
         {
-            Thread.Sleep(50);
+          //  if (Tasks.Equals(basetask)) return false;
             return true;
         }
 
@@ -136,7 +123,7 @@ namespace First.ViewModel
         {
             get
             {
-                if (_editTaskCommand == null) { _editTaskCommand = new RelayCommand(ExecuteEditTaskCommandCommand, CanExecuteRefeshCommandCommand); }
+                if (_editTaskCommand == null) { _editTaskCommand = new RelayCommand(ExecuteEditTaskCommand, CanExecuteEditTaskCommand); }
                         //((o) => { mainWindowViewModel.CurrentPage = new OneTask(ActualTask, mainWindowViewModel); }, canExecute: (o) => { if (ActualTask != null) return true; return false; }); }
                     return _editTaskCommand;
 
@@ -146,24 +133,62 @@ namespace First.ViewModel
         }
 
 
-        public void ExecuteEditTaskCommandCommand(object parameter)
+        public void ExecuteEditTaskCommand(object parameter)
         {
             mainWindowViewModel.CurrentPage = new OneTask(ActualTask, mainWindowViewModel);
             mainWindowViewModel.ColorSet(3);
         }
-        public bool CanExecuteRefeshCommandCommand(object parameter)
+        public bool CanExecuteEditTaskCommand(object parameter)
         {
             if (ActualTask != null) return true; return false;
         }
 
 
+        string _searchText;
+        public string SearchText
+        {
+            get => _searchText;
 
+            set { _searchText = value;
 
+                OnPropertyChanged("SearchText");
+                MessageBox.Show("Сменилось");
+            }
 
+        }
 
+        RelayCommand _searchTaskCommand;
 
+        public RelayCommand SearchTaskCommand
+        {
+            get
+            {
+                if (_searchTaskCommand == null) { _searchTaskCommand = new RelayCommand(ExecuteSearchTaskCommand, CanExecuteSearchTaskCommand); }
+              
+                return _searchTaskCommand;
+            }
+        }
+             public void ExecuteSearchTaskCommand(object parameter)
+        {
+          
 
+           var rr = basetask.Where(x => x.Name.Contains(SearchText));
+         Tasks=   new ObservableCollection<IMyTask>(rr);
 
+            // Tasks = (ObservableCollection)rr;
+           
+        }
+        public bool CanExecuteSearchTaskCommand (object parameter)
+        {
+            if (SearchText != null) return true;
+            return false;
+        }
 
     }
+
+
+
+
+
+    
 }
