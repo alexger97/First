@@ -35,10 +35,10 @@
                 </Rectangle>
                 <Line x:Name="l1" Stroke="White" X1="150" Y1="0" X2="150" Y2="300" StrokeThickness="0.5"/>
                 <Line x:Name="l2" Stroke="White" X1="0" Y1="150" X2="300" Y2="150" StrokeThickness="0.5"/>
-                <Ellipse x:Name="round" Height="20" Width="20" Stroke="LightGray" StrokeThickness="4" Canvas.Left="{Binding Path= X, Mode=OneWay,UpdateSourceTrigger=PropertyChanged}" Canvas.Top="{Binding Path= Y, Mode=OneWay,UpdateSourceTrigger=PropertyChanged}" Fill="{Binding BrushMy,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"   />
+                <Ellipse x:Name="round" Height="20" Width="20" Stroke="LightGray" StrokeThickness="4" Canvas.Left="{Binding Path= X, Mode=TwoWay,UpdateSourceTrigger=PropertyChanged, ElementName=uk}" Canvas.Top="{Binding Path= Y, Mode=OneWay,UpdateSourceTrigger=PropertyChanged, ElementName=uk}" Fill="{Binding BrushMy,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged, ElementName=uk}"   />
             </Canvas>
         </Grid>
-        <TextBlock x:Name="tb1" Text="{Binding Path=X_Title, Mode=OneWay,UpdateSourceTrigger=PropertyChanged ,ElementName=uk}" FontStyle="Oblique" FontSize="40" Height="56" Width="352" TextAlignment="Center" Canvas.Top="301" Canvas.Left="6" />
+        <TextBlock x:Name="tb1" Text="{Binding Path=X_Title, Mode=OneWay,UpdateSourceTrigger=PropertyChanged, ElementName=uk}" FontStyle="Oblique" FontSize="40" Height="56" Width="352" TextAlignment="Center" Canvas.Top="301" Canvas.Left="6" />
         <TextBlock x:Name="tb2" Text="{Binding Path=Y_Title, Mode=OneWay,UpdateSourceTrigger=PropertyChanged,  ElementName=uk}" FontSize="40" TextWrapping="Wrap" TextAlignment="Center" RenderTransformOrigin="0.5,0.5" Height="51" Width="300" Canvas.Left="183" Canvas.Top="124" >
             <TextBlock.RenderTransform>
                 <TransformGroup>
