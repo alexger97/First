@@ -10,29 +10,32 @@ namespace First.Service
 {
     public class TaskService : ITaskService
     {
-        //  public MyTask newtask = null;
+        static ITaskRepository taskRepository;
 
-       // public TaskService(ITaskRepository repository)
-       // {
+        public TaskService(ITaskRepository repository)
+        {
 
-            //taskRepository = repository;
+       taskRepository = repository;
+           
+      }
 
-        //}
+       public void DelTask(string name)
+        {
+            if (!taskRepository.DeleteTask(name))
+            { MessageBox.Show("Удаление не удалось"); }
 
-        static ITaskRepository taskRepository= new TaskRepository();
-  // public TaskService(ITaskRepository service)
-    //       {
-        // taskRepository = service;
-      //              }
+            else { MessageBox.Show("Удаление удалось"); }
+            
 
-      
+        }
+ 
 
-        public static void AddTaskService(IMyTask Vmodel)
+        public  void AddTaskService(IMyTask Vmodel)
         {
             taskRepository.AddTask(Vmodel);
         }
 
-        public static IMyTask GetTask(string name)
+        public  IMyTask GetTask(string name)
         {
 
             var _task = taskRepository.ReadTask(name);
@@ -42,9 +45,9 @@ namespace First.Service
 
         }
 
-        public static List<IMyTask> ReadAllTasks()
+        public  List<IMyTask> ReadAllTasks()
         {
-            MessageBox.Show("!!@#@#");
+           
             return taskRepository.ReadAllTasks();
             
 
@@ -53,11 +56,7 @@ namespace First.Service
        
 
 
-        //  public static void OpenWindow()
-        //     {
-        //      MainWindow2 me=  new MainWindow2
-
-        //   }
+      
 
 
     }

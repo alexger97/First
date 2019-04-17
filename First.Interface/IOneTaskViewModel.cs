@@ -6,7 +6,38 @@ using System.Threading.Tasks;
 
 namespace First.Interface
 {
-    interface IOneTaskViewModel
+   public interface IOneTaskViewModel
     {
+
+       
+
+       
+
+
+      
+
+         IMyTask ActualTask { get;set; }
+        
+
+
+       bool ImportanceVM { get; set; }
+
+
+    bool UrgencyVM { get; set; }
+
+
+
+         string Name { get; set; }
+
+
+       string Description { get; set; }
+
+
+
+
+
+       
+
+
     }
 }

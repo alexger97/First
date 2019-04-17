@@ -7,12 +7,12 @@
         xmlns:sys="clr-namespace:System;assembly=mscorlib"
         xmlns:local1="clr-namespace:First.ViewModel"
         mc:Ignorable="d"
-        Title="Window1" Height="500" Width="1150">
+        Title="Window1" Height="500" Width="1210" ResizeMode="NoResize" >
 
 
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="150"/>
+            <ColumnDefinition Width="200"/>
             <ColumnDefinition Width="1000"/>
         </Grid.ColumnDefinitions>
         <StackPanel Grid.Column="0">
@@ -24,12 +24,14 @@
             </StackPanel.Background>
 
             <Button Background="{Binding Path=ColorButton1}"  Content="Добавить задачу" Command="{Binding CliclOne}" Margin="0,50" FontSize="15" />
-            <Button  Background="{Binding Path=ColorButton2}" Content="Просмотра списка задач" Command="{Binding CliclTwo}" Margin="0,50" FontSize="15" />
+            <Button  Background="{Binding Path=ColorButton2}" Content="Просмотр списка задач" Command="{Binding CliclTwo}" Margin="0,50" FontSize="15" >
+          
+            </Button>
             <Button Background="{Binding Path=ColorButton3}" Content="Редактирование задачи" Margin="0,50" FontSize="15" />
 
 
         </StackPanel>
-        <Frame Grid.Column="1" Content="{Binding CurrentPage}"  NavigationUIVisibility="Hidden" Opacity="{Binding FrameOpacity}" />
+        <Frame Grid.Column="1" Content="{Binding CurrentPage, Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"  NavigationUIVisibility="Hidden" Opacity="{Binding FrameOpacity}" />
 
     </Grid>
 </Window>

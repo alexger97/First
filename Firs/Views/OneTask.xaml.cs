@@ -1,6 +1,6 @@
 ﻿using First.Controllers;
 using First.Interface;
-using First.ViewModel;
+
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -23,7 +23,8 @@ namespace First
     /// </summary>
     public partial class OneTask :Page
     {
-        public OneTask(IMyTask myTask, ViewModelBase viewModelBase)
+        public OneTask()
+          //  IMyTask myTask, ViewModelBase viewModelBase
         {
             //   this.DataContext=
             //  Binding binding = new Binding();
@@ -36,11 +37,11 @@ namespace First
            // DatConst = viewModelBase;
           // binding.Source = DatConst;
           InitializeComponent();
-            DatConst = new OneTaskViewModel(myTask, viewModelBase);
-            this.DataContext = DatConst;
-            ct.DataContext = DatConst;
+          //  DatConst = new OneTaskViewModel(myTask, viewModelBase);
+          //  this.DataContext = DatConst;
+           // ct.DataContext = DatConst;
         }
-      public ViewModelBase DatConst ;
+     //public ViewModelBase DatConst ;
     }
 }
 

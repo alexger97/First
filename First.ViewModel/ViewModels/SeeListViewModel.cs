@@ -13,35 +13,44 @@ using First.ViewModel;
 
 namespace First.ViewModel
 {
-    public class SeeListViewModel : ViewModelBase
+    public class SeeListViewModel : ViewModelBase, ISeeListViewModel
     {
-        private ITaskService _taskService;
-
-
+        private TaskService _taskService;
         MainWindowViewModel mainWindowViewModel;
-        public SeeListViewModel( MainWindowViewModel Vm)///ITaskService taskService)
-        {
-          //  _taskService = taskService;
 
-           this.mainWindowViewModel = Vm;
+     public   IMainViewModel MainWindowViewModel { get => mainWindowViewModel;
+
+            set { mainWindowViewModel = (MainWindowViewModel) value; }
+        }
+
+
+        public SeeListViewModel(IMainViewModel Vm ,ITaskService taskService)
+        {
+           _taskService = (TaskService) taskService;
+
+            MainWindowViewModel =  Vm;
             basetask = Refesh();
-            Tasks = basetask;
+           Tasks = basetask;
         }
 
        
-        ObservableCollection<IMyTask> _tasks = null;
+       
         MyTask actualTask;
 
-        public MyTask ActualTask
+        public IMyTask ActualTask
            {
             get { return actualTask; }
 
             set {
-                actualTask = value; OnPropertyChanged("ActualTask");
+                actualTask = (MyTask)value; OnPropertyChanged("ActualTask");
                // MessageBox.Show(value.Description); 
             }
                     }
 
+
+
+
+        ObservableCollection<IMyTask> _tasks;
         private ObservableCollection<IMyTask> basetask;
         public  ObservableCollection<IMyTask> Tasks
         {
@@ -69,28 +78,16 @@ namespace First.ViewModel
             }
 
         }
-        void oi ()
-        {
-            var i = from ii in Tasks orderby ii.Name select ii;
-            
-        }
-        
-
-
-
        
 
-        private ObservableCollection<IMyTask> Refesh()
-        {
-           
-            var list = TaskService.ReadAllTasks();
-            return new ObservableCollection<IMyTask>(list);
-            
-           
-           
+      private ObservableCollection<IMyTask> Refesh()
+         {
 
-        }
-    RelayCommand _refeshCommand;
+     var list = _taskService.ReadAllTasks();
+        
+            return new ObservableCollection<IMyTask>(list);
+    }
+        RelayCommand _refeshCommand;
 
      public  RelayCommand RefeshCommand
         {
@@ -104,8 +101,9 @@ namespace First.ViewModel
         }
         public void ExecuteRefeshCommand(object parameter)
         {
-            // mainWindowViewModel.CurrentPage = new SeeListTask(this);
-            basetask = Refesh();
+           
+          basetask = Refesh();
+            if (basetask.Count == 0) { MessageBox.Show("База пуста"); }
             Tasks = basetask;
             
             MessageBox.Show("Обновление базы произошло");
@@ -135,7 +133,13 @@ namespace First.ViewModel
 
         public void ExecuteEditTaskCommand(object parameter)
         {
-            mainWindowViewModel.CurrentPage = new OneTask(ActualTask, mainWindowViewModel);
+            MainWindowViewModel.OneTaskViewModel.Name = ActualTask.Name;
+            MainWindowViewModel.OneTaskViewModel.Description = ActualTask.Description;
+            MainWindowViewModel.OneTaskViewModel.ImportanceVM = ActualTask.Importance;
+            MainWindowViewModel.OneTaskViewModel.UrgencyVM = ActualTask.Urgency;
+            MainWindowViewModel.SlowOpacity(MainWindowViewModel.OneTask1);
+
+            //mainWindowViewModel.CurrentPage = new OneTask(ActualTask, mainWindowViewModel);
             mainWindowViewModel.ColorSet(3);
         }
         public bool CanExecuteEditTaskCommand(object parameter)
@@ -168,11 +172,14 @@ namespace First.ViewModel
                 return _searchTaskCommand;
             }
         }
-             public void ExecuteSearchTaskCommand(object parameter)
+
+     
+
+        public void ExecuteSearchTaskCommand(object parameter)
         {
           
 
-           var rr = basetask.Where(x => x.Name.Contains(SearchText));
+           var rr = basetask.Where(x => x.Name.Contains(SearchText.ToUpper())|| x.Name.Contains(SearchText.ToLower()));
          Tasks=   new ObservableCollection<IMyTask>(rr);
 
             // Tasks = (ObservableCollection)rr;
@@ -183,6 +190,45 @@ namespace First.ViewModel
             if (SearchText != null) return true;
             return false;
         }
+
+
+
+
+
+
+
+        RelayCommand _deleteTaskCommand;
+
+        public RelayCommand DeleteTaskCommand
+        {
+            get
+            {
+                if (_deleteTaskCommand == null) { _deleteTaskCommand = new RelayCommand(ExecuteDeleteTaskCommand, CanExecuteDeleteTaskCommand); }
+
+                return _deleteTaskCommand;
+            }
+        }
+
+
+
+        public void ExecuteDeleteTaskCommand(object parameter)
+        {
+           
+
+            _taskService.DelTask(ActualTask.Name);
+            // Tasks = (ObservableCollection)rr;
+            ExecuteRefeshCommand(null);
+        }
+        public bool CanExecuteDeleteTaskCommand(object parameter)
+        {
+            if (ActualTask != null) return true;
+            return false;
+        }
+
+
+
+
+
 
     }
 

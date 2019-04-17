@@ -19,7 +19,7 @@ namespace First.Views
     /// <summary>
     /// Логика взаимодействия для MainWindowS.xaml
     /// </summary>
-    public partial class MainWindowS : Page,IMyMainWindows
+    public partial class MainWindowS : Page
     {
         public MainWindowS()
         {

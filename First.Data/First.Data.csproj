@@ -55,7 +55,7 @@
       <Name>First.Interface</Name>
     </ProjectReference>
     <ProjectReference Include="..\First.Model\First.Model.csproj">
-      <Project>{0BE005C4-1BC2-45EC-B123-70FDFA1C820E}</Project>
+      <Project>{0be005c4-1bc2-45ec-b123-70fdfa1c820e}</Project>
       <Name>First.Model</Name>
     </ProjectReference>
   </ItemGroup>

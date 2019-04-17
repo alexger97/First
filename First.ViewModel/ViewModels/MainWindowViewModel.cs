@@ -1,5 +1,5 @@
 ﻿using First.Model;
-using First.Views;
+
 using First.Service;
 using System.Threading;
 using System.Threading.Tasks;
@@ -7,25 +7,48 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
+using First.Interface;
 
 namespace First.ViewModel
 {
-    public class MainWindowViewModel : ViewModelBase
+    public class MainWindowViewModel : ViewModelBase, IMainViewModel
     {
-        public static NavigationService nv = new NavigationService();
+        public Page Main { get; set; }
+        public Page OneTask1 { get; set; }
+        public Page ListTasks { get; set; }
 
 
+        public IOneTaskViewModel OneTaskViewModel { get; set; }
+        public  ISeeListViewModel SeeListViewModel { get; set; }
 
-        private Page Main;
-        private Page OneTask1;
-        private Page ListTasks;
+        public MainWindowViewModel(IOneTaskViewModel oneTaskViewModel, ISeeListViewModel seeListViewModel)
+        {
 
-        
-    
+            OneTaskViewModel = (OneTaskViewModel)oneTaskViewModel;
+            SeeListViewModel = (SeeListViewModel)seeListViewModel;
+
+
+            /// MessageBox.Show(OneTaskViewModel.Description);
+            //OneTaskViewModel.Description = "ХАХАХА";
+            // MessageBox.Show(OneTaskViewModel.Description);
+            // Main = new MainWindowS();
+            ///{ DataContext = new OneTaskViewModel()};
+            //Main = //new MainWindowS();
+            //  OneTask1 =// new OneTask(new MyTask(), this);
+
+
+            // CP = Main;
+            ColorSet(0);
+            CurrentPage = Main;
+            FrameOpacity = 1;
+
+        }
+
+
 
         private Page _currentPage;
-    
-        public Page CurrentPage { get => _currentPage; set { _currentPage = value; OnPropertyChanged("CurrentPage");   } }
+
+        public Page CurrentPage { get => _currentPage; set { _currentPage = value; OnPropertyChanged("CurrentPage"); } }
 
         private Brush _colorButton1;
         private Brush _colorButton2;
@@ -56,9 +79,6 @@ namespace First.ViewModel
             {
                 _colorButton3 = value;
                 OnPropertyChanged("ColorButton3");
-
-                
-                
             }
            
         }
@@ -73,25 +93,13 @@ namespace First.ViewModel
             if (i==0) { ColorButton3 = ColorButton2 = ColorButton1 = othercolor; }
         }
 
-
-
-
         private double _frameOpacity;
         public double FrameOpacity
         { get => _frameOpacity;
             set { _frameOpacity = value; OnPropertyChanged("FrameOpacity"); }
         }
 
-        public MainWindowViewModel()
-        {
-            Main = new MainWindowS();
-            ///{ DataContext = new OneTaskViewModel()};
-
-            ColorSet(0);
-            CurrentPage = Main;
-            FrameOpacity = 1;
-
-        }
+       
 
         RelayCommand _cliclOne;
 
@@ -109,10 +117,18 @@ namespace First.ViewModel
 
             public void ExecuteCliclOne(object parameter)
         {
-           // Page li = new OneTask();
-          //  nv.Navigate()
-            OneTask1 = new OneTask(new MyTask { Name="22",Description="55",Urgency=true,Importance=true}, this); SlowOpacity(OneTask1);
-            //ColorSet(1);
+            // Page li = new OneTask();
+            //  nv.Navigate()
+            // OneTask1 = new OneTask(new MyTask { Name="22",Description="55",Urgency=true,Importance=true}, this);
+            OneTaskViewModel.Name = "";
+            OneTaskViewModel.Description = "";
+          //  MessageBox.Show(OneTaskViewModel.Description + OneTaskViewModel.Name);
+          //  OneTask1.DataContext = OneTaskViewModel;
+            SlowOpacity(OneTask1);
+            //OneTask1.DataContext= OneTaskViewModel;
+            //CurrentPage = OneTask1;
+          
+            ColorSet(1);
 
 
         }
@@ -136,10 +152,15 @@ namespace First.ViewModel
             }
         }
 
+      
+
         public void ExecuteCliclTwo(object parameter)
         {
-            
-            ListTasks = new SeeListTask((ViewModelBase)this); SlowOpacity(ListTasks);
+
+            ListTasks.DataContext = SeeListViewModel;
+            SlowOpacity(ListTasks);
+
+
             ColorSet(2);
         }
         public bool CanExecuteCliclTwo (object parameter)
@@ -152,7 +173,7 @@ namespace First.ViewModel
 
 
 
-        private async void SlowOpacity(Page page)
+        public async void SlowOpacity(Page page)
         {
             await Task.Factory.StartNew(() =>
 
@@ -163,7 +184,9 @@ namespace First.ViewModel
                     Thread.Sleep(50);
 
                 }
-                CurrentPage = page;
+              
+               CurrentPage = page;
+               
                 for (double i = 0; i < 1.1; i += 0.1)
                 {
                 FrameOpacity = i;
@@ -175,7 +198,7 @@ namespace First.ViewModel
 
         }
 
-
+       
     }
     }
 

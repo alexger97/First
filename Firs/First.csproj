@@ -80,18 +80,12 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="Composite.cs" />
     <Compile Include="Controllers\ConverterValue.cs" />
     <Compile Include="Controllers\GradientPicker.xaml.cs">
       <DependentUpon>GradientPicker.xaml</DependentUpon>
     </Compile>
-    <Compile Include="ViewModels\Converter\Converter1.cs" />
-    <Compile Include="ViewModels\Converter\Converter2.cs" />
-    <Compile Include="ViewModels\Converter\RelayCommand.cs" />
-    <Compile Include="ViewModels\MainWindowViewModel.cs" />
-    <Compile Include="ViewModels\OneTaskViewModel.cs" />
-    <Compile Include="ViewModels\SeeListViewModel.cs" />
-    <Compile Include="ViewModels\ViewModelBase.cs" />
+    <Compile Include="Converter\Converter1.cs" />
+    <Compile Include="Converter\Converter2.cs" />
     <Compile Include="Views\MainWindowS.xaml.cs">
       <DependentUpon>MainWindowS.xaml</DependentUpon>
     </Compile>
@@ -158,21 +152,17 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\First.Data\First.Data.csproj">
-      <Project>{0a546ce6-29d3-402c-b151-e309ced570e7}</Project>
-      <Name>First.Data</Name>
+    <ProjectReference Include="..\First.Integration\First.Integration.csproj">
+      <Project>{3dd67bad-b754-4e9b-a1a0-2070671a15cb}</Project>
+      <Name>First.Integration</Name>
     </ProjectReference>
     <ProjectReference Include="..\First.Interface\First.Interface.csproj">
       <Project>{cad34784-5aac-4ef5-b539-64679f0fef6b}</Project>
       <Name>First.Interface</Name>
     </ProjectReference>
-    <ProjectReference Include="..\First.Model\First.Model.csproj">
-      <Project>{0BE005C4-1BC2-45EC-B123-70FDFA1C820E}</Project>
-      <Name>First.Model</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\First.Service\First.Service.csproj">
-      <Project>{443b5485-db8d-45c3-bd6f-2727886e7692}</Project>
-      <Name>First.Service</Name>
+    <ProjectReference Include="..\First.ViewModel\First.ViewModel.csproj">
+      <Project>{b4bb0f29-8d25-4d05-a556-79a74529deb8}</Project>
+      <Name>First.ViewModel</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
@@ -186,6 +176,9 @@
       <ProductName>.NET Framework 3.5 SP1</ProductName>
       <Install>false</Install>
     </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Connected Services\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

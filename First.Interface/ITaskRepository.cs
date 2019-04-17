@@ -20,5 +20,7 @@ namespace First.Interface
         IMyTask DeserializeTask(string path);
 
         List<IMyTask> ReadAllTasks();
+
+        bool DeleteTask(string name);
     }
 }

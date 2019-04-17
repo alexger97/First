@@ -19,6 +19,13 @@ namespace First.Data
             SaveInJson(task);
         }
 
+        public TaskRepository()
+        {
+            // File.Create((@"../DataJson/"));
+            Directory.CreateDirectory(@"../DataJson/");
+
+        }
+
 
         public void SaveInJson(IMyTask task)
         {
@@ -60,7 +67,25 @@ namespace First.Data
             return tasks;
         }
 
+        public bool DeleteTask(string name)
+        {
+            if (SearchTaskOfName(name))
+            {
+                try
+                {
+                    File.Delete(@"../DataJson/" + name + ".json");
+                    return true;
+                }
+                catch (Exception r)
+                {
+                    MessageBox.Show(r.Message);
+                    return false;
+                }
+            }
 
+            else return false;
+
+        }
 
         public bool SearchTaskOfName(string name)
         {

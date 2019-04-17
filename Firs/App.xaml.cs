@@ -1,10 +1,8 @@
 ﻿using Autofac;
-using First.Data;
+
 using First.Interface;
 
-using First.Model;
-using First.Service;
-using First.ViewModel;
+using First.Integration;
 using First.Views;
 using System;
 using System.Collections.Generic;
@@ -24,7 +22,17 @@ namespace First
 
         protected override void OnStartup(StartupEventArgs e)
         {
-           var view= new MainWindow() { DataContext = Composite.GetMainViewModel() };
+            var vm = Composite.MainViewModel;
+           vm.Main = new MainWindowS();/// можно и страницы добавить в контейнер , но придется их тутже выгружать. Не вижу смысла
+            vm.CurrentPage = vm.Main;
+           vm.OneTask1 = new OneTask();
+            vm.ListTasks = new SeeListTask();
+            vm.OneTask1.DataContext = vm.OneTaskViewModel;
+            vm.ListTasks.DataContext = vm.SeeListViewModel;
+        
+          var view = new MainWindow() { DataContext = vm};
+
+            
             view.Show();
         }
     }

@@ -6,7 +6,7 @@ using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
-using First.Controllers;
+
 using First.Interface;
 
 using First.Model;
@@ -14,43 +14,48 @@ using First.Service;
 
 namespace First.ViewModel
 {
-    public class OneTaskViewModel : ViewModelBase
+    public class OneTaskViewModel : ViewModelBase, IOneTaskViewModel
     {
-        /*  public static readonly DependencyProperty ImportanceProperty;
-          public static readonly DependencyProperty UrgencyProperty;
-          static OneTaskViewModel()
-              {
-              ImportanceProperty = DependencyProperty.Register("ImportanceVM", typeof(bool), typeof(OneTaskViewModel), null);
-              UrgencyProperty = DependencyProperty.Register("UrgencyVM", typeof(bool), typeof(OneTaskViewModel), null);
-          }
-         */
+      
         private string _name;
         private string _description;
         private bool _importance;
         private bool _urgency;
 
-
+        TaskService taskService;
         
 
-        public  OneTaskViewModel(IMyTask myTask, ViewModelBase viewModelBase)
+        public  OneTaskViewModel(IMyTask myTask, 
+            ITaskService service)
         {
-            ActualTask = (MyTask)myTask;
-            mainWindowViewModel = (MainWindowViewModel) viewModelBase;
+           
+                ActualTask = myTask;
+         
+
+           // mainWindowViewModel = (MainWindowViewModel) viewModelBase;
+            taskService = (TaskService)service;
         }
 
         MainWindowViewModel mainWindowViewModel;
         MyTask actualTask;
 
-        public MyTask ActualTask
+        public IMyTask ActualTask
         {
-            get => actualTask;
+            get { 
+             
+                return actualTask;
+            }
+            
 
             set
             {
 
-                if (value != null) { actualTask = value; Name = value.Name; Description = value.Description; UrgencyVM = value.Urgency; ImportanceVM = value.Importance; }
+                if (value != null) { actualTask = (MyTask)value; Name = value.Name; Description = value.Description; UrgencyVM = value.Urgency; ImportanceVM = value.Importance; }
 
-                else { Name = String.Empty; Description = String.Empty; UrgencyVM = false; ImportanceVM = false; actualTask = new MyTask(); }
+                else { Name = ""; Description = ""; UrgencyVM = false; ImportanceVM = false;
+
+                    actualTask = new MyTask();/// в-принцепи тут можно сделать логику получения из контейнера , но стоит ли ?
+                }
                 
                 OnPropertyChanged("ActualTask");
             }
@@ -59,23 +64,19 @@ namespace First.ViewModel
         }
 
 
-
-
-
-
         public bool ImportanceVM
         {
 
             get
             {
                 return _importance;
-              // return (bool)GetValue(ImportanceProperty);
+
             }
             set
             {
                 _importance = value;
-                //  SetValue(ImportanceProperty, value);
-               ActualTask.Importance = value;
+              
+              // ActualTask.Importance = value;
                  OnPropertyChanged("ImportanceVM");
 
               MessageBox.Show("Importance"+ImportanceVM.ToString());
@@ -90,13 +91,13 @@ namespace First.ViewModel
             get
             {
                 return _urgency;
-               // return (bool)GetValue(UrgencyProperty);
+
             }
             set
             {
                 _urgency = value;
-               ActualTask.Urgency = value;
-               // SetValue(UrgencyProperty, value);
+              
+
                  OnPropertyChanged("UrgencyVM");
 
                 MessageBox.Show("Urgency"+UrgencyVM.ToString());
@@ -106,20 +107,13 @@ namespace First.ViewModel
         }
 
 
-
-       
-
-
-        // TaskService taskService = new TaskService();
-
-
         public string Name
         {
             get => _name;
             set
             {
                 _name = value;
-                ActualTask.Name = value;
+                //ActualTask.Name = value;
                 OnPropertyChanged("Name");
             }
         }
@@ -129,7 +123,7 @@ namespace First.ViewModel
             get { return _description; }
 
             set { _description = value;
-                ActualTask.Description = value;
+               
                 OnPropertyChanged("Description");
                 
             }
@@ -150,10 +144,16 @@ namespace First.ViewModel
 
         }
 
-        public void ExecuteAddClientCommand(object parameter)
-        {MessageBox.Show("Вроде что-то произошло");
+       
 
-            TaskService.AddTaskService((IMyTask)ActualTask);
+        public void ExecuteAddClientCommand(object parameter)
+        {MessageBox.Show("Задача добавлена в Базу");
+            ActualTask.Name = Name;
+            ActualTask.Description = Description;
+            ActualTask.Urgency = UrgencyVM;
+            ActualTask.Importance = ImportanceVM;
+          
+            taskService.AddTaskService((IMyTask)ActualTask);
             ActualTask = null;
             
         }
@@ -164,7 +164,7 @@ namespace First.ViewModel
             if ((!String.IsNullOrWhiteSpace(Name)) && (!string.IsNullOrWhiteSpace(Description))){  return true; }
 
             //  MessageBox.Show("Условия не норм"); 
-            return false; return true;
+            return false; 
 
 
         }
