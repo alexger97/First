@@ -11,7 +11,7 @@ namespace First
         public SeeListTask()
         {
             InitializeComponent();
-         //  DataContext= new SeeListViewModel((MainWindowViewModel)vm);
+       
             radioButton1.IsChecked = true;
         }
 

@@ -1,4 +1,4 @@
-﻿using First.Controllers;
+﻿using First.Controls;
 using First.Interface;
 
 using System;
@@ -24,24 +24,13 @@ namespace First
     public partial class OneTask :Page
     {
         public OneTask()
-          //  IMyTask myTask, ViewModelBase viewModelBase
+        
         {
-            //   this.DataContext=
-            //  Binding binding = new Binding();
-            // binding.Path= new PropertyPath()
-            //  binding.ElementName = "tt"; // элемент-источник
-            //  binding.Path = new PropertyPath("DataContext"); // свойство элемента-источника
-            //this.DataContext.SetBinding(this.DataContext, binding); // установка привязки для элемента-приемника
-            // DatConst = new OneTaskViewModel(myTask, viewModelBase);
-
-           // DatConst = viewModelBase;
-          // binding.Source = DatConst;
+           
           InitializeComponent();
-          //  DatConst = new OneTaskViewModel(myTask, viewModelBase);
-          //  this.DataContext = DatConst;
-           // ct.DataContext = DatConst;
+        
         }
-     //public ViewModelBase DatConst ;
+     
     }
 }
 

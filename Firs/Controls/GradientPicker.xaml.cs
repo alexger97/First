@@ -14,7 +14,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace First.Controllers
+namespace First.Controls
 {
     // [ToDo] Форматирование кода здесь особенно странно выглядит. Нужны ли закомментированные куски кода?
     // Urgency и Importance здесь ломают универсальность элемента управления.
@@ -35,10 +35,11 @@ namespace First.Controllers
         public GradientPicker()
         {
             this.InitializeComponent();
-            BrushMy = (Brush)System.ComponentModel.TypeDescriptor
+            //  BrushMy = (Brush)System.ComponentModel.TypeDescriptor
+            // .GetConverter(typeof(Brush)).ConvertFromInvariantString("Aqua");
+   
+            ColorOne= (Brush)System.ComponentModel.TypeDescriptor            /// для примера
          .GetConverter(typeof(Brush)).ConvertFromInvariantString("Aqua");
-            Y_Title = "First";
-            X_Title = "Second";
         }
         private Point mousePosition;
         private bool check = false;
@@ -49,10 +50,14 @@ namespace First.Controllers
         public static readonly DependencyProperty X_TitleProperty;
        public static readonly DependencyProperty Y_TitleProperty;
 
-
-
-       public static  DependencyProperty UrgencyProperty;
+        public static readonly DependencyProperty XX_Property;
+        public static readonly DependencyProperty YY_Property;
+        public static  DependencyProperty UrgencyProperty;
        public static  DependencyProperty ImportanceProperty;
+
+        public static DependencyProperty ColorOneProperty;
+        public static DependencyProperty ColorTwoProperty;
+        public static DependencyProperty ColorThirdProperty;
 
         public static DependencyProperty BrushMyProperty;
 
@@ -71,16 +76,35 @@ namespace First.Controllers
            YProperty = DependencyProperty.Register("Y", typeof(double), typeof(GradientPicker), new PropertyMetadata(null));
            Y_TitleProperty = DependencyProperty.Register("Y_Title", typeof(string), typeof(GradientPicker), new PropertyMetadata(null));
             X_TitleProperty = DependencyProperty.Register("X_Title", typeof(string), typeof(GradientPicker), new PropertyMetadata(null));
-            
+            XX_Property = DependencyProperty.Register("XX", typeof(double), typeof(GradientPicker), new PropertyMetadata(null));
+            YY_Property = DependencyProperty.Register("YY", typeof(double), typeof(GradientPicker), new PropertyMetadata(null));
 
-        //  var metadata1=  new FrameworkPropertyMetadata(false, FrameworkPropertyMetadataOptions.BindsTwoWayByDefault);
-            UrgencyProperty = DependencyProperty.Register("Urgency", typeof(bool), typeof(GradientPicker), new PropertyMetadata(null));
-            ImportanceProperty = DependencyProperty.Register("Importance", typeof(bool), typeof(GradientPicker), new PropertyMetadata(null));
+            ColorOneProperty= DependencyProperty.Register("ColorOne", typeof(Brush), typeof(GradientPicker), new PropertyMetadata(null));
+            ColorTwoProperty = DependencyProperty.Register("ColorTwo", typeof(Brush), typeof(GradientPicker), new PropertyMetadata(null));
+            ColorThirdProperty = DependencyProperty.Register("ColorThird", typeof(Brush), typeof(GradientPicker), new PropertyMetadata(null));
         }
 
 
-      
+      public Brush ColorOne
+        {
+            get { return(Brush)GetValue(ColorOneProperty); }
 
+            set { SetValue(ColorOneProperty, value); }
+        }
+
+        public Brush ColorTwo
+        {
+            get { return (Brush)GetValue(ColorTwoProperty); }
+
+            set { SetValue(ColorTwoProperty, value); }
+        }
+
+        public Brush ColorThird
+        {
+            get { return (Brush)GetValue(ColorThirdProperty); }
+
+            set { SetValue(ColorThirdProperty, value); }
+        }
 
 
 
@@ -102,57 +126,83 @@ namespace First.Controllers
         {
             get
             {
-               // return _x;
+              
                return (double)GetValue(XProperty);
             }
             set
             {
                   SetValue(XProperty, value);
             
-               // _x = value;
-                //OnPropertyChanged("X");
             }
         }
+
+        public double XX
+        {
+            get
+            {
+
+                return (double)GetValue(XX_Property);
+            }
+            set
+            {
+                SetValue(XX_Property, value);
+
+            }
+        }
+
+
+
         public double Y
         {
             get
             {
-                //return _y;
+               
                return (double)GetValue(YProperty);
             }
             set
             {
-               // _y = value;
-                   SetValue(YProperty, value);
-               // OnPropertyChanged("Y");
+             
+     SetValue(YProperty, value); 
             }
         }
+
+        public double YY
+        {
+            get
+            {
+
+                return (double)GetValue(YY_Property);
+            }
+            set
+            {
+
+                SetValue(YY_Property, value);
+            }
+        }
+
+
+
+
         public string X_Title
         {
             get
             {
-              ///  return _x_title;
                  return (string)GetValue(X_TitleProperty);
             }
             set
             {
-                ///_x_title = value;
                SetValue(X_TitleProperty, value: value);
-               /// OnPropertyChanged("X_Title");
             }
         }
         public string Y_Title
         {
             get
             {
-                //return y_title;
                return (string)GetValue(Y_TitleProperty);
             }
             set
             {
-             //   y_title = value;
                 SetValue(Y_TitleProperty, value);
-              ////  OnPropertyChanged("Y_Title");
             }
         }
 
@@ -161,25 +211,19 @@ namespace First.Controllers
             get => (bool)GetValue(UrgencyProperty);
 
             set
-            {//OnPropertyChanged("Urgency");
-                //_urgency = value;
+            {
                SetValue(UrgencyProperty, value);
-                //OnPropertyChanged("UrgencyPropery");
-              //  OnPropertyChanged("Urgency");
             }
 
         }
 
         public bool Importance
         {
-            get =>// _importance;
-                (bool)GetValue(ImportanceProperty);
+            get => (bool)GetValue(ImportanceProperty);
 
             set
             {
-               // _importance = value;
                 SetValue(ImportanceProperty, value);
-              // OnPropertyChanged("Importance");
             }
 
         }
@@ -196,38 +240,25 @@ namespace First.Controllers
                 X = mousePosition.X;
                 Y = mousePosition.Y;
 
-                // round. = mousePosition;
+               
             }
         }
 
         private void grid_PointerPressed(object sender, MouseEventArgs e)
         {
-
-
-
-            BrushMy  = (Brush)System.ComponentModel.TypeDescriptor
-            .GetConverter(typeof(Brush)).ConvertFromInvariantString("Red");
+          BrushMy  = (Brush)System.ComponentModel.TypeDescriptor
+           .GetConverter(typeof(Brush)).ConvertFromInvariantString("Red");
 
                 Point point = GetCoordinates(sender, e);
                 X = point.X;
                 Y = point.Y;
+            YY = Y;
+            XX=X;
 
-                if (Y >= 150)
-                { Importance = false; 
-                }
-                else { Importance = true;
-                }
-
-                if (X >= 150)
-                { Urgency = true; 
-                }
-                else { Urgency = false; 
-                }
-
+        
              
 
-                check = !check; //}
-                                //  Ellipse.Colo
+                check = !check; 
 
 
             
@@ -239,7 +270,6 @@ namespace First.Controllers
 
             var gr = (Grid)sender;
             Point position = e.GetPosition(gr);
-            //Point position = e.GetCurrentPoint(gr).Position;
 
             if (position.X > gr.Width - round.Width)
             {

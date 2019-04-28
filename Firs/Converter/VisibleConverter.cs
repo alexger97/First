@@ -7,12 +7,9 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Data;
 
-namespace First.Service
+namespace First.Converter
 {
-    // [ToDo] Очевидно, в этом проекте не место ни конвертерам, ни классу RelayCommand.
-    // RelayCommand относится к слою view model, и должна быть там, в то время, как 
-    // конвертеры относятся исключительно к слою view
-    class TypeListConverter : IValueConverter
+    public class VisibleConverter : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {

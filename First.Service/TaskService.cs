@@ -17,24 +17,25 @@ namespace First.Service
 
         public TaskService(ITaskRepository repository)
         {
-
-       taskRepository = repository;
-           
+             taskRepository = repository;     
       }
 
        public void DelTask(string name)
         {
             if (!taskRepository.DeleteTask(name))
-            { MessageBox.Show("Удаление не удалось"); }
+            {
+                MessageBox.Show("Удаление не удалось");
+            }
 
-            else { MessageBox.Show("Удаление удалось"); }
-            
-
+            else
+            {
+                MessageBox.Show("Удаление удалось");
+            }
         }
  
         // [ToDo] Неподходящее имя для метода добавления задачи. Мы не добавляем сервис,
         // а добавляем задачу.
-        public  void AddTaskService(IMyTask Vmodel)
+        public  void AddTask(IMyTask Vmodel)
         {
             taskRepository.AddTask(Vmodel);
         }
@@ -51,17 +52,7 @@ namespace First.Service
 
         public  List<IMyTask> ReadAllTasks()
         {
-           
             return taskRepository.ReadAllTasks();
-            
-
-
         }
-       
-
-
-      
-
-
     }
 }

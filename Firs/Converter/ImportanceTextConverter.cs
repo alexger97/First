@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Data;
 
-namespace First.Controllers
+namespace First.Converter
 {
     // [ToDo] Наименование класса не вполне соответствует его сущности.
     // Это конвертер и его имя должно оканчиваться на Converter.
@@ -15,26 +15,24 @@ namespace First.Controllers
     // Гораздо лучше сделать два конвертера. Это всегда способствует лучшей изоляции проблем,
     // большей понятности сценария использования конвертеров для других разработчиков. 
     // Рекомендуется: UrgencyTextConverter, ImportanceTextConverter.
-    public class ConverterValue : IValueConverter
+
+        // Выполнил
+    public class ImportanceTextConverter : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            if ((string)parameter == "1")
-            {
+          
                 if ((bool)value) { return "Важно"; }
-                else { return "Не важно"; };
-            }
-            else
-            {
-
-                if ((bool)value) { return "Срочно"; }
-                else { return "Не срочно"; };
-            }
+                else { return "Не важно"; }
+      
+          
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            throw new NotImplementedException();
+            if ((double)value >= 150) { return false; }
+            else { return true; }
+
         }
     }
 }

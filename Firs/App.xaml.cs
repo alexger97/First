@@ -23,14 +23,14 @@ namespace First
         protected override void OnStartup(StartupEventArgs e)
         {
             var vm = Composite.MainViewModel;
-           vm.Main = new MainWindowS();/// можно и страницы добавить в контейнер , но придется их тутже выгружать. Не вижу смысла
-            vm.CurrentPage = vm.Main;
-           vm.OneTask1 = new OneTask();
-            vm.ListTasks = new SeeListTask();
-            vm.OneTask1.DataContext = vm.OneTaskViewModel;
-            vm.ListTasks.DataContext = vm.SeeListViewModel;
-        
-          var view = new MainWindow() { DataContext = vm};
+            vm.NavigationService.First = new OneTask();
+            vm.NavigationService.Second = new SeeListTask();
+            vm.NavigationService.Third = new MainWindowS();
+            vm.CurrentPage = vm.NavigationService.Third;
+            vm.NavigationService.First.DataContext = vm.OneTaskViewModel;
+            vm.NavigationService.Second.DataContext = vm.SeeListViewModel;
+
+            var view = new MainWindow() { DataContext = vm};
 
             
             view.Show();

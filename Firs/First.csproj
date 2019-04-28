@@ -80,12 +80,12 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="Controllers\ConverterValue.cs" />
-    <Compile Include="Controllers\GradientPicker.xaml.cs">
+    <Compile Include="Converter\UrgencyTextConverter.cs" />
+    <Compile Include="Converter\ImportanceTextConverter.cs" />
+    <Compile Include="Controls\GradientPicker.xaml.cs">
       <DependentUpon>GradientPicker.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Converter\Converter1.cs" />
-    <Compile Include="Converter\Converter2.cs" />
+    <Compile Include="Converter\VisibleConverter.cs" />
     <Compile Include="Views\MainWindowS.xaml.cs">
       <DependentUpon>MainWindowS.xaml</DependentUpon>
     </Compile>
@@ -95,7 +95,7 @@
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
     </Compile>
-    <Page Include="Controllers\GradientPicker.xaml">
+    <Page Include="Controls\GradientPicker.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

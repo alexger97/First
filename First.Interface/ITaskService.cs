@@ -8,7 +8,7 @@ namespace First.Interface
 {
  public  interface ITaskService
     {
-        void AddTaskService(IMyTask Vmodel);
+        void AddTask(IMyTask Vmodel);
 
 
         IMyTask GetTask(string name);

@@ -5,14 +5,13 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         mc:Ignorable="d"
-      xmlns:local2="clr-namespace:First.Controllers"
+      xmlns:local2="clr-namespace:First.Controls"
+       xmlns:local3="clr-namespace:First.Converter"
       Title="MainWindow" Height="500" Width="800">
-
-    <!--   DataContext="{Binding Path=DatConst,ElementName=ttt}" -->
-
-
-
-
+    <Page.Resources>
+        <local3:UrgencyTextConverter x:Key="UrgencyTextConverter"></local3:UrgencyTextConverter>
+        <local3:ImportanceTextConverter x:Key="ImportanceTextConverter"></local3:ImportanceTextConverter>
+    </Page.Resources>
     <Grid >
 
         <Grid HorizontalAlignment="Left" Height="422" Margin="23,34,0,0" VerticalAlignment="Top" Width="753" RenderTransformOrigin="0.5,0.5">
@@ -31,13 +30,13 @@
                 <Button x:Name="button" Content="Добавить в список задач" HorizontalAlignment="Center"   Width="169" Height="40"  Command="{Binding AddCommand}" Background="LawnGreen"  />
 
             </StackPanel>
-            
-           
-           
 
-            <local2:GradientPicker  X_Title="Срочность" Y_Title="Важность" Grid.Column="1" x:Name="ct" 
-                                    Importance="{Binding Path=ImportanceVM, Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" 
-                                    Urgency="{Binding Path=UrgencyVM,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" >
+
+
+
+            <local2:GradientPicker  ColorOne="Blue" ColorTwo="#FF6517EE" ColorThird="AliceBlue" X_Title="Срочность" Y_Title="Важность" Grid.Column="1" x:Name="ct" XX="{Binding Path=UrgencyVM,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged, Converter={StaticResource UrgencyTextConverter }}"
+                           YY="{Binding Path=ImportanceVM,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged, Converter={StaticResource ImportanceTextConverter }}"   
+                                    >
 
             </local2:GradientPicker>
 

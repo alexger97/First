@@ -17,33 +17,27 @@ namespace First.ViewModel
         // здесь их быть не должно. Слой view model должен сохранять полную работоспособность 
         // даже если слоя view вообще нет, или если мы решили заменить WPF слой view 
         // на голосовое управление.
-        public Page Main { get; set; }
-        public Page OneTask1 { get; set; }
-        public Page ListTasks { get; set; }
+      //  public Page Main { get; set; }
+       // public Page OneTask1 { get; set; }
+      //  public Page ListTasks { get; set; }
 
 
-        public IOneTaskViewModel OneTaskViewModel { get; set; }
+        public  IOneTaskViewModel OneTaskViewModel { get; set; }
         public  ISeeListViewModel SeeListViewModel { get; set; }
+        public  INavigationService NavigationService { get; set; }
 
-        public MainWindowViewModel(IOneTaskViewModel oneTaskViewModel, ISeeListViewModel seeListViewModel)
+        public MainWindowViewModel(IOneTaskViewModel oneTaskViewModel, ISeeListViewModel seeListViewModel, INavigationService navigationService)
         {
 
             OneTaskViewModel = (OneTaskViewModel)oneTaskViewModel;
             SeeListViewModel = (SeeListViewModel)seeListViewModel;
+            NavigationService = navigationService;
+
+           
 
 
-            /// MessageBox.Show(OneTaskViewModel.Description);
-            //OneTaskViewModel.Description = "ХАХАХА";
-            // MessageBox.Show(OneTaskViewModel.Description);
-            // Main = new MainWindowS();
-            ///{ DataContext = new OneTaskViewModel()};
-            //Main = //new MainWindowS();
-            //  OneTask1 =// new OneTask(new MyTask(), this);
-
-
-            // CP = Main;
             ColorSet(0);
-            CurrentPage = Main;
+            CurrentPage = NavigationService.Third;
             FrameOpacity = 1;
 
         }
@@ -121,17 +115,10 @@ namespace First.ViewModel
 
             public void ExecuteCliclOne(object parameter)
         {
-            // Page li = new OneTask();
-            //  nv.Navigate()
-            // OneTask1 = new OneTask(new MyTask { Name="22",Description="55",Urgency=true,Importance=true}, this);
             OneTaskViewModel.Name = "";
             OneTaskViewModel.Description = "";
-          //  MessageBox.Show(OneTaskViewModel.Description + OneTaskViewModel.Name);
-          //  OneTask1.DataContext = OneTaskViewModel;
-            SlowOpacity(OneTask1);
-            //OneTask1.DataContext= OneTaskViewModel;
-            //CurrentPage = OneTask1;
-          
+            
+            SlowOpacity(NavigationService.First);
             ColorSet(1);
 
 
@@ -161,8 +148,8 @@ namespace First.ViewModel
         public void ExecuteCliclTwo(object parameter)
         {
 
-            ListTasks.DataContext = SeeListViewModel;
-            SlowOpacity(ListTasks);
+           
+            SlowOpacity(NavigationService.Second);
 
 
             ColorSet(2);
