@@ -8,6 +8,9 @@ using System.Windows;
 
 namespace First.Service
 {
+    // [ToDo] Общая рекоммендация : привести в порядок отступы и структуру кода.
+    // Для этого можно использовать любой популярный свод рекоммендаций по оформлению кода. 
+    // Главное - его придерживаться во всех неавтосгенерированных файлах проекта.
     public class TaskService : ITaskService
     {
         static ITaskRepository taskRepository;
@@ -29,7 +32,8 @@ namespace First.Service
 
         }
  
-
+        // [ToDo] Неподходящее имя для метода добавления задачи. Мы не добавляем сервис,
+        // а добавляем задачу.
         public  void AddTaskService(IMyTask Vmodel)
         {
             taskRepository.AddTask(Vmodel);

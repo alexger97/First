@@ -13,6 +13,10 @@ namespace First.ViewModel
 {
     public class MainWindowViewModel : ViewModelBase, IMainViewModel
     {
+        // [ToDo] Предлагается удалить из слоя view model все упоминания слоя view
+        // здесь их быть не должно. Слой view model должен сохранять полную работоспособность 
+        // даже если слоя view вообще нет, или если мы решили заменить WPF слой view 
+        // на голосовое управление.
         public Page Main { get; set; }
         public Page OneTask1 { get; set; }
         public Page ListTasks { get; set; }

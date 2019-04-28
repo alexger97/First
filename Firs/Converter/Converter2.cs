@@ -8,6 +8,9 @@ using System.Windows.Data;
 
 namespace First.Converter
 {
+
+     // [ToDo] См. комментарий к Converter1. Также вызывают нарекание отступы в коде. 
+     // Рекомендуется использовать для отступов 4 пробела.
    public class Converter2 : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)

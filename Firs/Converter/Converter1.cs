@@ -9,6 +9,9 @@ using System.Windows.Data;
 
 namespace First.Converter
 {
+    // [ToDo] Не очень говорящие названия для конвертеров: Converter1 и Converter2. 
+    // Что делают эти конвертеры. Сможет ли программист, их использующий, не заглядывая в код
+    // сообразить как и где их использовать, что от них ожидать?
     public class Converter1 : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)

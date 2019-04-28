@@ -10,7 +10,9 @@ namespace First.Interface
 {
   public  interface IMainViewModel
     {
-
+        // [ToDo] В слое view model не должно быть никаких ссылок на слой View.
+        // Здесь не должно присутствовать слово Page или что-либо подобное.
+        // 
         Page Main { get; set; }
        Page OneTask1 { get; set; }
          Page ListTasks { get; set; }
