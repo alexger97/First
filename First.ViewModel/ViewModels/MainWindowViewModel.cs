@@ -33,7 +33,7 @@ namespace First.ViewModel
 
 
             ColorSet(0);
-            CurrentPage = (IView)NavigationService.Third;
+            CurrentPage = NavigationService.Third;
             FrameOpacity = 1;
 
         }
@@ -114,7 +114,7 @@ namespace First.ViewModel
             OneTaskViewModel.Name = "";
             OneTaskViewModel.Description = "";
             
-            SlowOpacity((IView)NavigationService.First);
+            SlowOpacity(NavigationService.First);
             ColorSet(1);
 
 
@@ -145,7 +145,7 @@ namespace First.ViewModel
         {
 
            
-            SlowOpacity((IView)NavigationService.Second);
+            SlowOpacity(NavigationService.Second);
 
 
             ColorSet(2);

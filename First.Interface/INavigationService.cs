@@ -9,8 +9,8 @@ namespace First.Interface
 {
    public interface INavigationService
     {
-            Page First { get; set; }
-            Page Second { get; set; }
-            Page Third { get; set; }
+        IView First { get; set; }
+        IView Second { get; set; }
+        IView Third { get; set; }
     }
 }

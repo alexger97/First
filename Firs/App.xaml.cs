@@ -23,12 +23,11 @@ namespace First
         protected override void OnStartup(StartupEventArgs e)
         {
             var vm = Composite.MainViewModel;
-            vm.NavigationService.First = new OneTask();
-            vm.NavigationService.Second = new SeeListTask();
+            vm.NavigationService.First = new OneTask() { DataContext = vm.OneTaskViewModel  };
+            vm.NavigationService.Second = new SeeListTask() { DataContext = vm.SeeListViewModel };
             vm.NavigationService.Third = new MainWindowS();
-            vm.CurrentPage = (IView)vm.NavigationService.Third;
-            vm.NavigationService.First.DataContext = vm.OneTaskViewModel;
-            vm.NavigationService.Second.DataContext = vm.SeeListViewModel;
+            vm.CurrentPage = vm.NavigationService.Third;
+         
 
             var view = new MainWindow() { DataContext = vm};
 

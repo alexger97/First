@@ -10,9 +10,9 @@ namespace First.Service
 {
     public   class NavigationService: INavigationService
     {
-        public  Page First { get; set; }
-        public Page Second { get; set; }
-        public Page Third  { get; set; }
+        public IView First { get; set; }
+        public IView Second { get; set; }
+        public IView Third  { get; set; }
 
 
     }
