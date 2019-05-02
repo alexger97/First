@@ -21,7 +21,7 @@ namespace First
     /// <summary>
     
     /// </summary>
-    public partial class OneTask :Page
+    public partial class OneTask :Page, IView
     {
         public OneTask()
         

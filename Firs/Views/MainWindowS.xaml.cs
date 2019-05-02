@@ -17,7 +17,7 @@ using System.Windows.Shapes;
 namespace First.Views
 {
 
-    public partial class MainWindowS : Page
+    public partial class MainWindowS : Page, IView
     {
         public MainWindowS()
         {

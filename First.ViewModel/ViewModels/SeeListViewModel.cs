@@ -23,7 +23,6 @@ namespace First.ViewModel
             set { mainWindowViewModel = (MainWindowViewModel) value; }
         }
 
-
         public SeeListViewModel(IMainViewModel Vm ,ITaskService taskService)
         {
            _taskService = (TaskService) taskService;
@@ -33,8 +32,6 @@ namespace First.ViewModel
            Tasks = basetask;
         }
 
-       
-       
         MyTask actualTask;
 
         public IMyTask ActualTask
@@ -47,17 +44,12 @@ namespace First.ViewModel
 
         }
 
-
-
-
         ObservableCollection<IMyTask> _tasks;
         private ObservableCollection<IMyTask> basetask;
         public  ObservableCollection<IMyTask> Tasks
         {
-            
             get
             {
-               
                 return _tasks;
             }
 
@@ -121,8 +113,6 @@ namespace First.ViewModel
             {
                 if (_editTaskCommand == null) { _editTaskCommand = new RelayCommand(ExecuteEditTaskCommand, CanExecuteEditTaskCommand); }
                     return _editTaskCommand;
-
-
             }
 
         }
@@ -134,9 +124,8 @@ namespace First.ViewModel
             MainWindowViewModel.OneTaskViewModel.Description = ActualTask.Description;
             MainWindowViewModel.OneTaskViewModel.ImportanceVM = ActualTask.Importance;
             MainWindowViewModel.OneTaskViewModel.UrgencyVM = ActualTask.Urgency;
-            MainWindowViewModel.SlowOpacity(MainWindowViewModel.NavigationService.First);
-
-            //mainWindowViewModel.CurrentPage = new OneTask(ActualTask, mainWindowViewModel);
+            MainWindowViewModel.SlowOpacity((IView)MainWindowViewModel.NavigationService.First);
+           
             mainWindowViewModel.ColorSet(3);
         }
         public bool CanExecuteEditTaskCommand(object parameter)

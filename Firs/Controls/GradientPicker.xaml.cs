@@ -35,11 +35,6 @@ namespace First.Controls
         public GradientPicker()
         {
             this.InitializeComponent();
-            //  BrushMy = (Brush)System.ComponentModel.TypeDescriptor
-            // .GetConverter(typeof(Brush)).ConvertFromInvariantString("Aqua");
-   
-            ColorOne= (Brush)System.ComponentModel.TypeDescriptor            /// для примера
-         .GetConverter(typeof(Brush)).ConvertFromInvariantString("Aqua");
         }
         private Point mousePosition;
         private bool check = false;
@@ -79,29 +74,29 @@ namespace First.Controls
             XX_Property = DependencyProperty.Register("XX", typeof(double), typeof(GradientPicker), new PropertyMetadata(null));
             YY_Property = DependencyProperty.Register("YY", typeof(double), typeof(GradientPicker), new PropertyMetadata(null));
 
-            ColorOneProperty= DependencyProperty.Register("ColorOne", typeof(Brush), typeof(GradientPicker), new PropertyMetadata(null));
-            ColorTwoProperty = DependencyProperty.Register("ColorTwo", typeof(Brush), typeof(GradientPicker), new PropertyMetadata(null));
-            ColorThirdProperty = DependencyProperty.Register("ColorThird", typeof(Brush), typeof(GradientPicker), new PropertyMetadata(null));
+            ColorOneProperty= DependencyProperty.Register("ColorOne", typeof(Color), typeof(GradientPicker), new PropertyMetadata(null));
+            ColorTwoProperty = DependencyProperty.Register("ColorTwo", typeof(Color), typeof(GradientPicker), new PropertyMetadata(null));
+            ColorThirdProperty = DependencyProperty.Register("ColorThird", typeof(Color), typeof(GradientPicker), new PropertyMetadata(null));
         }
 
 
-      public Brush ColorOne
+      public Color ColorOne
         {
-            get { return(Brush)GetValue(ColorOneProperty); }
+            get { return(Color)GetValue(ColorOneProperty); }
 
             set { SetValue(ColorOneProperty, value); }
         }
 
-        public Brush ColorTwo
+        public Color ColorTwo
         {
-            get { return (Brush)GetValue(ColorTwoProperty); }
+            get { return (Color)GetValue(ColorTwoProperty); }
 
             set { SetValue(ColorTwoProperty, value); }
         }
 
-        public Brush ColorThird
+        public Color ColorThird
         {
-            get { return (Brush)GetValue(ColorThirdProperty); }
+            get { return (Color)GetValue(ColorThirdProperty); }
 
             set { SetValue(ColorThirdProperty, value); }
         }
@@ -252,17 +247,9 @@ namespace First.Controls
                 Point point = GetCoordinates(sender, e);
                 X = point.X;
                 Y = point.Y;
-            YY = Y;
-            XX=X;
-
-        
-             
-
+                YY = Y;
+                XX=X;
                 check = !check; 
-
-
-            
-
         }
    
         private Point GetCoordinates(object sender, MouseEventArgs e)

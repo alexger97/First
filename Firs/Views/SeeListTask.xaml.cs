@@ -1,4 +1,5 @@
-﻿using System.Windows.Controls;
+﻿using First.Interface;
+using System.Windows.Controls;
 
 
 namespace First
@@ -6,7 +7,7 @@ namespace First
     /// <summary>
     /// Логика взаимодействия для SeeOneTask.xaml
     /// </summary>
-    public partial class SeeListTask : Page
+    public partial class SeeListTask : Page, IView
     {
         public SeeListTask()
         {

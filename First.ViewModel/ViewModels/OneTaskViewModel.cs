@@ -66,7 +66,6 @@ namespace First.ViewModel
             {
                 _importance = value;  
                  OnPropertyChanged("ImportanceVM");
-             // MessageBox.Show("Importance"+ImportanceVM.ToString());
             }
         }
 
@@ -81,7 +80,6 @@ namespace First.ViewModel
             {
                 _urgency = value;              
                  OnPropertyChanged("UrgencyVM");
-              //  MessageBox.Show("Urgency"+UrgencyVM.ToString());
             }
         }
 

@@ -26,7 +26,7 @@ namespace First
             vm.NavigationService.First = new OneTask();
             vm.NavigationService.Second = new SeeListTask();
             vm.NavigationService.Third = new MainWindowS();
-            vm.CurrentPage = vm.NavigationService.Third;
+            vm.CurrentPage = (IView)vm.NavigationService.Third;
             vm.NavigationService.First.DataContext = vm.OneTaskViewModel;
             vm.NavigationService.Second.DataContext = vm.SeeListViewModel;
 

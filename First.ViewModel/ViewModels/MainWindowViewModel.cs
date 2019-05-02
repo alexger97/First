@@ -17,10 +17,6 @@ namespace First.ViewModel
         // здесь их быть не должно. Слой view model должен сохранять полную работоспособность 
         // даже если слоя view вообще нет, или если мы решили заменить WPF слой view 
         // на голосовое управление.
-      //  public Page Main { get; set; }
-       // public Page OneTask1 { get; set; }
-      //  public Page ListTasks { get; set; }
-
 
         public  IOneTaskViewModel OneTaskViewModel { get; set; }
         public  ISeeListViewModel SeeListViewModel { get; set; }
@@ -37,16 +33,16 @@ namespace First.ViewModel
 
 
             ColorSet(0);
-            CurrentPage = NavigationService.Third;
+            CurrentPage = (IView)NavigationService.Third;
             FrameOpacity = 1;
 
         }
 
 
 
-        private Page _currentPage;
+        private IView _currentPage;
 
-        public Page CurrentPage { get => _currentPage; set { _currentPage = value; OnPropertyChanged("CurrentPage"); } }
+        public IView CurrentPage { get => _currentPage; set { _currentPage = value; OnPropertyChanged("CurrentPage"); } }
 
         private Brush _colorButton1;
         private Brush _colorButton2;
@@ -118,7 +114,7 @@ namespace First.ViewModel
             OneTaskViewModel.Name = "";
             OneTaskViewModel.Description = "";
             
-            SlowOpacity(NavigationService.First);
+            SlowOpacity((IView)NavigationService.First);
             ColorSet(1);
 
 
@@ -149,7 +145,7 @@ namespace First.ViewModel
         {
 
            
-            SlowOpacity(NavigationService.Second);
+            SlowOpacity((IView)NavigationService.Second);
 
 
             ColorSet(2);
@@ -164,7 +160,7 @@ namespace First.ViewModel
 
 
 
-        public async void SlowOpacity(Page page)
+        public async void SlowOpacity(IView page)
         {
             await Task.Factory.StartNew(() =>
 

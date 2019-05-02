@@ -21,10 +21,9 @@ namespace First.Converter
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            if ((double)value >= 150) { return true; }
-            else { return false; }
+            throw new NotImplementedException();
 
-             
+
 
         }
     }

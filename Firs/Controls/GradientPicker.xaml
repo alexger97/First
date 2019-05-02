@@ -17,12 +17,12 @@
     <Canvas x:Name="canv" Margin="0,50,0,0">
         <Grid x:Name="grid"  Height="300" Width="300"  MouseMove="grid_PointerMoved" MouseDown="grid_PointerPressed" Canvas.Left="3" >
             <Canvas Background="Transparent">
-                <Rectangle x:Name="rec1" Stroke="Black" StrokeThickness="2"  Height="300" Width="300" DataContext="">
+                <Rectangle x:Name="rec1" Stroke="Black" StrokeThickness="2"  Height="300" Width="300" >
                     <Rectangle.Fill >
-                        <LinearGradientBrush StartPoint="0,1" EndPoint="0,0" >
-                            <GradientStop Color="{Binding Path=ColorOne,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged,ElementName=uk}" Offset="0"/>
-                            <GradientStop Color="{Binding Path=ColorTwo,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged,ElementName=uk}" Offset="0.5"/>
-                            <GradientStop Color="{Binding Path=ColorThird,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged,ElementName=uk}" Offset="1"/>
+                        <LinearGradientBrush StartPoint="0,1" EndPoint="0,0"  >
+                            <GradientStop  Color="{Binding ColorOne,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged, ElementName=uk}"  Offset="0"/>
+                            <GradientStop Color="{Binding ColorTwo,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged, ElementName=uk}" Offset="0.5"/>
+                            <GradientStop Color="{Binding ColorThird,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged, ElementName=uk}" Offset="1"/>
                         </LinearGradientBrush>
                     </Rectangle.Fill>
                 </Rectangle>

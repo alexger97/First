@@ -15,7 +15,7 @@ namespace First.Interface
         // 
       
 
-        Page CurrentPage { get; set; }
+        IView CurrentPage { get; set; }
 
         IOneTaskViewModel OneTaskViewModel { get; set; }
         ISeeListViewModel SeeListViewModel { get; set; }
@@ -27,6 +27,6 @@ namespace First.Interface
 
         double FrameOpacity { get; set; }
      
-        void SlowOpacity(Page page);
+        void SlowOpacity(IView page);
     }
 }

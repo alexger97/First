@@ -80,6 +80,8 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Converter\ImportanceValueConverter.cs" />
+    <Compile Include="Converter\UrgencyValueConverter.cs" />
     <Compile Include="Converter\UrgencyTextConverter.cs" />
     <Compile Include="Converter\ImportanceTextConverter.cs" />
     <Compile Include="Controls\GradientPicker.xaml.cs">

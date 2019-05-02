@@ -17,20 +17,24 @@ namespace First.Converter
     // Рекомендуется: UrgencyTextConverter, ImportanceTextConverter.
 
         // Выполнил
-    public class ImportanceTextConverter : IValueConverter
+    public class ImportanceValueConverter : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-          
-                if ((bool)value) { return "Важно"; }
-                else { return "Не важно"; }
-      
-          
+            Random rm=new Random();
+           
+
+            if ((bool)(value)) { return rm.Next(1,149); }
+            else { return rm.Next(151, 259); }
+
+
+
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            throw new NotImplementedException();
+            if ((double)value >= 150) { return false; }
+            else { return true; }
 
         }
     }
