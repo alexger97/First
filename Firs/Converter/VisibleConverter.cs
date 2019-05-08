@@ -9,10 +9,10 @@ using System.Windows.Data;
 
 namespace First.Converter
 {
-    // [ToDo] VisibleConverter - хорошее название? Когда мы его видим, мы понимаем что во что преобразуется?
+    // [ToDo][Выполнено?] VisibleConverter - хорошее название? Когда мы его видим, мы понимаем что во что преобразуется?
     // Даже VisibilityConverter не очень хорошее название. Предлагается выбрать наиболее очевидное для
     // использующего кода название конвертера.
-    public class VisibleConverter : IValueConverter
+    public class ListBoxIsVisibilityConverter : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
@@ -21,7 +21,7 @@ namespace First.Converter
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            throw new NotImplementedException();
+            return new NotSupportedException();
         }
     }
 }

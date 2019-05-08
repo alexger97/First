@@ -20,9 +20,9 @@
                 <Rectangle x:Name="rec1" Stroke="Black" StrokeThickness="2"  Height="300" Width="300" >
                     <Rectangle.Fill >
                         <LinearGradientBrush StartPoint="0,1" EndPoint="0,0"  >
-                            <GradientStop  Color="{Binding ColorOne,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged, ElementName=uk}"  Offset="0"/>
-                            <GradientStop Color="{Binding ColorTwo,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged, ElementName=uk}" Offset="0.5"/>
-                            <GradientStop Color="{Binding ColorThird,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged, ElementName=uk}" Offset="1"/>
+                            <GradientStop  Color="{Binding FirstGradientColor,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged, ElementName=uk}"  Offset="0"/>
+                            <GradientStop Color="{Binding SecondGradientColor,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged, ElementName=uk}" Offset="0.5"/>
+                            <GradientStop Color="{Binding ThirdGradientColor,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged, ElementName=uk}" Offset="1"/>
                         </LinearGradientBrush>
                     </Rectangle.Fill>
                 </Rectangle>

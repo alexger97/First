@@ -50,9 +50,9 @@ namespace First.Controls
         public static  DependencyProperty UrgencyProperty;
        public static  DependencyProperty ImportanceProperty;
 
-        public static DependencyProperty ColorOneProperty;
-        public static DependencyProperty ColorTwoProperty;
-        public static DependencyProperty ColorThirdProperty;
+        public static DependencyProperty FirstGradientColorProperty;
+        public static DependencyProperty SecondGradientColorProperty;
+        public static DependencyProperty ThirdGradientColorProperty;
 
         public static DependencyProperty BrushMyProperty;
 
@@ -74,34 +74,34 @@ namespace First.Controls
             XX_Property = DependencyProperty.Register("XX", typeof(double), typeof(GradientPicker), new PropertyMetadata(null));
             YY_Property = DependencyProperty.Register("YY", typeof(double), typeof(GradientPicker), new PropertyMetadata(null));
 
-            ColorOneProperty= DependencyProperty.Register("ColorOne", typeof(Color), typeof(GradientPicker), new PropertyMetadata(null));
-            ColorTwoProperty = DependencyProperty.Register("ColorTwo", typeof(Color), typeof(GradientPicker), new PropertyMetadata(null));
-            ColorThirdProperty = DependencyProperty.Register("ColorThird", typeof(Color), typeof(GradientPicker), new PropertyMetadata(null));
+            FirstGradientColorProperty= DependencyProperty.Register("FirstGradientColor", typeof(Color), typeof(GradientPicker), new PropertyMetadata(null));
+            SecondGradientColorProperty = DependencyProperty.Register("SecondGradientColor", typeof(Color), typeof(GradientPicker), new PropertyMetadata(null));
+            ThirdGradientColorProperty = DependencyProperty.Register("ThirdGradientColor", typeof(Color), typeof(GradientPicker), new PropertyMetadata(null));
         }
 
 
         // [ToDo] Не очень очевидные названия для полей контрола. 
         // Сможет ли человек, использующий контрол, понять какой цвет какой, не глядя на дизайнер?
         // Предлагается подобрать более говорящие названия полей.
-      public Color ColorOne
+      public Color FirstGradientColor
         {
-            get { return(Color)GetValue(ColorOneProperty); }
+            get { return(Color)GetValue(FirstGradientColorProperty); }
 
-            set { SetValue(ColorOneProperty, value); }
+            set { SetValue(FirstGradientColorProperty, value); }
         }
 
-        public Color ColorTwo
+        public Color SecondGradientColor
         {
-            get { return (Color)GetValue(ColorTwoProperty); }
+            get { return (Color)GetValue(SecondGradientColorProperty); }
 
-            set { SetValue(ColorTwoProperty, value); }
+            set { SetValue(SecondGradientColorProperty, value); }
         }
 
-        public Color ColorThird
+        public Color ThirdGradientColor
         {
-            get { return (Color)GetValue(ColorThirdProperty); }
+            get { return (Color)GetValue(ThirdGradientColorProperty); }
 
-            set { SetValue(ColorThirdProperty, value); }
+            set { SetValue(ThirdGradientColorProperty, value); }
         }
 
 

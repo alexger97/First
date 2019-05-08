@@ -26,12 +26,12 @@ namespace First.Converter
           
         }
 
-        // [ToDo] Это не просто нереализованный метод преобразования.
+        // [ToDo][Выполнено?] Это не просто нереализованный метод преобразования.
         // Преобразование в эту сторону вообще не определено.
         // Предлагается: заменить на NotSupportedException.
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            throw new NotImplementedException();
+            return new NotSupportedException();
 
         }
     }

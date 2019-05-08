@@ -34,7 +34,7 @@
 
 
 
-            <local2:GradientPicker  ColorOne="Blue" ColorTwo="#FF6517EE" ColorThird="Orange" X_Title="Срочность" Y_Title="Важность" Grid.Column="1" x:Name="ct" XX="{Binding Path=UrgencyVM,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged, Converter={StaticResource UrgencyValueConverter }}"
+            <local2:GradientPicker  FirstGradientColor="Blue" SecondGradientColor="#FF6517EE" ThirdGradientColor="Orange" X_Title="Срочность" Y_Title="Важность" Grid.Column="1" x:Name="ct" XX="{Binding Path=UrgencyVM,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged, Converter={StaticResource UrgencyValueConverter }}"
                            YY="{Binding Path=ImportanceVM,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged, Converter={StaticResource ImportanceValueConverter }}"   
                                     >
 

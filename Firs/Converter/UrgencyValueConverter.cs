@@ -14,11 +14,7 @@ namespace First.Converter
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
 
-            Random rm = new Random();
-
-
-            if (!(bool)(value)) { return rm.Next(1, 149); }
-            else { return rm.Next(151, 259); }
+         return new NotSupportedException();
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)

@@ -17,19 +17,13 @@ namespace First.Converter
     // > Рекомендуется: UrgencyTextConverter, ImportanceTextConverter.
     public class ImportanceValueConverter : IValueConverter
     {
-        // [ToDo] Не для каждого преобразования существует обратное преобразование.
+        // [ToDo][Выполнено?] Не для каждого преобразования существует обратное преобразование.
         // В данном случае можно смело кидать NotSupportedException. Нельзя из 'true' получить цифру.
         // См. ImportanceTextConverter. Здесь принцип тот же.
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            Random rm=new Random();
-           
-
-            if ((bool)(value)) { return rm.Next(1,149); }
-            else { return rm.Next(151, 259); }
-
-
-
+            
+            return new NotSupportedException();
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
