@@ -40,14 +40,15 @@ namespace First.Integration
                 {
                    
                    var service= Container.Resolve<ITaskService>(new NamedParameter("repository", GetTaskRepository()));
-
                     var onetaskvm = Container.Resolve<IOneTaskViewModel>(new NamedParameter("myTask", null),
                       new NamedParameter("viewModelBase", _MainViewModel),
                       new NamedParameter("service", service));
 
+                    var NavService = Container.Resolve<INavigationService>();
+
                     var seelistvm = Container.Resolve<ISeeListViewModel>(new NamedParameter("Vm", _MainViewModel),
                          new NamedParameter("taskService", service));
-                    _MainViewModel = Container.Resolve<IMainViewModel>(new NamedParameter("oneTaskViewModel", onetaskvm), new NamedParameter("seeListViewModel", seelistvm));
+                    _MainViewModel = Container.Resolve<IMainViewModel>(new NamedParameter("oneTaskViewModel", onetaskvm), new NamedParameter("seeListViewModel", seelistvm), new NamedParameter("navigationService", NavService));
                    
                 }
 
@@ -76,6 +77,7 @@ namespace First.Integration
             var containerBuilder = new ContainerBuilder();
             //var taskListAssembly = Assembly.GetExecutingAssembly();
             var serviceAssembly = Assembly.GetAssembly(typeof(TaskService));
+            
             var repositoryAssembly = Assembly.GetAssembly(typeof(TaskRepository));
             var viewModelAssembly = Assembly.GetAssembly(typeof(ViewModelBase));
 
@@ -88,6 +90,9 @@ namespace First.Integration
             // Место для добавления сервисов
             containerBuilder.RegisterAssemblyTypes(serviceAssembly).Where(t => t.Name.EndsWith("Service",
                   StringComparison.CurrentCultureIgnoreCase)).AsImplementedInterfaces();
+
+            containerBuilder.RegisterType<NavigationService>().As<INavigationService>();
+
             // Место для добавления репозиториев
             containerBuilder.RegisterAssemblyTypes(repositoryAssembly).Where(t => t.Name.EndsWith("Repository",
                    StringComparison.CurrentCultureIgnoreCase)).AsImplementedInterfaces();

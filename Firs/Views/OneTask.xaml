@@ -5,14 +5,13 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         mc:Ignorable="d"
-      xmlns:local2="clr-namespace:First.Controllers"
+      xmlns:local2="clr-namespace:First.Controls"
+       xmlns:local3="clr-namespace:First.Converter"
       Title="MainWindow" Height="500" Width="800">
-
-    <!--   DataContext="{Binding Path=DatConst,ElementName=ttt}" -->
-
-
-
-
+    <Page.Resources>
+        <local3:UrgencyValueConverter x:Key="UrgencyValueConverter"></local3:UrgencyValueConverter>
+        <local3:ImportanceValueConverter x:Key="ImportanceValueConverter"></local3:ImportanceValueConverter>
+    </Page.Resources>
     <Grid >
 
         <Grid HorizontalAlignment="Left" Height="422" Margin="23,34,0,0" VerticalAlignment="Top" Width="753" RenderTransformOrigin="0.5,0.5">
@@ -31,13 +30,13 @@
                 <Button x:Name="button" Content="Добавить в список задач" HorizontalAlignment="Center"   Width="169" Height="40"  Command="{Binding AddCommand}" Background="LawnGreen"  />
 
             </StackPanel>
-            
-           
-           
 
-            <local2:GradientPicker  X_Title="Срочность" Y_Title="Важность" Grid.Column="1" x:Name="ct" 
-                                    Importance="{Binding Path=ImportanceVM, Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" 
-                                    Urgency="{Binding Path=UrgencyVM,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" >
+
+
+
+            <local2:GradientPicker  FirstGradientColor="Blue" SecondGradientColor="#FF6517EE" ThirdGradientColor="Orange" X_Title="Срочность" Y_Title="Важность" Grid.Column="1" x:Name="ct" XX="{Binding Path=UrgencyVM,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged, Converter={StaticResource UrgencyValueConverter }}"
+                           YY="{Binding Path=ImportanceVM,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged, Converter={StaticResource ImportanceValueConverter }}"   
+                                    >
 
             </local2:GradientPicker>
 

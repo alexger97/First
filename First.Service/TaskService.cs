@@ -8,29 +8,34 @@ using System.Windows;
 
 namespace First.Service
 {
+    // [ToDo] Общая рекоммендация : привести в порядок отступы и структуру кода.
+    // Для этого можно использовать любой популярный свод рекоммендаций по оформлению кода. 
+    // Главное - его придерживаться во всех неавтосгенерированных файлах проекта.
     public class TaskService : ITaskService
     {
         static ITaskRepository taskRepository;
 
         public TaskService(ITaskRepository repository)
         {
-
-       taskRepository = repository;
-           
+             taskRepository = repository;     
       }
 
        public void DelTask(string name)
         {
             if (!taskRepository.DeleteTask(name))
-            { MessageBox.Show("Удаление не удалось"); }
+            {
+                MessageBox.Show("Удаление не удалось");
+            }
 
-            else { MessageBox.Show("Удаление удалось"); }
-            
-
+            else
+            {
+                MessageBox.Show("Удаление удалось");
+            }
         }
  
-
-        public  void AddTaskService(IMyTask Vmodel)
+        // [ToDo] Неподходящее имя для метода добавления задачи. Мы не добавляем сервис,
+        // а добавляем задачу.
+        public  void AddTask(IMyTask Vmodel)
         {
             taskRepository.AddTask(Vmodel);
         }
@@ -47,17 +52,7 @@ namespace First.Service
 
         public  List<IMyTask> ReadAllTasks()
         {
-           
             return taskRepository.ReadAllTasks();
-            
-
-
         }
-       
-
-
-      
-
-
     }
 }

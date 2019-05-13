@@ -7,7 +7,7 @@
         xmlns:sys="clr-namespace:System;assembly=mscorlib"
         xmlns:local1="clr-namespace:First.ViewModel"
         mc:Ignorable="d"
-        Title="Window1" Height="500" Width="1210" ResizeMode="NoResize" >
+        Title="Менеджер задач  1.0" Height="500" Width="1210" ResizeMode="NoResize" >
 
 
     <Grid>

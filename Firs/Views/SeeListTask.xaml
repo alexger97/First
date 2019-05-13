@@ -4,10 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
        xmlns:local2="clr-namespace:First.Converter"
-      xmlns:local="clr-namespace:First.ViewModel"
-     
-     xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
-      xmlns:i1="http://schemas.microsoft.com/xps/2005/06"
+      xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
       mc:Ignorable="d"
         Title="SeeOneTask" 
       Width="1000"
@@ -15,8 +12,9 @@
 
 
     <Page.Resources>
-        <local2:Converter1 x:Key="Converter1"></local2:Converter1>
-        <local2:Converter2 x:Key="Converter2" ></local2:Converter2>
+        <local2:ListBoxIsVisibilityConverter x:Key="ListBoxIsVisibilityConverter"></local2:ListBoxIsVisibilityConverter>
+        <local2:ImportanceTextConverter x:Key="ImportanceTextConverter"></local2:ImportanceTextConverter>
+        <local2:UrgencyTextConverter x:Key="UrgencyTextConverter"></local2:UrgencyTextConverter>
     </Page.Resources>
 
 
@@ -25,7 +23,7 @@
 
         <Grid Width="800" Height="500"  >
 
-            <ListBox Name="TaskList"    Visibility="{Binding ElementName=radioButton, Path=IsChecked, Converter={StaticResource Converter1}}" Width="800" ItemsSource="{Binding  Path=Tasks, Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" SelectedItem="{Binding Path=ActualTask, Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" >
+            <ListBox Name="TaskList"    Visibility="{Binding ElementName=radioButton, Path=IsChecked, Converter={StaticResource ListBoxIsVisibilityConverter}}" Width="800" ItemsSource="{Binding  Path=Tasks, Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" SelectedItem="{Binding Path=ActualTask, Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" >
                 <i:Interaction.Triggers>
                     <i:EventTrigger EventName="MouseDoubleClick" >
                         <i:InvokeCommandAction Command="{Binding EditTaskCommand}"             />
@@ -45,8 +43,8 @@
                                 <TextBlock FontWeight="Bold"
                                Text="{Binding Path=Name}" />
                                 <TextBlock Grid.Row="1" Text="{Binding Path=Description }" />
-                                <TextBlock Grid.Row="2" Text="{Binding Path=Importance, Converter={StaticResource Converter2},ConverterParameter=1 }" />
-                                <TextBlock Grid.Row="3" Text="{Binding Path=Urgency , Converter={StaticResource Converter2},ConverterParameter=2 }" />
+                                <TextBlock Grid.Row="2" Text="{Binding Path=Importance, Converter={StaticResource ImportanceTextConverter} }" />
+                                <TextBlock Grid.Row="3" Text="{Binding Path=Urgency , Converter={StaticResource UrgencyTextConverter} }" />
                             </Grid>
                         </Border>
                     </DataTemplate>
@@ -54,7 +52,7 @@
 
             </ListBox>
 
-            <ListBox Name="TaskList2" Width="800" Visibility="{Binding ElementName=radioButton1, Path=IsChecked, Converter={StaticResource Converter1}}" ItemsSource="{Binding  Path=Tasks, Mode=OneWay,UpdateSourceTrigger=PropertyChanged}" SelectedItem="{Binding Path=ActualTask, Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}">
+            <ListBox Name="TaskList2" Width="800" Visibility="{Binding ElementName=radioButton1, Path=IsChecked,  Converter={StaticResource ListBoxIsVisibilityConverter}}" ItemsSource="{Binding  Path=Tasks, Mode=OneWay,UpdateSourceTrigger=PropertyChanged}" SelectedItem="{Binding Path=ActualTask, Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}">
                 <i:Interaction.Triggers>
                     <i:EventTrigger EventName="MouseDoubleClick" >
                         <i:InvokeCommandAction Command="{Binding EditTaskCommand}"             />
@@ -75,8 +73,8 @@
                                 <TextBlock FontWeight="Bold"
                                Text="{Binding Path=Name}" />
                                 <TextBlock Grid.Column="1" Text="{Binding Path=Description }" />
-                                <TextBlock Grid.Column="2" Text="{Binding Path=Importance, Converter={StaticResource Converter2 },ConverterParameter=1 }" />
-                                <TextBlock Grid.Column="3" Text="{Binding Path=Urgency , Converter={StaticResource Converter2 },ConverterParameter=2 }" />
+                                <TextBlock Grid.Column="2" Text="{Binding Path=Importance, Converter={StaticResource ImportanceTextConverter } }" />
+                                <TextBlock Grid.Column="3" Text="{Binding Path=Urgency , Converter={StaticResource UrgencyTextConverter }}" />
                             </Grid>
                         </Border>
                     </DataTemplate>
@@ -103,18 +101,7 @@
 
             </StackPanel>
 
-
-
-
-
-
-
-
         </Grid>
-
-
-
-
     </DockPanel>
 
 

@@ -16,10 +16,8 @@ using System.Windows.Shapes;
 
 namespace First.Views
 {
-    /// <summary>
-    /// Логика взаимодействия для MainWindowS.xaml
-    /// </summary>
-    public partial class MainWindowS : Page
+
+    public partial class MainWindowS : Page, IView
     {
         public MainWindowS()
         {

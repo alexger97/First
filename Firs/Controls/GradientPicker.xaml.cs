@@ -14,8 +14,19 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace First.Controllers
+namespace First.Controls
 {
+    // [ToDo] Форматирование кода здесь особенно странно выглядит. Нужны ли закомментированные куски кода?
+    // Urgency и Importance здесь ломают универсальность элемента управления.
+    // Предлагается сделать его более универсальным за счёт переноса расчёта важности и срочности из контрола в
+    // view model. Здесь этой логике явно не место. Контрол будет полезен, если его можно будет использовать 
+    // для указания на координатной плоскости точки для любых систем из двух координат, не только для
+    // важности и сложности, как в данном случае. Также предлагается сделать возможным задание параметров градиента
+    // и надписей в коде, использующем данный контрол.
+
+    // [ToDo] Также непонятно, почему папка, в которой лежит контрол называется Controllers. Более логичным было 
+    // бы название Controls
+
     /// <summary>
     /// Логика взаимодействия для GradientPicker.xaml
     /// </summary>
@@ -24,10 +35,6 @@ namespace First.Controllers
         public GradientPicker()
         {
             this.InitializeComponent();
-            BrushMy = (Brush)System.ComponentModel.TypeDescriptor
-         .GetConverter(typeof(Brush)).ConvertFromInvariantString("Aqua");
-            Y_Title = "First";
-            X_Title = "Second";
         }
         private Point mousePosition;
         private bool check = false;
@@ -38,10 +45,14 @@ namespace First.Controllers
         public static readonly DependencyProperty X_TitleProperty;
        public static readonly DependencyProperty Y_TitleProperty;
 
-
-
-       public static  DependencyProperty UrgencyProperty;
+        public static readonly DependencyProperty XX_Property;
+        public static readonly DependencyProperty YY_Property;
+        public static  DependencyProperty UrgencyProperty;
        public static  DependencyProperty ImportanceProperty;
+
+        public static DependencyProperty FirstGradientColorProperty;
+        public static DependencyProperty SecondGradientColorProperty;
+        public static DependencyProperty ThirdGradientColorProperty;
 
         public static DependencyProperty BrushMyProperty;
 
@@ -60,16 +71,38 @@ namespace First.Controllers
            YProperty = DependencyProperty.Register("Y", typeof(double), typeof(GradientPicker), new PropertyMetadata(null));
            Y_TitleProperty = DependencyProperty.Register("Y_Title", typeof(string), typeof(GradientPicker), new PropertyMetadata(null));
             X_TitleProperty = DependencyProperty.Register("X_Title", typeof(string), typeof(GradientPicker), new PropertyMetadata(null));
-            
+            XX_Property = DependencyProperty.Register("XX", typeof(double), typeof(GradientPicker), new PropertyMetadata(null));
+            YY_Property = DependencyProperty.Register("YY", typeof(double), typeof(GradientPicker), new PropertyMetadata(null));
 
-        //  var metadata1=  new FrameworkPropertyMetadata(false, FrameworkPropertyMetadataOptions.BindsTwoWayByDefault);
-            UrgencyProperty = DependencyProperty.Register("Urgency", typeof(bool), typeof(GradientPicker), new PropertyMetadata(null));
-            ImportanceProperty = DependencyProperty.Register("Importance", typeof(bool), typeof(GradientPicker), new PropertyMetadata(null));
+            FirstGradientColorProperty= DependencyProperty.Register("FirstGradientColor", typeof(Color), typeof(GradientPicker), new PropertyMetadata(null));
+            SecondGradientColorProperty = DependencyProperty.Register("SecondGradientColor", typeof(Color), typeof(GradientPicker), new PropertyMetadata(null));
+            ThirdGradientColorProperty = DependencyProperty.Register("ThirdGradientColor", typeof(Color), typeof(GradientPicker), new PropertyMetadata(null));
         }
 
 
-      
+        // [ToDo] Не очень очевидные названия для полей контрола. 
+        // Сможет ли человек, использующий контрол, понять какой цвет какой, не глядя на дизайнер?
+        // Предлагается подобрать более говорящие названия полей.
+      public Color FirstGradientColor
+        {
+            get { return(Color)GetValue(FirstGradientColorProperty); }
 
+            set { SetValue(FirstGradientColorProperty, value); }
+        }
+
+        public Color SecondGradientColor
+        {
+            get { return (Color)GetValue(SecondGradientColorProperty); }
+
+            set { SetValue(SecondGradientColorProperty, value); }
+        }
+
+        public Color ThirdGradientColor
+        {
+            get { return (Color)GetValue(ThirdGradientColorProperty); }
+
+            set { SetValue(ThirdGradientColorProperty, value); }
+        }
 
 
 
@@ -91,57 +124,83 @@ namespace First.Controllers
         {
             get
             {
-               // return _x;
+              
                return (double)GetValue(XProperty);
             }
             set
             {
                   SetValue(XProperty, value);
             
-               // _x = value;
-                //OnPropertyChanged("X");
             }
         }
+
+        public double XX
+        {
+            get
+            {
+
+                return (double)GetValue(XX_Property);
+            }
+            set
+            {
+                SetValue(XX_Property, value);
+
+            }
+        }
+
+
+
         public double Y
         {
             get
             {
-                //return _y;
+               
                return (double)GetValue(YProperty);
             }
             set
             {
-               // _y = value;
-                   SetValue(YProperty, value);
-               // OnPropertyChanged("Y");
+             
+     SetValue(YProperty, value); 
             }
         }
+
+        public double YY
+        {
+            get
+            {
+
+                return (double)GetValue(YY_Property);
+            }
+            set
+            {
+
+                SetValue(YY_Property, value);
+            }
+        }
+
+
+
+
         public string X_Title
         {
             get
             {
-              ///  return _x_title;
                  return (string)GetValue(X_TitleProperty);
             }
             set
             {
-                ///_x_title = value;
                SetValue(X_TitleProperty, value: value);
-               /// OnPropertyChanged("X_Title");
             }
         }
         public string Y_Title
         {
             get
             {
-                //return y_title;
                return (string)GetValue(Y_TitleProperty);
             }
             set
             {
-             //   y_title = value;
                 SetValue(Y_TitleProperty, value);
-              ////  OnPropertyChanged("Y_Title");
             }
         }
 
@@ -150,25 +209,19 @@ namespace First.Controllers
             get => (bool)GetValue(UrgencyProperty);
 
             set
-            {//OnPropertyChanged("Urgency");
-                //_urgency = value;
+            {
                SetValue(UrgencyProperty, value);
-                //OnPropertyChanged("UrgencyPropery");
-              //  OnPropertyChanged("Urgency");
             }
 
         }
 
         public bool Importance
         {
-            get =>// _importance;
-                (bool)GetValue(ImportanceProperty);
+            get => (bool)GetValue(ImportanceProperty);
 
             set
             {
-               // _importance = value;
                 SetValue(ImportanceProperty, value);
-              // OnPropertyChanged("Importance");
             }
 
         }
@@ -185,42 +238,21 @@ namespace First.Controllers
                 X = mousePosition.X;
                 Y = mousePosition.Y;
 
-                // round. = mousePosition;
+               
             }
         }
 
         private void grid_PointerPressed(object sender, MouseEventArgs e)
         {
-
-
-
-            BrushMy  = (Brush)System.ComponentModel.TypeDescriptor
-            .GetConverter(typeof(Brush)).ConvertFromInvariantString("Red");
+          BrushMy  = (Brush)System.ComponentModel.TypeDescriptor
+           .GetConverter(typeof(Brush)).ConvertFromInvariantString("Red");
 
                 Point point = GetCoordinates(sender, e);
                 X = point.X;
                 Y = point.Y;
-
-                if (Y >= 150)
-                { Importance = false; 
-                }
-                else { Importance = true;
-                }
-
-                if (X >= 150)
-                { Urgency = true; 
-                }
-                else { Urgency = false; 
-                }
-
-             
-
-                check = !check; //}
-                                //  Ellipse.Colo
-
-
-            
-
+                YY = Y;
+                XX=X;
+                check = !check; 
         }
    
         private Point GetCoordinates(object sender, MouseEventArgs e)
@@ -228,7 +260,6 @@ namespace First.Controllers
 
             var gr = (Grid)sender;
             Point position = e.GetPosition(gr);
-            //Point position = e.GetCurrentPoint(gr).Position;
 
             if (position.X > gr.Width - round.Width)
             {

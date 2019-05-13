@@ -23,7 +23,6 @@ namespace First.ViewModel
             set { mainWindowViewModel = (MainWindowViewModel) value; }
         }
 
-
         public SeeListViewModel(IMainViewModel Vm ,ITaskService taskService)
         {
            _taskService = (TaskService) taskService;
@@ -33,8 +32,6 @@ namespace First.ViewModel
            Tasks = basetask;
         }
 
-       
-       
         MyTask actualTask;
 
         public IMyTask ActualTask
@@ -42,22 +39,17 @@ namespace First.ViewModel
             get { return actualTask; }
 
             set {
-                actualTask = (MyTask)value; OnPropertyChanged("ActualTask");
-               // MessageBox.Show(value.Description); 
+                actualTask = (MyTask)value; OnPropertyChanged("ActualTask"); 
             }
-                    }
 
-
-
+        }
 
         ObservableCollection<IMyTask> _tasks;
         private ObservableCollection<IMyTask> basetask;
         public  ObservableCollection<IMyTask> Tasks
         {
-            
             get
             {
-               
                 return _tasks;
             }
 
@@ -72,7 +64,6 @@ namespace First.ViewModel
 
                 if ((value) is ObservableCollection<IMyTask>)
                 {
-
                     _tasks = value; base.OnPropertyChanged("Tasks");
                 }
             }
@@ -111,7 +102,6 @@ namespace First.ViewModel
 
         public bool CanExecuteRefeshCommand(object parameter)
         {
-          //  if (Tasks.Equals(basetask)) return false;
             return true;
         }
 
@@ -122,10 +112,7 @@ namespace First.ViewModel
             get
             {
                 if (_editTaskCommand == null) { _editTaskCommand = new RelayCommand(ExecuteEditTaskCommand, CanExecuteEditTaskCommand); }
-                        //((o) => { mainWindowViewModel.CurrentPage = new OneTask(ActualTask, mainWindowViewModel); }, canExecute: (o) => { if (ActualTask != null) return true; return false; }); }
                     return _editTaskCommand;
-
-
             }
 
         }
@@ -137,9 +124,8 @@ namespace First.ViewModel
             MainWindowViewModel.OneTaskViewModel.Description = ActualTask.Description;
             MainWindowViewModel.OneTaskViewModel.ImportanceVM = ActualTask.Importance;
             MainWindowViewModel.OneTaskViewModel.UrgencyVM = ActualTask.Urgency;
-            MainWindowViewModel.SlowOpacity(MainWindowViewModel.OneTask1);
-
-            //mainWindowViewModel.CurrentPage = new OneTask(ActualTask, mainWindowViewModel);
+            MainWindowViewModel.SlowOpacity((IView)MainWindowViewModel.NavigationService.First);
+           
             mainWindowViewModel.ColorSet(3);
         }
         public bool CanExecuteEditTaskCommand(object parameter)
@@ -156,7 +142,7 @@ namespace First.ViewModel
             set { _searchText = value;
 
                 OnPropertyChanged("SearchText");
-                MessageBox.Show("Сменилось");
+               
             }
 
         }
@@ -168,7 +154,6 @@ namespace First.ViewModel
             get
             {
                 if (_searchTaskCommand == null) { _searchTaskCommand = new RelayCommand(ExecuteSearchTaskCommand, CanExecuteSearchTaskCommand); }
-              
                 return _searchTaskCommand;
             }
         }
@@ -177,24 +162,14 @@ namespace First.ViewModel
 
         public void ExecuteSearchTaskCommand(object parameter)
         {
-          
-
            var rr = basetask.Where(x => x.Name.Contains(SearchText.ToUpper())|| x.Name.Contains(SearchText.ToLower()));
          Tasks=   new ObservableCollection<IMyTask>(rr);
-
-            // Tasks = (ObservableCollection)rr;
-           
         }
         public bool CanExecuteSearchTaskCommand (object parameter)
         {
             if (SearchText != null) return true;
             return false;
         }
-
-
-
-
-
 
 
         RelayCommand _deleteTaskCommand;
@@ -213,10 +188,8 @@ namespace First.ViewModel
 
         public void ExecuteDeleteTaskCommand(object parameter)
         {
-           
-
+          
             _taskService.DelTask(ActualTask.Name);
-            // Tasks = (ObservableCollection)rr;
             ExecuteRefeshCommand(null);
         }
         public bool CanExecuteDeleteTaskCommand(object parameter)
@@ -226,15 +199,6 @@ namespace First.ViewModel
         }
 
 
-
-
-
-
     }
 
-
-
-
-
-    
 }
