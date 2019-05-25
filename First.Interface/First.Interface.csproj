@@ -51,6 +51,7 @@
     <Compile Include="INavigationService.cs" />
     <Compile Include="IOneTaskViewModel.cs" />
     <Compile Include="ISeeListViewModel.cs" />
+    <Compile Include="IServerRepository.cs" />
     <Compile Include="ITaskRepository.cs" />
     <Compile Include="ITaskService.cs" />
     <Compile Include="IView.cs" />

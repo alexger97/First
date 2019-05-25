@@ -48,7 +48,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="NavigationService.cs" />
-    <Compile Include="TaskService.cs" />
+    <Compile Include="TaskLocalService.cs" />
+    <Compile Include="TaskServerService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -4,19 +4,16 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-
 namespace First.Interface
 {
-    public  interface ITaskService<T>
+  public  interface IServerRepository
     {
-       
-        void DelTask(IMyTask task);
+      List<IMyTask> ReadAllTasks();
 
-        void AddTask(IMyTask Vmodel);
-
-        List<IMyTask> ReadAllTasks();
+        void SendTask(IMyTask task);
 
         void EditTask(IMyTask myTask);
 
+        void DeleteTask(int id);
     }
 }

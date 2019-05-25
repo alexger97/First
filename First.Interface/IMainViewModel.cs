@@ -10,16 +10,17 @@ namespace First.Interface
 {
   public  interface IMainViewModel
     {
-        // [ToDo] В слое view model не должно быть никаких ссылок на слой View.
-        // Здесь не должно присутствовать слово Page или что-либо подобное.
-        // 
-      
 
+
+        bool UseServer { get; set; }
         IView CurrentPage { get; set; }
 
         IOneTaskViewModel OneTaskViewModel { get; set; }
         ISeeListViewModel SeeListViewModel { get; set; }
         INavigationService NavigationService { get; set; }
+
+         ITaskService<ITaskRepository> LocalService { get; set; }
+        ITaskService<IServerRepository> ServerService { get; set; }
 
         Brush ColorButton1 { get; set; }
         Brush ColorButton2 { get; set; }

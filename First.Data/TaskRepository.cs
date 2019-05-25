@@ -11,7 +11,7 @@ using System.Windows;
 
 namespace First.Data
 {
-    public class TaskRepository:ITaskRepository
+    public class TaskRepository : ITaskRepository
     {
 
         public void AddTask(IMyTask task)
@@ -21,9 +21,7 @@ namespace First.Data
 
         public TaskRepository()
         {
-            // File.Create((@"../DataJson/"));
             Directory.CreateDirectory(@"../DataJson/");
-
         }
 
 
@@ -31,9 +29,8 @@ namespace First.Data
         {
             string json = JsonConvert.SerializeObject(task);
             File.WriteAllText(@"../DataJson/" + task.Name + ".json", json);
-           
-        }
 
+        }
 
 
         public IMyTask ReadTask(string name)
@@ -48,14 +45,10 @@ namespace First.Data
         }
 
 
-            // else { MessageBox.Show("Дата таску не нашла"); 
-            //   return null;
-        
-
         public List<IMyTask> ReadAllTasks()
         {
             string[] allFoundFiles = Directory.GetFiles(@"../DataJson/", @"*.json", SearchOption.AllDirectories);
-            List< IMyTask > tasks = new List<IMyTask>();
+            List<IMyTask> tasks = new List<IMyTask>();
             foreach (string path in allFoundFiles)
             {
                 IMyTask tsk = DeserializeTask(path);
@@ -90,14 +83,11 @@ namespace First.Data
         public bool SearchTaskOfName(string name)
         {
             string path = @"../DataJson/" + name + ".json";
-           if (File.Exists(path))
-                
+            if (File.Exists(path))
+
                 return true;
-                         return false;
+            return false;
         }
-
-
-    //    ITask dtask = new TaskRepository().DeserializeTask("");
 
         public IMyTask DeserializeTask(string path)
         {

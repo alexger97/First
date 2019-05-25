@@ -13,7 +13,7 @@ namespace First.Service
         public IView First { get; set; }
         public IView Second { get; set; }
         public IView Third  { get; set; }
-
+        public IView SettingsPage { get; set; }
 
     }
 }

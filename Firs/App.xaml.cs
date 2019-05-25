@@ -26,6 +26,9 @@ namespace First
             vm.NavigationService.First = new OneTask() { DataContext = vm.OneTaskViewModel  };
             vm.NavigationService.Second = new SeeListTask() { DataContext = vm.SeeListViewModel };
             vm.NavigationService.Third = new MainWindowS();
+            vm.NavigationService.SettingsPage = new SettingsTask() { DataContext = vm };
+           vm.OneTaskViewModel.MainWindowViewModel = vm;
+           // vm.SeeListViewModel.MainWindowViewModel = vm;
             vm.CurrentPage = vm.NavigationService.Third;
          
 

@@ -28,7 +28,7 @@
           
             </Button>
             <Button Background="{Binding Path=ColorButton3}" Content="Редактирование задачи" Margin="0,50" FontSize="15" />
-
+            <Button Background="{Binding Path=ColorButton3}" Content="Настройки" Margin="0,50" FontSize="15" Command="{Binding CliclSettings}"/>
 
         </StackPanel>
         <Frame Grid.Column="1" Content="{Binding CurrentPage, Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"  NavigationUIVisibility="Hidden" Opacity="{Binding FrameOpacity}" />

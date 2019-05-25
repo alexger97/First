@@ -16,50 +16,47 @@ namespace First.ViewModel
 {
     public class OneTaskViewModel : ViewModelBase, IOneTaskViewModel
     {
-      
         private string _name;
         private string _description;
         private bool _importance;
         private bool _urgency;
 
-
-
-        TaskService taskService;
-
+        public IMainViewModel MainWindowViewModel { get; set; }
+        
         MyTask actualTask;
 
-        public  OneTaskViewModel(IMyTask myTask, ITaskService service)
+        public OneTaskViewModel(IMyTask myTask, IMainViewModel Vm) 
         {
-                ActualTask = myTask;
-            taskService = (TaskService)service;
+            ActualTask = myTask;
+            
+            MainWindowViewModel = Vm;
+            Vm.OneTaskViewModel = this;
         }
 
-      
 
+        
         public IMyTask ActualTask
         {
             get => actualTask;
         set
             {
-                if (value != null) { actualTask = (MyTask)value; Name = value.Name; Description = value.Description; UrgencyVM = value.Urgency; ImportanceVM = value.Importance; }
+                if (value != null)
+                {
+                    actualTask = (MyTask)value; Name = value.Name; Description = value.Description; UrgencyVM = value.Urgency; ImportanceVM = value.Importance;
+                    MessageBox.Show(actualTask.Id.ToString());
+                }
 
                 else { Name = ""; Description = ""; UrgencyVM = false; ImportanceVM = false;
 
-                    actualTask = new MyTask();/// в-принцепи тут можно сделать логику получения из контейнера , но стоит ли ?
+                    actualTask = new MyTask();
+                   
                 }
                 
                 OnPropertyChanged("ActualTask");
             }
-
-
         }
 
-        // [ToDo] Важность и срочность можно выразить числом, на основании 
-        // которого потом можно будет рассчитать это значение? Если да, то лучше так и сделать.
-        // Bool значение в данном случае вторично и является продуктом необратимого преобразования.
-
-            // На данный момент считаю, что в контексте данной программы нет смысла хрнанить данные о градации степени важности и срочности задачи. 
-            //Это можно реализовать путем внедрения дополнительной логики, но я не вижу смысла усложнять уже существующую логику...
+        #region Property      
         public bool ImportanceVM
         {
 
@@ -108,7 +105,8 @@ namespace First.ViewModel
             }
         }
 
-    
+        #endregion
+        #region Add
         private RelayCommand _addCommand;      
         public RelayCommand AddCommand
         {
@@ -123,14 +121,28 @@ namespace First.ViewModel
        
 
         public void ExecuteAddClientCommand(object parameter)
-        {MessageBox.Show("Задача добавлена в Базу");
+        {
             ActualTask.Name = Name;
             ActualTask.Description = Description;
             ActualTask.Urgency = UrgencyVM;
-            ActualTask.Importance = ImportanceVM;         
-            taskService.AddTask((IMyTask)ActualTask);
+            ActualTask.Importance = ImportanceVM;
+           
+            if (MainWindowViewModel.UseServer)
+            {
+                if (ActualTask.Id != 0)
+                {
+                    MainWindowViewModel.ServerService.EditTask((MyTask)ActualTask);
+                }
+                   else MainWindowViewModel.ServerService.AddTask(ActualTask);
+
+            }
+           
+            else
+            {
+                MainWindowViewModel.LocalService.AddTask((MyTask)ActualTask);
+            }
             ActualTask = null;
-            
+            MessageBox.Show("Задача добавлена в Базу");
         }
 
         public bool CanExecuteAddClientCommand(object parameter)
@@ -138,6 +150,6 @@ namespace First.ViewModel
             if ((!String.IsNullOrWhiteSpace(Name)) && (!string.IsNullOrWhiteSpace(Description))){  return true; }
             return false; 
         }
-
+        #endregion
     }
 }

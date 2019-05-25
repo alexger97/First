@@ -62,6 +62,10 @@
       <Project>{cad34784-5aac-4ef5-b539-64679f0fef6b}</Project>
       <Name>First.Interface</Name>
     </ProjectReference>
+    <ProjectReference Include="..\First.Model\First.Model.csproj">
+      <Project>{0BE005C4-1BC2-45EC-B123-70FDFA1C820E}</Project>
+      <Name>First.Model</Name>
+    </ProjectReference>
     <ProjectReference Include="..\First.Service\First.Service.csproj">
       <Project>{443b5485-db8d-45c3-bd6f-2727886e7692}</Project>
       <Name>First.Service</Name>

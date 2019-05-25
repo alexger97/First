@@ -9,6 +9,7 @@ using Autofac;
 using First.ViewModel;
 using First.Data;
 using System.Reflection;
+using First.Model;
 
 namespace First.Integration
 {
@@ -38,89 +39,91 @@ namespace First.Integration
             {
                 if (_MainViewModel == null)
                 {
-                   
-                   var service= Container.Resolve<ITaskService>(new NamedParameter("repository", GetTaskRepository()));
-                    var onetaskvm = Container.Resolve<IOneTaskViewModel>(new NamedParameter("myTask", null),
-                      new NamedParameter("viewModelBase", _MainViewModel),
-                      new NamedParameter("service", service));
 
+                    var Localservice = GetLocalTaskService();
+                    var Serverservice = GetServerTaskService("https://localhost:44301/api/Task/");
+
+                   
                     var NavService = Container.Resolve<INavigationService>();
 
-                    var seelistvm = Container.Resolve<ISeeListViewModel>(new NamedParameter("Vm", _MainViewModel),
-                         new NamedParameter("taskService", service));
-                    _MainViewModel = Container.Resolve<IMainViewModel>(new NamedParameter("oneTaskViewModel", onetaskvm), new NamedParameter("seeListViewModel", seelistvm), new NamedParameter("navigationService", NavService));
+                    _MainViewModel = Container.Resolve<IMainViewModel>(new NamedParameter("navigationService", NavService), new NamedParameter("serviceLoc", Localservice), new NamedParameter("serviceServer", Serverservice));
+
+                    var seelistvm = Container.Resolve<ISeeListViewModel>(
+                        new NamedParameter("Vm", _MainViewModel));
+
+                    var onetaskvm = Container.Resolve<IOneTaskViewModel>(
+                      new NamedParameter("myTask", null),
+                      new NamedParameter("Vm",_MainViewModel)
+                      );
+                   
                    
                 }
 
                 return _MainViewModel;
             }
         }
-
-
-        public static ITaskRepository GetTaskRepository()
+        #region Repository
+        public static IServerRepository GetServerTaskRepository() //(string adress)
         {
+            return Container.Resolve<IServerRepository>();//;(new NamedParameter("adress",adress));
+
+        }
+
+
+        public static ITaskRepository GetLocalTaskRepository()
+        {
+            
             return Container.Resolve<ITaskRepository>();
 
         }
+        #endregion
 
-        public static ITaskService GetTaskService()
+        #region Services
+        public static ITaskService<ITaskRepository> GetLocalTaskService()
         {
-            return Container.Resolve<ITaskService>(new NamedParameter("repository", GetTaskRepository()));
-
+            return Container.Resolve<ITaskService<ITaskRepository>>(new NamedParameter("repository", GetLocalTaskRepository()));
         }
 
+        public static ITaskService<IServerRepository> GetServerTaskService(string adress)
+        {
+            return Container.Resolve<ITaskService<IServerRepository>>(new NamedParameter("_serverData", GetServerTaskRepository()));
+        }
 
+        #endregion
+        #region Container
         private static IContainer BuildContainer()
         {
 
-
             var containerBuilder = new ContainerBuilder();
-            //var taskListAssembly = Assembly.GetExecutingAssembly();
-            var serviceAssembly = Assembly.GetAssembly(typeof(TaskService));
+   
+            var serviceAssembly = Assembly.GetAssembly(typeof(TaskServerService));
             
             var repositoryAssembly = Assembly.GetAssembly(typeof(TaskRepository));
             var viewModelAssembly = Assembly.GetAssembly(typeof(ViewModelBase));
 
+            //локал сервис
+            containerBuilder.RegisterType<TaskLocalService>().As<ITaskService<ITaskRepository>>().AsSelf();
+            // удаленный сервис
+            containerBuilder.RegisterType<TaskServerService>().As<ITaskService<IServerRepository>>().AsSelf();
 
-
-
-            // containerBuilder.RegisterType<MainWindowS>().AsSelf();
-            //containerBuilder.RegisterType<OneTask>().AsSelf();
-            // containerBuilder.RegisterType<SeeListTask>().AsSelf();
-            // Место для добавления сервисов
-            containerBuilder.RegisterAssemblyTypes(serviceAssembly).Where(t => t.Name.EndsWith("Service",
-                  StringComparison.CurrentCultureIgnoreCase)).AsImplementedInterfaces();
-
+           
             containerBuilder.RegisterType<NavigationService>().As<INavigationService>();
-
-            // Место для добавления репозиториев
+            
+            containerBuilder.RegisterType<MyTask>().As<IMyTask>();
             containerBuilder.RegisterAssemblyTypes(repositoryAssembly).Where(t => t.Name.EndsWith("Repository",
                    StringComparison.CurrentCultureIgnoreCase)).AsImplementedInterfaces();
-
-
 
 
             containerBuilder.RegisterAssemblyTypes(viewModelAssembly)
                 .Where(x => x.Name.EndsWith("ViewModel", StringComparison.InvariantCultureIgnoreCase))
                 .AsImplementedInterfaces()
-                .PropertiesAutowired(PropertyWiringOptions.AllowCircularDependencies)
-                .SingleInstance();
-
-            //var builder = new ContainerBuilder();
-            //builder.RegisterType<MyTask>().As<IMyTask>();
-            /// builder.RegisterType<TaskRepository>().As<ITaskRepository>();
-         //   containerBuilder.RegisterType<TaskService>().As<ITaskService>();
-            //  builder.RegisterType<MainWindowS>().As<IMainWindows>();
-            // builder.RegisterType<VisitorRepository>().As<IVisitorRepository>();
-            // builder.RegisterType<MainWindowViewModel>().AsSelf();
-
+                .PropertiesAutowired(PropertyWiringOptions.AllowCircularDependencies).SingleInstance();
+                
 
             return containerBuilder.Build();
-
-
         }
 
-
+        #endregion
 
     }
 }

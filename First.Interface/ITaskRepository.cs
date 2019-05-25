@@ -13,11 +13,11 @@ namespace First.Interface
 
         void SaveInJson(IMyTask task);
 
-         IMyTask ReadTask(string name);
+        IMyTask ReadTask(string name);
 
-         bool SearchTaskOfName(string name);
+        bool SearchTaskOfName(string name);
 
-        IMyTask DeserializeTask(string path);
+        //MyTask DeserializeTask(string path);
 
         List<IMyTask> ReadAllTasks();
 

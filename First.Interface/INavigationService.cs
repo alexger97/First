@@ -12,5 +12,6 @@ namespace First.Interface
         IView First { get; set; }
         IView Second { get; set; }
         IView Third { get; set; }
+        IView SettingsPage { get; set; }
     }
 }

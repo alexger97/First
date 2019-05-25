@@ -15,30 +15,48 @@ namespace First.ViewModel
 {
     public class SeeListViewModel : ViewModelBase, ISeeListViewModel
     {
-        private TaskService _taskService;
+      
         MainWindowViewModel mainWindowViewModel;
 
-     public   IMainViewModel MainWindowViewModel { get => mainWindowViewModel;
-
-            set { mainWindowViewModel = (MainWindowViewModel) value; }
+        public  IMainViewModel MainWindowViewModel
+        {
+            get => mainWindowViewModel;
+            set
+            {
+                mainWindowViewModel = (MainWindowViewModel) value;
+            }
         }
 
-        public SeeListViewModel(IMainViewModel Vm ,ITaskService taskService)
+        public SeeListViewModel(IMainViewModel Vm )
         {
-           _taskService = (TaskService) taskService;
-
+            
             MainWindowViewModel =  Vm;
             basetask = Refesh();
-           Tasks = basetask;
+            Tasks = basetask;
+            Vm.SeeListViewModel = this;
+            
+        }
+        string _searchText;
+        public string SearchText
+        {
+            get => _searchText;
+
+            set
+            {
+                _searchText = value;
+                OnPropertyChanged("SearchText");
+            }
+
         }
 
-        MyTask actualTask;
+        IMyTask actualTask;
 
         public IMyTask ActualTask
            {
             get { return actualTask; }
 
-            set {
+            set
+            {
                 actualTask = (MyTask)value; OnPropertyChanged("ActualTask"); 
             }
 
@@ -55,32 +73,33 @@ namespace First.ViewModel
 
             set
             {
-                if ((value) is IMyTask)
-                {
+                    _tasks = value;
                     base.OnPropertyChanged("Tasks");
-                    _tasks.Add((IMyTask)value);
-                    base.OnPropertyChanged("Tasks");
-                }
-
-                if ((value) is ObservableCollection<IMyTask>)
-                {
-                    _tasks = value; base.OnPropertyChanged("Tasks");
-                }
             }
 
         }
        
 
       private ObservableCollection<IMyTask> Refesh()
-         {
+        {
+            List<IMyTask> list;
+            if (MainWindowViewModel.UseServer)
+            {
+                list = MainWindowViewModel.ServerService.ReadAllTasks();
+               
+            }
+            else
+            {
+                list = MainWindowViewModel.LocalService.ReadAllTasks();
+                 
+            }
+        return  new ObservableCollection<IMyTask>(list);
+        }
 
-     var list = _taskService.ReadAllTasks();
-        
-            return new ObservableCollection<IMyTask>(list);
-    }
+        #region Commands
+        #region Refesh
         RelayCommand _refeshCommand;
-
-     public  RelayCommand RefeshCommand
+        public  RelayCommand RefeshCommand
         {
             get
             {
@@ -92,19 +111,17 @@ namespace First.ViewModel
         }
         public void ExecuteRefeshCommand(object parameter)
         {
-           
-          basetask = Refesh();
+            basetask = Refesh();
             if (basetask.Count == 0) { MessageBox.Show("База пуста"); }
-            Tasks = basetask;
-            
-            MessageBox.Show("Обновление базы произошло");
+            Tasks = basetask;   
         }
 
         public bool CanExecuteRefeshCommand(object parameter)
         {
             return true;
         }
-
+        #endregion
+        #region Edit
         RelayCommand _editTaskCommand;
 
         public RelayCommand EditTaskCommand
@@ -120,33 +137,18 @@ namespace First.ViewModel
 
         public void ExecuteEditTaskCommand(object parameter)
         {
-            MainWindowViewModel.OneTaskViewModel.Name = ActualTask.Name;
-            MainWindowViewModel.OneTaskViewModel.Description = ActualTask.Description;
-            MainWindowViewModel.OneTaskViewModel.ImportanceVM = ActualTask.Importance;
-            MainWindowViewModel.OneTaskViewModel.UrgencyVM = ActualTask.Urgency;
+            MainWindowViewModel.OneTaskViewModel.ActualTask = ActualTask;
             MainWindowViewModel.SlowOpacity((IView)MainWindowViewModel.NavigationService.First);
-           
             mainWindowViewModel.ColorSet(3);
         }
         public bool CanExecuteEditTaskCommand(object parameter)
         {
             if (ActualTask != null) return true; return false;
         }
+        #endregion
 
-
-        string _searchText;
-        public string SearchText
-        {
-            get => _searchText;
-
-            set { _searchText = value;
-
-                OnPropertyChanged("SearchText");
-               
-            }
-
-        }
-
+        #region Search
+       
         RelayCommand _searchTaskCommand;
 
         public RelayCommand SearchTaskCommand
@@ -170,15 +172,18 @@ namespace First.ViewModel
             if (SearchText != null) return true;
             return false;
         }
-
-
+        #endregion
+        #region Delete
         RelayCommand _deleteTaskCommand;
 
         public RelayCommand DeleteTaskCommand
         {
             get
             {
-                if (_deleteTaskCommand == null) { _deleteTaskCommand = new RelayCommand(ExecuteDeleteTaskCommand, CanExecuteDeleteTaskCommand); }
+                if (_deleteTaskCommand == null)
+                {
+                    _deleteTaskCommand = new RelayCommand(ExecuteDeleteTaskCommand, CanExecuteDeleteTaskCommand);
+                }
 
                 return _deleteTaskCommand;
             }
@@ -188,9 +193,14 @@ namespace First.ViewModel
 
         public void ExecuteDeleteTaskCommand(object parameter)
         {
-          
-            _taskService.DelTask(ActualTask.Name);
-            ExecuteRefeshCommand(null);
+            if (MainWindowViewModel.UseServer)
+            {
+                MainWindowViewModel.ServerService.DelTask(ActualTask);
+                
+            }
+            else MainWindowViewModel.LocalService.DelTask(ActualTask);
+
+            ExecuteRefeshCommand(null); OnPropertyChanged("Tasks");
         }
         public bool CanExecuteDeleteTaskCommand(object parameter)
         {
@@ -198,7 +208,8 @@ namespace First.ViewModel
             return false;
         }
 
-
+        #endregion
+        #endregion
     }
 
 }

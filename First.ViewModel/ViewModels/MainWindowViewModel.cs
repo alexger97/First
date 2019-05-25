@@ -13,24 +13,25 @@ namespace First.ViewModel
 {
     public class MainWindowViewModel : ViewModelBase, IMainViewModel
     {
-        // [ToDo] Предлагается удалить из слоя view model все упоминания слоя view
-        // здесь их быть не должно. Слой view model должен сохранять полную работоспособность 
-        // даже если слоя view вообще нет, или если мы решили заменить WPF слой view 
-        // на голосовое управление.
+        private bool useServer;
+        public bool UseServer { get => useServer; set { useServer = value; OnPropertyChanged("UseServer"); } }
 
         public  IOneTaskViewModel OneTaskViewModel { get; set; }
         public  ISeeListViewModel SeeListViewModel { get; set; }
         public  INavigationService NavigationService { get; set; }
 
-        public MainWindowViewModel(IOneTaskViewModel oneTaskViewModel, ISeeListViewModel seeListViewModel, INavigationService navigationService)
+        public ITaskService<ITaskRepository> LocalService { get; set; }
+        public ITaskService<IServerRepository> ServerService { get; set; }
+
+        public MainWindowViewModel(INavigationService navigationService, ITaskService<ITaskRepository> serviceLoc, ITaskService<IServerRepository> serviceServer)
         {
 
-            OneTaskViewModel = (OneTaskViewModel)oneTaskViewModel;
-            SeeListViewModel = (SeeListViewModel)seeListViewModel;
+           // OneTaskViewModel = oneTaskViewModel;
+           // SeeListViewModel = seeListViewModel;
+
             NavigationService = navigationService;
-
-           
-
+            LocalService = serviceLoc;
+            ServerService = serviceServer;
 
             ColorSet(0);
             CurrentPage = NavigationService.Third;
@@ -143,11 +144,7 @@ namespace First.ViewModel
 
         public void ExecuteCliclTwo(object parameter)
         {
-
-           
             SlowOpacity(NavigationService.Second);
-
-
             ColorSet(2);
         }
         public bool CanExecuteCliclTwo (object parameter)
@@ -155,6 +152,32 @@ namespace First.ViewModel
             return true;
         }
 
+
+        RelayCommand _cliclSettings;
+
+        public RelayCommand CliclSettings
+        {
+            get
+            {
+                if (_cliclSettings == null)
+                {
+                    _cliclSettings = new RelayCommand(ExecuteCliclSettings, CanExecuteCliclSettings);
+                }
+                return _cliclSettings;
+            }
+        }
+
+
+
+        public void ExecuteCliclSettings(object parameter)
+        {
+            SlowOpacity(NavigationService.SettingsPage);
+            ColorSet(2);
+        }
+        public bool CanExecuteCliclSettings(object parameter)
+        {
+            return true;
+        }
 
 
 
