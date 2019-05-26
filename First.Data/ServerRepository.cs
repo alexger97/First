@@ -28,7 +28,7 @@ namespace First.Data
        
        public   List<IMyTask> ReadAllTasks()
         {
-            Task<HttpResponseMessage> task= client.GetAsync(new Uri($"https://localhost:44301/api/Task/GetAllTasks"));
+            Task<HttpResponseMessage> task= client.GetAsync(new Uri($"https://taskserverapp20190526040022.azurewebsites.net/api/Task/GetAllTasks"));
             task.Wait();
             if (task.Result.IsSuccessStatusCode)
             {
@@ -53,7 +53,7 @@ namespace First.Data
         {
             try
             {
-                 HttpResponseMessage response = await client.PostAsJsonAsync(new Uri("https://localhost:44301/api/Task"), task);
+                 HttpResponseMessage response = await client.PostAsJsonAsync(new Uri("https://taskserverapp20190526040022.azurewebsites.net/api/Task"), task);
                  response.EnsureSuccessStatusCode();
             }
            catch (Exception ex)
@@ -67,7 +67,7 @@ namespace First.Data
         {
             try
             {
-                HttpResponseMessage response = await client.PutAsJsonAsync(new Uri("https://localhost:44301/api/Task"), myTask);
+                HttpResponseMessage response = await client.PutAsJsonAsync(new Uri("https://taskserverapp20190526040022.azurewebsites.net/api/Task"), myTask);
                             response.EnsureSuccessStatusCode();
             }
             catch (Exception ex)
@@ -80,7 +80,7 @@ namespace First.Data
 
         public  async void DeleteTask(int id)
         {
-            HttpResponseMessage response = await client.DeleteAsync(new Uri($"https://localhost:44301/api/Task/{id}"));
+            HttpResponseMessage response = await client.DeleteAsync(new Uri($"https://taskserverapp20190526040022.azurewebsites.net/api/Task/{id}"));
             response.EnsureSuccessStatusCode();
         }
 
