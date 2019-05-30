@@ -42,14 +42,15 @@ namespace First.Integration
 
                     var Localservice = GetLocalTaskService();
                     var Serverservice = GetServerTaskService("https://localhost:44301/api/Task/");
-
+                    
                    
                     var NavService = Container.Resolve<INavigationService>();
 
                     _MainViewModel = Container.Resolve<IMainViewModel>(new NamedParameter("navigationService", NavService), new NamedParameter("serviceLoc", Localservice), new NamedParameter("serviceServer", Serverservice));
 
-                    var seelistvm = Container.Resolve<ISeeListViewModel>(
-                        new NamedParameter("Vm", _MainViewModel));
+                    var settingsVM = Container.Resolve<ISettingsViewModel>(new NamedParameter("Vm", _MainViewModel));
+
+                    var seelistvm = Container.Resolve<ISeeListViewModel>(new NamedParameter("Vm", _MainViewModel));
 
                     var onetaskvm = Container.Resolve<IOneTaskViewModel>(
                       new NamedParameter("myTask", null),
@@ -110,6 +111,7 @@ namespace First.Integration
             containerBuilder.RegisterType<NavigationService>().As<INavigationService>();
             
             containerBuilder.RegisterType<MyTask>().As<IMyTask>();
+            containerBuilder.RegisterType<User>().As<IUser>();
             containerBuilder.RegisterAssemblyTypes(repositoryAssembly).Where(t => t.Name.EndsWith("Repository",
                    StringComparison.CurrentCultureIgnoreCase)).AsImplementedInterfaces();
 

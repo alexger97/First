@@ -4,26 +4,45 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:First.Views"
+      xmlns:local2="clr-namespace:First.Controls"
       mc:Ignorable="d" 
-      d:DesignHeight="450" d:DesignWidth="800"
-      Title="SettingsTask">
+      d:DesignHeight="500" d:DesignWidth="800"
+      Title="SettingsTask" Name="St">
 
-    <Grid>
-        <Grid HorizontalAlignment="Left" Height="362" Margin="51,43,0,0" VerticalAlignment="Top" Width="689">
-            <Grid HorizontalAlignment="Left" Height="247" Margin="56,52,0,0" VerticalAlignment="Top" Width="212" IsEnabled="{Binding ElementName=radioButton1,Path=IsChecked}">
-                <TextBox x:Name="textBox" HorizontalAlignment="Left" Height="20" Margin="19,83,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="155"/>
-                <TextBlock x:Name="textBlock" HorizontalAlignment="Left" Margin="26,50,0,0" TextWrapping="Wrap" Text="Логин:" VerticalAlignment="Top"/>
-                <TextBlock x:Name="textBlock2" HorizontalAlignment="Left" Margin="28,125,0,0" TextWrapping="Wrap" Text="Пароль:" VerticalAlignment="Top" />
-                <PasswordBox x:Name="passwordBox" HorizontalAlignment="Left" Margin="24,152,0,0" VerticalAlignment="Top" Width="155" PasswordChar="*" Height="20"/>
-                <Button x:Name="button" Content="Button" HorizontalAlignment="Left" Margin="69,205,0,0" VerticalAlignment="Top" Width="75" />
-            </Grid>
-            <Grid HorizontalAlignment="Left" Height="137" Margin="453,118,0,0" VerticalAlignment="Top" Width="180">
-                <RadioButton x:Name="radioButton" Content="Локальный пк" HorizontalAlignment="Left" Margin="11,39,0,0" VerticalAlignment="Top" IsChecked="True" GroupName="settings"/>
-                <RadioButton x:Name="radioButton1" Content="Сервер" HorizontalAlignment="Left" Margin="9,78,0,0" VerticalAlignment="Top" GroupName="settings" IsChecked="{Binding Path=UseServer,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"/>
-                <TextBlock x:Name="textBlock1" HorizontalAlignment="Left" Margin="7,9,0,0" TextWrapping="Wrap" Text="Место хранения задач:" VerticalAlignment="Top"/>
-            </Grid>
 
+    <Grid Height="500" Width="800">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="507*">
+
+            </ColumnDefinition>
+            <ColumnDefinition Width="293*">
+
+            </ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <Grid  Grid.Column="0">
+
+            <local2:LoginController  VerticalAlignment="Top" Margin="0,50,0,0" Login="{Binding Path=Name,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" 
+                                    Password="{Binding Path=Password,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" 
+                                    AddUserTrue="{Binding Path=AddUser,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" 
+                                    IsEnabled="{Binding ElementName=radioButton1,Path=IsChecked}"  
+                                    Password2="{Binding Path=Password2,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" 
+                                    CommandButton="{Binding CliclSettingsLogin}"
+                                    StateColor="{Binding Path=StateColor,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
+                                    StateText="{Binding Path=StateText,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
+                                    UserName="{Binding Path=UserName,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
+                                    />
+            <Button x:Name="button" Content="Применить настройки" HorizontalAlignment="Left" Margin="273,379,0,0" VerticalAlignment="Top" Width="135" Command="{Binding CliclSettingsLogin}"/>
         </Grid>
+        <Grid  Grid.Column="1">
+
+            <StackPanel  VerticalAlignment="Top" Margin="0,50,0,0" >
+                <TextBlock x:Name="textBlock1"  TextWrapping="Wrap" Text="Место хранения задач:" FontSize="22" Margin="0,0,0,20" />
+                <RadioButton x:Name="radioButton" Content="Локальный пк" FontSize="22"    IsChecked="True" GroupName="settings" Margin="0,0,0,20"/>
+                <RadioButton x:Name="radioButton1" Content="Сервер" FontSize="22"    GroupName="settings" IsChecked="{Binding Path=UseServer,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" Margin="0,0,0,20"/>
+            </StackPanel>
+        </Grid>
+
+
 
     </Grid>
 </Page>

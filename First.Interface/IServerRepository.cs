@@ -8,8 +8,9 @@ namespace First.Interface
 {
   public  interface IServerRepository
     {
-      List<IMyTask> ReadAllTasks();
-
+        List<IMyTask> ReadAllTasks(int id);
+        IUser AddUser(object[] auth);
+        IUser LoginUser(object[] auth);
         void SendTask(IMyTask task);
 
         void EditTask(IMyTask myTask);

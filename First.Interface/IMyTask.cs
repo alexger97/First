@@ -13,6 +13,8 @@ namespace First.Interface
         string Description { get; set; }
         bool Importance { get; set; }
         bool Urgency { get; set; }
-       
+
+       // IUser  TaskUser { get; set; }
+        int UserId { get; set; }
     }
 }

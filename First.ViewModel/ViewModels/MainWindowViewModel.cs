@@ -8,14 +8,24 @@ using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
 using First.Interface;
+using System.Security;
+using System.Net;
 
 namespace First.ViewModel
 {
     public class MainWindowViewModel : ViewModelBase, IMainViewModel
     {
-        private bool useServer;
-        public bool UseServer { get => useServer; set { useServer = value; OnPropertyChanged("UseServer"); } }
+        
 
+        public IUser User { get; set; }
+        
+        // public enum VariantsofStateReqest { notreqest, goodresult,badresult }
+       
+
+        //не забыть привести в порядок
+        //public SecureString SecurePassword { private get; set; }
+
+        public ISettingsViewModel SettingsViewModel { get; set; }
         public  IOneTaskViewModel OneTaskViewModel { get; set; }
         public  ISeeListViewModel SeeListViewModel { get; set; }
         public  INavigationService NavigationService { get; set; }
@@ -25,10 +35,6 @@ namespace First.ViewModel
 
         public MainWindowViewModel(INavigationService navigationService, ITaskService<ITaskRepository> serviceLoc, ITaskService<IServerRepository> serviceServer)
         {
-
-           // OneTaskViewModel = oneTaskViewModel;
-           // SeeListViewModel = seeListViewModel;
-
             NavigationService = navigationService;
             LocalService = serviceLoc;
             ServerService = serviceServer;
@@ -36,7 +42,7 @@ namespace First.ViewModel
             ColorSet(0);
             CurrentPage = NavigationService.Third;
             FrameOpacity = 1;
-
+          
         }
 
 
@@ -44,6 +50,9 @@ namespace First.ViewModel
         private IView _currentPage;
 
         public IView CurrentPage { get => _currentPage; set { _currentPage = value; OnPropertyChanged("CurrentPage"); } }
+
+
+
 
         private Brush _colorButton1;
         private Brush _colorButton2;
@@ -114,11 +123,10 @@ namespace First.ViewModel
         {
             OneTaskViewModel.Name = "";
             OneTaskViewModel.Description = "";
-            
+            OneTaskViewModel.ImportanceVM = false;
+            OneTaskViewModel.UrgencyVM = false;
             SlowOpacity(NavigationService.First);
             ColorSet(1);
-
-
         }
         public bool CanExecuteCliclOne(object parameter)
         {
@@ -178,6 +186,7 @@ namespace First.ViewModel
         {
             return true;
         }
+
 
 
 

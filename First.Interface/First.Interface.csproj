@@ -46,6 +46,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ISettingsViewModel.cs" />
+    <Compile Include="VariantsofStateReqest.cs" />
     <Compile Include="IMainViewModel.cs" />
     <Compile Include="IMyTask.cs" />
     <Compile Include="INavigationService.cs" />
@@ -54,6 +56,7 @@
     <Compile Include="IServerRepository.cs" />
     <Compile Include="ITaskRepository.cs" />
     <Compile Include="ITaskService.cs" />
+    <Compile Include="IUser.cs" />
     <Compile Include="IView.cs" />
     <Compile Include="IViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

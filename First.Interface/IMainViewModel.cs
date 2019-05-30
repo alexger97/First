@@ -12,14 +12,15 @@ namespace First.Interface
     {
 
 
-        bool UseServer { get; set; }
+      
         IView CurrentPage { get; set; }
-
+        IUser User { get; set; }
         IOneTaskViewModel OneTaskViewModel { get; set; }
         ISeeListViewModel SeeListViewModel { get; set; }
         INavigationService NavigationService { get; set; }
+        ISettingsViewModel SettingsViewModel { get; set; }
 
-         ITaskService<ITaskRepository> LocalService { get; set; }
+        ITaskService<ITaskRepository> LocalService { get; set; }
         ITaskService<IServerRepository> ServerService { get; set; }
 
         Brush ColorButton1 { get; set; }

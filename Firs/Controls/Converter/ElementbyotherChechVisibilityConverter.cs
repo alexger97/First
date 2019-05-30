@@ -12,7 +12,7 @@ namespace First.Converter
     // [ToDo][Выполнено?] VisibleConverter - хорошее название? Когда мы его видим, мы понимаем что во что преобразуется?
     // Даже VisibilityConverter не очень хорошее название. Предлагается выбрать наиболее очевидное для
     // использующего кода название конвертера.
-    public class ListBoxIsVisibilityConverter : IValueConverter
+    public class ElementbyotherChechVisibilityConverter : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {

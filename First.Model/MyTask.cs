@@ -15,6 +15,9 @@ namespace First.Model
         public bool Importance { get; set; }
         public bool Urgency { get; set; }
 
+       // public IUser TaskUser { get; set; }
+        public int UserId { get; set; }
+
         public MyTask (string Name, string Description, bool Importance, bool Urgency)
         {
             this.Name = Name;

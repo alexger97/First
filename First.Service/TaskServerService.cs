@@ -39,14 +39,27 @@ namespace First.Service
 
         }
 
-        public  List<IMyTask> ReadAllTasks()
+        public  List<IMyTask> ReadAllTasks(int id)
         {
             
 
-            return  taskRepository.ReadAllTasks();
+            return  taskRepository.ReadAllTasks(id);
          
         }
 
-      
+
+        public IUser LoginUser(object[] auth)
+        {
+
+            return taskRepository.LoginUser(auth);
+        }
+
+        public IUser AddUser(object[] auth)
+        {
+
+            return taskRepository.AddUser(auth);
+        }
+
+
     }
 }

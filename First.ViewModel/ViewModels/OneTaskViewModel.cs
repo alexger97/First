@@ -43,7 +43,7 @@ namespace First.ViewModel
                 if (value != null)
                 {
                     actualTask = (MyTask)value; Name = value.Name; Description = value.Description; UrgencyVM = value.Urgency; ImportanceVM = value.Importance;
-                    MessageBox.Show(actualTask.Id.ToString());
+                   
                 }
 
                 else { Name = ""; Description = ""; UrgencyVM = false; ImportanceVM = false;
@@ -127,8 +127,9 @@ namespace First.ViewModel
             ActualTask.Urgency = UrgencyVM;
             ActualTask.Importance = ImportanceVM;
            
-            if (MainWindowViewModel.UseServer)
+            if (MainWindowViewModel.SettingsViewModel.UseServer)
             {
+                ActualTask.UserId= MainWindowViewModel.User.Id;
                 if (ActualTask.Id != 0)
                 {
                     MainWindowViewModel.ServerService.EditTask((MyTask)ActualTask);

@@ -12,7 +12,7 @@
 
 
     <Page.Resources>
-        <local2:ListBoxIsVisibilityConverter x:Key="ListBoxIsVisibilityConverter"></local2:ListBoxIsVisibilityConverter>
+        <local2:ElementbyotherChechVisibilityConverter x:Key="ElementbyotherChechVisibilityConverter"></local2:ElementbyotherChechVisibilityConverter>
         <local2:ImportanceTextConverter x:Key="ImportanceTextConverter"></local2:ImportanceTextConverter>
         <local2:UrgencyTextConverter x:Key="UrgencyTextConverter"></local2:UrgencyTextConverter>
     </Page.Resources>
@@ -23,7 +23,7 @@
 
         <Grid Width="800" Height="500"  >
 
-            <ListBox Name="TaskList"    Visibility="{Binding ElementName=radioButton, Path=IsChecked, Converter={StaticResource ListBoxIsVisibilityConverter}}" Width="800" ItemsSource="{Binding  Path=Tasks, Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" SelectedItem="{Binding Path=ActualTask, Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" >
+            <ListBox Name="TaskList"    Visibility="{Binding ElementName=radioButton, Path=IsChecked, Converter={StaticResource ElementbyotherChechVisibilityConverter}}" Width="800" ItemsSource="{Binding  Path=Tasks, Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" SelectedItem="{Binding Path=ActualTask, Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" >
                 <i:Interaction.Triggers>
                     <i:EventTrigger EventName="MouseDoubleClick" >
                         <i:InvokeCommandAction Command="{Binding EditTaskCommand}"             />
@@ -52,7 +52,7 @@
 
             </ListBox>
 
-            <ListBox Name="TaskList2" Width="800" Visibility="{Binding ElementName=radioButton1, Path=IsChecked,  Converter={StaticResource ListBoxIsVisibilityConverter}}" ItemsSource="{Binding  Path=Tasks, Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" SelectedItem="{Binding Path=ActualTask, Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}">
+            <ListBox Name="TaskList2" Width="800" Visibility="{Binding ElementName=radioButton1, Path=IsChecked,  Converter={StaticResource ElementbyotherChechVisibilityConverter}}" ItemsSource="{Binding  Path=Tasks, Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" SelectedItem="{Binding Path=ActualTask, Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}">
                 <i:Interaction.Triggers>
                     <i:EventTrigger EventName="MouseDoubleClick" >
                         <i:InvokeCommandAction Command="{Binding EditTaskCommand}"             />

@@ -83,14 +83,14 @@ namespace First.ViewModel
       private ObservableCollection<IMyTask> Refesh()
         {
             List<IMyTask> list;
-            if (MainWindowViewModel.UseServer)
+            if (MainWindowViewModel.SettingsViewModel.UseServer)
             {
-                list = MainWindowViewModel.ServerService.ReadAllTasks();
+                list = MainWindowViewModel.ServerService.ReadAllTasks(MainWindowViewModel.User.Id);
                
             }
             else
             {
-                list = MainWindowViewModel.LocalService.ReadAllTasks();
+                list = MainWindowViewModel.LocalService.ReadAllTasks(0);
                  
             }
         return  new ObservableCollection<IMyTask>(list);
@@ -193,7 +193,7 @@ namespace First.ViewModel
 
         public void ExecuteDeleteTaskCommand(object parameter)
         {
-            if (MainWindowViewModel.UseServer)
+            if (MainWindowViewModel.SettingsViewModel.UseServer)
             {
                 MainWindowViewModel.ServerService.DelTask(ActualTask);
                 

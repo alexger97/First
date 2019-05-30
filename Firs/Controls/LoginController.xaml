@@ -1,0 +1,46 @@
+﻿<UserControl x:Class="First.Controls.LoginController"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:First.Controls"
+      xmlns:local2="clr-namespace:First.Converter"
+      mc:Ignorable="d" 
+      d:DesignHeight="300" d:DesignWidth="500" x:Name="Lc">
+    <UserControl.Resources>
+        <local2:ElementbyotherChechVisibilityConverter x:Key="ElementbyotherChechVisibilityConverter"></local2:ElementbyotherChechVisibilityConverter>
+        <local2:StateViewConverter x:Key="StateViewConverter"></local2:StateViewConverter>
+    </UserControl.Resources>
+    <Grid   Width="500" Height="300" >
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="11*"></ColumnDefinition>
+            <ColumnDefinition Width="14*"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <StackPanel Margin="0,4,0,32" >
+            <TextBlock x:Name="textBlock4" HorizontalAlignment="Left" Margin="0,7,0,25" TextWrapping="Wrap" Text="Текущий пользователь" FontSize="18" VerticalAlignment="Top" Width="202"/>
+            <TextBlock x:Name="textBlock"  TextWrapping="Wrap" Text="Логин" Height="33" FontSize="25"  />
+            <TextBox Text="{Binding Path=Login,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay,ElementName=Lc}" Width="200" HorizontalAlignment="Left" Height="35" FontSize="20"></TextBox>
+            <TextBlock x:Name="textBlock2"   TextWrapping="Wrap" Text="Пароль" FontSize="25" />
+            <PasswordBox DataContext="{Binding Path=PasswordBox,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged,ElementName=Lc}" Width="200" HorizontalAlignment="Left" Height="35" FontSize="20" PasswordChanged="PasswordBox_PasswordChanged">
+            </PasswordBox>
+            <TextBlock x:Name="textBlock3"  TextWrapping="Wrap" Text="Повторите пароль" Height="33" FontSize="25" Visibility="{Binding ElementName=checkBox, Path=IsChecked, Converter={StaticResource ElementbyotherChechVisibilityConverter}}"  />
+            <PasswordBox DataContext="{Binding Path=PasswordBox2,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged,ElementName=Lc}" Width="200" HorizontalAlignment="Left" Height="35" FontSize="20" Visibility="{Binding ElementName=checkBox, Path=IsChecked, Converter={StaticResource ElementbyotherChechVisibilityConverter}}" PasswordChanged="PasswordBox_PasswordChanged_1">
+            </PasswordBox>
+        </StackPanel >
+        <StackPanel Grid.Column="1">
+            <TextBlock x:Name="textBlock5" HorizontalAlignment="Left" Margin="0,7,0,25" TextWrapping="Wrap" Text="{Binding UserName,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged,ElementName=Lc}" FontSize="18" VerticalAlignment="Top" Width="202"/>
+
+            <CheckBox x:Name="checkBox" Content="Создать нового пользователя"  IsChecked="{Binding Path=AddUserTrue, Mode=TwoWay,UpdateSourceTrigger=PropertyChanged,ElementName=Lc}"  FontSize="19" HorizontalAlignment="Left" Margin="0,35,-3,15" VerticalAlignment="Top" Grid.Column="1" Height="26" Width="283"/>
+            <TextBlock TextWrapping="Wrap"  Text="Пароли: должны совпадать и быть длиннее пяти символов" Background="Azure" FontSize="15" Visibility="{Binding ElementName=checkBox, Path=IsChecked,Converter= {StaticResource ElementbyotherChechVisibilityConverter}}" Margin="0,0,0,15"></TextBlock>
+            <Button x:Name="button" Content="Оправить запрос" Grid.Column="1" HorizontalAlignment="Center"  VerticalAlignment="Center" Width="169" Command="{Binding CommandButton,ElementName=Lc}"/>
+            <StackPanel Grid.Column="1" Orientation="Horizontal" Margin="0,25,0,0">
+                <TextBlock x:Name="textBox"     HorizontalAlignment="Right" TextWrapping="Wrap" Text="Статус операции" VerticalAlignment="Top" Width="120" FontSize="15"  Height="25" />
+                <TextBlock x:Name="textBlock1"  HorizontalAlignment="Right" Text="{Binding Path=StateText,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged,ElementName=Lc}" FontSize="15" Background="{Binding Path=StateColor,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged,ElementName=Lc}" Width="160" Visibility="Visible" Height="25" >
+                         <!--     "{Binding Path=StateRequest, Mode=TwoWay,UpdateSourceTrigger=PropertyChanged, Converter= {StaticResource StateViewConverter}}" -->
+                          </TextBlock>
+            </StackPanel>
+        </StackPanel>
+        
+    </Grid>
+    
+</UserControl>

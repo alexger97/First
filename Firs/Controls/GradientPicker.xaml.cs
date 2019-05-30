@@ -1,35 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace First.Controls
 {
-    // [ToDo] Форматирование кода здесь особенно странно выглядит. Нужны ли закомментированные куски кода?
-    // Urgency и Importance здесь ломают универсальность элемента управления.
-    // Предлагается сделать его более универсальным за счёт переноса расчёта важности и срочности из контрола в
-    // view model. Здесь этой логике явно не место. Контрол будет полезен, если его можно будет использовать 
-    // для указания на координатной плоскости точки для любых систем из двух координат, не только для
-    // важности и сложности, как в данном случае. Также предлагается сделать возможным задание параметров градиента
-    // и надписей в коде, использующем данный контрол.
 
-    // [ToDo] Также непонятно, почему папка, в которой лежит контрол называется Controllers. Более логичным было 
-    // бы название Controls
-
-    /// <summary>
-    /// Логика взаимодействия для GradientPicker.xaml
-    /// </summary>
     public partial class GradientPicker :UserControl
     {
         public GradientPicker()
@@ -80,9 +56,6 @@ namespace First.Controls
         }
 
 
-        // [ToDo] Не очень очевидные названия для полей контрола. 
-        // Сможет ли человек, использующий контрол, понять какой цвет какой, не глядя на дизайнер?
-        // Предлагается подобрать более говорящие названия полей.
       public Color FirstGradientColor
         {
             get { return(Color)GetValue(FirstGradientColorProperty); }

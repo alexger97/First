@@ -48,7 +48,7 @@ namespace First.Service
 
         }
 
-        public List<IMyTask> ReadAllTasks()
+        public List<IMyTask> ReadAllTasks(int id)
         {
             return taskRepository.ReadAllTasks();
         }
@@ -58,6 +58,22 @@ namespace First.Service
         public void EditTask(IMyTask myTask)
         {
             AddTask(myTask);
+        }
+
+        public IUser LoginUser()
+        {
+            return (IUser)new User { Id = 0, Name = "Localhost" };
+        }
+
+        public IUser LoginUser(object[] auth)
+        {
+            //throw new NotImplementedException();
+            return null;
+        }
+
+        public IUser AddUser(object[] auth)
+        {
+            throw new NotImplementedException();
         }
     }
 }

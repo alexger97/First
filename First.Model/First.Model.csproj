@@ -46,6 +46,7 @@
   <ItemGroup>
     <Compile Include="MyTask.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="User.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\First.Interface\First.Interface.csproj">

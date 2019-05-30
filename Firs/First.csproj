@@ -58,6 +58,7 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
     <Reference Include="System.Windows" />
     <Reference Include="System.Windows.Interactivity, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Windows.Interactivity.WPF.2.0.20525\lib\net40\System.Windows.Interactivity.dll</HintPath>
@@ -67,7 +68,6 @@
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
-    <Reference Include="System.Net.Http" />
     <Reference Include="System.Xaml">
       <RequiredTargetFramework>4.0</RequiredTargetFramework>
     </Reference>
@@ -80,14 +80,18 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="Converter\ImportanceValueConverter.cs" />
-    <Compile Include="Converter\UrgencyValueConverter.cs" />
-    <Compile Include="Converter\UrgencyTextConverter.cs" />
-    <Compile Include="Converter\ImportanceTextConverter.cs" />
+    <Compile Include="Controls\Converter\StateVisabilityConverter.cs" />
+    <Compile Include="Controls\LoginController.xaml.cs">
+      <DependentUpon>LoginController.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\Converter\ImportanceValueConverter.cs" />
+    <Compile Include="Controls\Converter\UrgencyValueConverter.cs" />
+    <Compile Include="Controls\Converter\UrgencyTextConverter.cs" />
+    <Compile Include="Controls\Converter\ImportanceTextConverter.cs" />
     <Compile Include="Controls\GradientPicker.xaml.cs">
       <DependentUpon>GradientPicker.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Converter\VisibleConverter.cs" />
+    <Compile Include="Controls\Converter\ElementbyotherChechVisibilityConverter.cs" />
     <Compile Include="Views\MainWindowS.xaml.cs">
       <DependentUpon>MainWindowS.xaml</DependentUpon>
     </Compile>
@@ -101,6 +105,10 @@
       <DependentUpon>SettingsTask.xaml</DependentUpon>
     </Compile>
     <Page Include="Controls\GradientPicker.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\LoginController.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
