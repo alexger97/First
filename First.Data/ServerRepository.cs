@@ -29,7 +29,7 @@ namespace First.Data
        
        public   List<IMyTask> ReadAllTasks(int id)
         {
-            Task<HttpResponseMessage> task = client.GetAsync(new Uri($"https://localhost:44301/api/Task/GetAllTasks/{id}"));
+            Task<HttpResponseMessage> task = client.GetAsync(new Uri($"https://taskserverapp3.azurewebsites.net/api/Task/GetAllTasks/{id}"));
                                                                           // $"https://taskserverapp20190526040022.azurewebsites.net/api/Task/GetAllTasks";
             task.Wait();
             if (task.Result.IsSuccessStatusCode)
@@ -48,14 +48,14 @@ namespace First.Data
             else return null;
    
         }
-
+        //https://taskserverapp20190526040022.azurewebsites.net/api/Task/
 
 
         public  async void SendTask(IMyTask task)
         {
             try
             {
-                 HttpResponseMessage response = await client.PostAsJsonAsync(new Uri("https://localhost:44301/api/Task/"), task);;
+                 HttpResponseMessage response = await client.PostAsJsonAsync(new Uri("https://taskserverapp3.azurewebsites.net/api/Task/"), task);;
                  response.EnsureSuccessStatusCode();
             }
            catch (Exception ex)
@@ -69,7 +69,7 @@ namespace First.Data
         {
             try
             {
-                HttpResponseMessage response = await client.PutAsJsonAsync(new Uri("https://localhost:44301/api/Task"), myTask);
+                HttpResponseMessage response = await client.PutAsJsonAsync(new Uri("https://taskserverapp3.azurewebsites.net/api/Task/"), myTask);
                             response.EnsureSuccessStatusCode();
             }
             catch (Exception ex)
@@ -82,7 +82,7 @@ namespace First.Data
 
         public  async void DeleteTask(int id)
         {
-            HttpResponseMessage response = await client.DeleteAsync(new Uri($"https://localhost:44301/api/Task/{id}"));
+            HttpResponseMessage response = await client.DeleteAsync(new Uri($"https://taskserverapp3.azurewebsites.net/api/Task/{id}"));
             response.EnsureSuccessStatusCode();
         }
 
@@ -90,7 +90,7 @@ namespace First.Data
         public IUser LoginUser(object[] auth)
         {
 
-            Task<HttpResponseMessage> response =  client.PostAsJsonAsync(new Uri("https://localhost:44301/api/User/LoginUser"), auth);
+            Task<HttpResponseMessage> response =  client.PostAsJsonAsync(new Uri("https://taskserverapp3.azurewebsites.net/api/User/LoginUser"), auth);
             response.Wait();
             if (response.Result.IsSuccessStatusCode)
             {
@@ -106,7 +106,7 @@ namespace First.Data
         public IUser AddUser(object[] auth)
         {
 
-            Task<HttpResponseMessage> response = client.PostAsJsonAsync(new Uri("https://localhost:44301/api/User/AddUser"), auth);
+            Task<HttpResponseMessage> response = client.PostAsJsonAsync(new Uri("https://taskserverapp3.azurewebsites.net/api/User/AddUser"), auth);
             response.Wait();
             if (response.Result.IsSuccessStatusCode)
             {
