@@ -21,7 +21,7 @@
         </Grid.ColumnDefinitions>
         <Grid  Grid.Column="0">
 
-            <local2:LoginController  VerticalAlignment="Top" Margin="0,50,0,0" Login="{Binding Path=Name,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" 
+            <local2:LoginController  VerticalAlignment="Top" Margin="0,0,0,0" Login="{Binding Path=Name,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" 
                                     Password="{Binding Path=Password,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" 
                                     AddUserTrue="{Binding Path=AddUser,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" 
                                     IsEnabled="{Binding ElementName=radioButton1,Path=IsChecked}"  
@@ -29,13 +29,12 @@
                                     CommandButton="{Binding CliclSettingsLogin}"
                                     StateColor="{Binding Path=StateColor,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
                                     StateText="{Binding Path=StateText,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
-                                    UserName="{Binding Path=UserName,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
+                                    UserName="{Binding Path=UserName,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" Height="385"
                                     />
-            <Button x:Name="button" Content="Применить настройки" HorizontalAlignment="Left" Margin="273,379,0,0" VerticalAlignment="Top" Width="135" Command="{Binding CliclSettingsLogin}"/>
         </Grid>
         <Grid  Grid.Column="1">
 
-            <StackPanel  VerticalAlignment="Top" Margin="0,50,0,0" >
+            <StackPanel  VerticalAlignment="Top" Margin="0,0,0,0" >
                 <TextBlock x:Name="textBlock1"  TextWrapping="Wrap" Text="Место хранения задач:" FontSize="22" Margin="0,0,0,20" />
                 <RadioButton x:Name="radioButton" Content="Локальный пк" FontSize="22"    IsChecked="True" GroupName="settings" Margin="0,0,0,20"/>
                 <RadioButton x:Name="radioButton1" Content="Сервер" FontSize="22"    GroupName="settings" IsChecked="{Binding Path=UseServer,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" Margin="0,0,0,20"/>

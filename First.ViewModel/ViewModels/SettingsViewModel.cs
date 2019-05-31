@@ -1,11 +1,7 @@
 ﻿using First.Interface;
 using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Media;
-using First.Interface;
 
 namespace First.ViewModel.ViewModels
 {
@@ -15,6 +11,7 @@ namespace First.ViewModel.ViewModels
         {
             this.Vm = Vm;
             Vm.SettingsViewModel = this;
+            UseServer = false;
         }
         public IMainViewModel Vm;
 
@@ -25,7 +22,10 @@ namespace First.ViewModel.ViewModels
         private string username;
 
         private bool useServer;
-        public bool UseServer { get => useServer; set { useServer = value; OnPropertyChanged("UseServer"); } }
+        public bool UseServer { get => useServer; set { useServer = value; OnPropertyChanged("UseServer"); if (!value) UserName = Environment.UserName;
+                       
+            } }
+
         public string Name { get => name; set { name = value; OnPropertyChanged("Name"); } }
         public string Password { get => password; set { password = value; OnPropertyChanged("Password"); } }
         public string Password2 { get => password2; set { password2 = value; OnPropertyChanged("Password2"); } }
@@ -118,15 +118,38 @@ namespace First.ViewModel.ViewModels
 
         }
         public bool CanExecuteCliclSettingsLogin(object parameter)
-        {
-            if(AddUser)
-            { if (Password == Password2 && Password != null && Password.Length > 5) return true;
-                else return false;
+        { string alf = "йцукенгшщзхъфывапролджэячсмитьбюё";
+
+            if (Name != null && Password != null)
+            {
+                if (Name.Count() > 3)
+                {
+                    if (AddUser)
+                    {
+                        if (Password == Password2 && Password.Count() > 5 && alf.ToUpper().Intersect(Password.ToUpper()).Count() == 0 && alf.ToUpper().Intersect(Name.ToUpper()).Count() == 0)
+
+                        {
+                            return true;
+                        }
+
+                    }
+                    else
+                    {
+                        if (Password.Count() > 5 && alf.ToUpper().Intersect(Password.ToUpper()).Count() == 0 && alf.ToUpper().Intersect(Name.ToUpper()).Count() == 0)
+
+                        {
+                            return true;
+                        }
+
+                    }
+                    return false;
+                }
             }
-            else
-            { 
-            if (Password != null && Name != null) return true; return false;
-            }
+            return false;
+
+
+
+      
         }
 
 

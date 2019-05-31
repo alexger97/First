@@ -6,12 +6,12 @@
       xmlns:local="clr-namespace:First.Controls"
       xmlns:local2="clr-namespace:First.Converter"
       mc:Ignorable="d" 
-      d:DesignHeight="300" d:DesignWidth="500" x:Name="Lc">
+      d:DesignHeight="400" d:DesignWidth="500" x:Name="Lc">
     <UserControl.Resources>
         <local2:ElementbyotherChechVisibilityConverter x:Key="ElementbyotherChechVisibilityConverter"></local2:ElementbyotherChechVisibilityConverter>
         <local2:StateViewConverter x:Key="StateViewConverter"></local2:StateViewConverter>
     </UserControl.Resources>
-    <Grid   Width="500" Height="300" >
+    <Grid   Width="500" Margin="0,50,0,1" >
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="11*"></ColumnDefinition>
             <ColumnDefinition Width="14*"></ColumnDefinition>
@@ -31,7 +31,7 @@
             <TextBlock x:Name="textBlock5" HorizontalAlignment="Left" Margin="0,7,0,25" TextWrapping="Wrap" Text="{Binding UserName,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged,ElementName=Lc}" FontSize="18" VerticalAlignment="Top" Width="202"/>
 
             <CheckBox x:Name="checkBox" Content="Создать нового пользователя"  IsChecked="{Binding Path=AddUserTrue, Mode=TwoWay,UpdateSourceTrigger=PropertyChanged,ElementName=Lc}"  FontSize="19" HorizontalAlignment="Left" Margin="0,35,-3,15" VerticalAlignment="Top" Grid.Column="1" Height="26" Width="283"/>
-            <TextBlock TextWrapping="Wrap"  Text="Пароли: должны совпадать и быть длиннее пяти символов" Background="Azure" FontSize="15" Visibility="{Binding ElementName=checkBox, Path=IsChecked,Converter= {StaticResource ElementbyotherChechVisibilityConverter}}" Margin="0,0,0,15"></TextBlock>
+            <TextBlock TextWrapping="Wrap"  Text="Логин должен состоять из строчных букв и длиннее 3 символов             Пароли: должны совпадать и быть длиннее пяти символов.          Допускается только английский алфавит." Background="Azure" FontSize="15" Visibility="{Binding ElementName=checkBox, Path=IsChecked,Converter= {StaticResource ElementbyotherChechVisibilityConverter}}" Margin="0,0,0,15"></TextBlock>
             <Button x:Name="button" Content="Оправить запрос" Grid.Column="1" HorizontalAlignment="Center"  VerticalAlignment="Center" Width="169" Command="{Binding CommandButton,ElementName=Lc}"/>
             <StackPanel Grid.Column="1" Orientation="Horizontal" Margin="0,25,0,0">
                 <TextBlock x:Name="textBox"     HorizontalAlignment="Right" TextWrapping="Wrap" Text="Статус операции" VerticalAlignment="Top" Width="120" FontSize="15"  Height="25" />
